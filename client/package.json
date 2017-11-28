@@ -1,0 +1,15 @@
+{
+  "name": "romp",
+  "version": "1.0.0",
+  "description": "An app for gamers to meet up and play.",
+  "main": "server/index.js",
+  "author": "colinear",
+  "dependencies": {
+    "react-scripts": "^1.0.17",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.17"
+  }
+}
