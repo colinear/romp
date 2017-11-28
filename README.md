@@ -1,7 +1,7 @@
-### Romp
+#Romp
 ## A web app for gamers!
 
-# To start: 
+### To start: 
 
 Run the following commands in separate terminals from the root folder.
 
