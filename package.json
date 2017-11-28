@@ -21,7 +21,7 @@
     "react-scripts": "1.0.17"
   },
   "engines": {
-    "node": "4.0.0"
+    "node": "4.7.0"
   },
   "keywords": [
     "node",
