@@ -1,18 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-
-var userSchema = mongoose.Schema({
-  username: {type: String, required: true, index: {unique: true}},
-  password: {type: String, required: true},
-  email: {type: String, required: true},
-  firstName: {type: String, required: true},
-  lastName: {type: String, required: true},
-  friends: Object,
-  event: Object,
-  team: Object,
-  favorites: Object,
-  profilePicURL: String,
-})
+var userSchema = require('../schema/User.js');
 
 // user method for generating a hashed password
 userSchema.methods.generateHash = function(password) {
