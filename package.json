@@ -13,9 +13,10 @@
   },
   "dependencies": {
     "express": "^4.13.3",
-    "react-scripts": "^1.0.17",
+    "mongoose": "^4.13.5",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-scripts": "^1.0.17"
   },
   "devDependencies": {
     "react-scripts": "1.0.17"
