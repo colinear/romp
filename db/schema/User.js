@@ -12,7 +12,7 @@ var userSchema = new Schema({
   team: Object,
   favorites: Object,
   profilePicURL: String,
-})
+});
 
 var User = mongoose.model('users', userSchema);
 module.exports = User;
