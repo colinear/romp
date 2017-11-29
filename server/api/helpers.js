@@ -1,1 +1,0 @@
-// Helper functions for interacting with the database go here
