@@ -3,6 +3,7 @@ var path = require('path');
 var app = express()
 var mongoose = require('mongoose');
 const MONGODB_URI = require('../db/mongo.js');
+var User = require('../db/models/User')
 mongoose.connect(MONGODB_URI);
 
 app.set('port', (process.env.PORT || 3000))
