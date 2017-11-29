@@ -17,6 +17,7 @@
     "mongoose": "^4.13.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-flexbox-grid": "^2.0.0",
     "react-scripts": "^1.0.17",
     "socket.io": "^2.0.4"
   },
