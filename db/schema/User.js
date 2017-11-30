@@ -8,10 +8,10 @@ var userSchema = new Schema({
   email: {type: String, required: true},
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
-  friends: Object,
-  event: Object,
-  team: Object,
-  favorites: Object,
+  friends: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+  event: [{ type: Schema.Types.ObjectId, ref: 'events' }],
+  team: [{ type: Schema.Types.ObjectId, ref: 'teams' }],
+  favorites: [{ type: Schema.Types.ObjectId, ref: 'games' }],
   profilePicURL: String,
 });
 
