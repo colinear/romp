@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var MONGODB_URI = require('../db/mongo.js');
 mongoose.connect(MONGODB_URI);
-var router = require('./api/index.js');
+var router = require('./api/route.js');
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
