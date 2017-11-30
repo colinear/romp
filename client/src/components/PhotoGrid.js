@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { Sticky } from 'semantic-ui-react';
 
 // Styles
 import '../styles/PhotoGrid.css';
