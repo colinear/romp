@@ -1,3 +1,7 @@
+.PhotoGrid {
+  margin-top: 20px;
+}
+
 .PhotoGrid-photos img {
   max-width: 100%;
   max-height: 100%;
