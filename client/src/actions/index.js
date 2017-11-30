@@ -1,3 +1,11 @@
 export function increment() {
-  console.log('We are incrementing.');
+  return {
+    type: 'INCREMENT'
+  }
+}
+
+export function decrement() {
+  return {
+    type: 'DECREMENT'
+  }
 }
