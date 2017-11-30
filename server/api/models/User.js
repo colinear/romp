@@ -3,33 +3,29 @@ var UserSchema = require('../../../db/schema/User.js');
 var User = {};
 
 User.createUser = (username, password, email, firstName, lastName, profilePicURL) => {
-  //create new user
-  var newUser = new UserSchema ({
-    username: username,
-    password: password,// newUser.generateHash(password), // need to check !!
-    email: email,
-    firstName: firstName,
-    lastName: lastName,
-    profilePicURL: profilePicURL
-  });
 
-  //save new user to db
+  //create new user
+  var newUser = new UserSchema ();
+  newUser.username = username;
+  newUser.password = newUser.generateHash(password);
+  newUser.email = email;
+  newUser.firstName = firstName;
+  newUser.lastName = lastName;
+  newUser.profilePicURL = profilePicURL;
+
+  //save user to db
   newUser.save((err) => {
     if (err) {throw err}
-    else {console.log('user added')}
+    console.log('user added');
   });
-}
+};
 
-// User.createUser = (userObj) => {
-//   var user = new User();
-
-//   user.username = userObj.username;
-//   user.password = userObj.password;
-//   user.email = userObj.email;
-//   user.firstName = userObj.firstName;
-//   user.lastName = userObj.lastName;
-//   user.profilePicURL = userObj.profilePicURL;
-
-// }
+//get all users
+//We actually won't need this for our app, but good for testing db
+User.findAllUsers = () => {
+  return UserSchema.find({}).exec((err, users) => {
+    return users;
+  });
+};
 
 module.exports = User;
