@@ -1,7 +1,7 @@
 // Libraries
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { increment, decrement } from '../actions/index.js';
+import { increment, decrement } from '../actions/actions_app.js';
 import { bindActionCreators } from 'redux';
 
 // Components
