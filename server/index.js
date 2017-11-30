@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var MONGODB_URI = require('../db/mongo.js');
 
 mongoose.connect(MONGODB_URI);
-mongoose.Promise = global.Promise;
 
 var routes = require('./api/route.js');
 
