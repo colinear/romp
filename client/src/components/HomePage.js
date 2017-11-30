@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Carousel from './Carousel.js';
+import Thing from './Thing.js';
 import { Segment } from 'semantic-ui-react';
 
 class HomePage extends React.Component {
   render() {
     return (
       <Segment>
-        <Carousel />
+      <Thing />
       </Segment>
     );
   }
