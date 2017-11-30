@@ -1,13 +1,14 @@
 import React from 'react';
 
-import PhotoGrid from './PhotoGrid.js';
+import Carousel from './Carousel.js';
+import { Segment } from 'semantic-ui-react';
 
 class HomePage extends React.Component {
   render() {
     return (
-      <div>
-        <PhotoGrid />
-      </div>
+      <Segment>
+        <Carousel />
+      </Segment>
     );
   }
 }

@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var MONGODB_URI = require('../db/mongo.js');
+
 mongoose.connect(MONGODB_URI);
 var router = require('./api/index.js');
 
