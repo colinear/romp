@@ -4,15 +4,19 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var MONGODB_URI = require('../db/mongo.js');
 mongoose.connect(MONGODB_URI);
-var router = require('./api/route.js');
+mongoose.Promise = global.Promise;
+
+var routes = require('./api/route.js');
 
 var app = express();
+app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 3000));
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.use(bodyParser.json());
 
-app.get('/', function(request, response) {
-  response.send('Hello World!');
+app.use('/', routes);
+
+app.get('/', function(req, res) {
+  res.send('Hello World!');
 });
 
 app.listen(app.get('port'), function() {

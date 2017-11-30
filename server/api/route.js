@@ -1,16 +1,18 @@
 var router = require('express').Router();
 var User = require('./models/User.js');
 
-router.get('/signup', (req, res) => {
-  var user = {
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    profilePicURL: req.body.profilePicURL
-  };
+router.post('/signup', (req, res) => {
+  console.log("req: ", req.body)
+  var username = req.body.username;
+  var password = req.body.password;
+  var email = req.body.email;
+  var firstName = req.body.firstName;
+  var lastName = req.body.lastName;
+  var profilePicURL = req.body.profilePicURL;
 
-  User.createUser(user);
+  User.createUser(username, password, email, firstName, lastName, profilePicURL)
+
+  res.send("Route is functional");
 });
-// info off of req.body (username, password, email, firstName, lastName, profilePicURL)
+
+module.exports = router;
