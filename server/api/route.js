@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var User = require('./models/User.js');
+var Event = require('./models/Event.js');
 
 router.post('/signup', (req, res) => {
   console.log("req: ", req.body)
@@ -34,5 +35,15 @@ router.get('/users/:username', (req, res) => {
       res.status(401).send({err});
     })
 });
+
+router.post('/event', (req, res) => {
+  console.log('event req', req.body)
+  var players = req.body.players;
+  var name = req.body.name;
+  var description = req.body.description;
+  var notes = req.body.notes;
+  Event.createEvent(name, description, notes)
+  res.end()
+})
 
 module.exports = router;
