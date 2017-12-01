@@ -3,7 +3,7 @@ var User = require('./models/User.js');
 var Event = require('./models/Event.js');
 
 router.post('/signup', (req, res) => {
-  console.log("req: ", req.body)
+  console.log('req: ', req.body);
   var username = req.body.username;
   var password = req.body.password;
   var email = req.body.email;
@@ -11,41 +11,41 @@ router.post('/signup', (req, res) => {
   var lastName = req.body.lastName;
   var profilePicURL = req.body.profilePicURL;
 
-  User.createUser(username, password, email, firstName, lastName, profilePicURL)
+  User.createUser(username, password, email, firstName, lastName, profilePicURL);
 
   res.end();
 });
 
 router.get('/users', (req, res) => {
   User.getAllUsers()
-    .then((users) => {
-      res.json(users)
+    .then(users => {
+      res.json(users);
     })
-    .catch((err) => {
-      res.status(401).send({err})
-    })
+    .catch(err => {
+      res.status(401).send({ err });
+    });
 });
 
 router.get('/users/:username', (req, res) => {
   User.getUser(req.params.username)
-    .then((user) => {
+    .then(user => {
       res.json(user);
     })
-    .catch((err) => {
-      res.status(401).send({err});
-    })
+    .catch(err => {
+      res.status(401).send({ err });
+    });
 });
 
 router.post('/event', (req, res) => {
-  console.log('event req', req.body)
+  console.log('event req', req.body);
   var teams = req.body.teams;
   var location = req.body.location;
   var user_id = req.body.user_id;
   var name = req.body.name;
   var description = req.body.description;
   var notes = req.body.notes;
-  Event.createEvent(teams, location, user_id, name, description, notes)
-  res.end()
-})
+  Event.createEvent(teams, location, user_id, name, description, notes);
+  res.end();
+});
 
 module.exports = router;

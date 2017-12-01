@@ -13,7 +13,7 @@ actions.fetchPosts = () => {
   const request = axios({
     method: 'GET',
     url: ROOT_URL,
-    headers: {'Client-ID': CLIENT_ID}
+    headers: { 'Client-ID': CLIENT_ID }
   });
 
   return {

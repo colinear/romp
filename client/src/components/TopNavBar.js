@@ -16,7 +16,10 @@ class BottomNavBar extends React.Component {
     return (
       <Menu attached="top" inverted>
         <Menu.Item>
-          <img src="https://images.vexels.com/media/users/3/145135/isolated/preview/76608161d143a7d27f20cdcc336bc09c-sun-sharp-rays-big-and-small-icon-by-vexels.png" alt="ROMP"/>
+          <img
+            src="https://images.vexels.com/media/users/3/145135/isolated/preview/76608161d143a7d27f20cdcc336bc09c-sun-sharp-rays-big-and-small-icon-by-vexels.png"
+            alt="ROMP"
+          />
         </Menu.Item>
 
         <Menu.Item name="features" active={activeItem === 'features'} onClick={this.handleItemClick}>

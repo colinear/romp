@@ -1,8 +1,10 @@
 var User = require('../../../db/schema/User.js');
 
-User.getUser = (username) => {
-  return User.find({'username': username}).exec((err, user) => {
-    if (err) {throw err}
+User.getUser = username => {
+  return User.find({ username: username }).exec((err, user) => {
+    if (err) {
+      throw err;
+    }
 
     // returns empty array
     if (user.length <= 0) {
@@ -12,19 +14,18 @@ User.getUser = (username) => {
   });
 };
 
-
 //get all users
 //We won't need this for our app, but good for testing db
 User.getAllUsers = () => {
   return User.find({}).exec((err, users) => {
-    if (err) {throw err}
+    if (err) {
+      throw err;
+    }
     return users;
   });
 };
 
-
 User.createUser = (username, password, email, firstName, lastName, profilePicURL) => {
-
   //create new user
   var newUser = new User();
   newUser.username = username;
@@ -35,12 +36,12 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
   newUser.profilePicURL = profilePicURL;
 
   //save user to db
-  newUser.save((err) => {
+  newUser.save(err => {
     if (err) {
       // *** need to send message to client that username is taken
-      console.error('error with username')
+      console.error('error with username');
     } else {
-      console.log('user added')
+      console.log('user added');
     }
   });
 };
