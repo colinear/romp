@@ -4,17 +4,15 @@ import { Segment } from 'semantic-ui-react';
 import { changeView } from '../actions/actions_homepage.js';
 import { bindActionCreators } from 'redux';
 
-import Carousel from './Carousel.js';
-
-class HomePage extends React.Component {
+class SearchPage extends React.Component {
   render() {
     return (
       <Segment>
-      <Carousel />
-      <button onClick={() => {
-        this.props.changeView('SearchPage')
+        <p>Hello</p>
+        <button onClick={() => {
+        this.props.changeView('HomePage')
         console.log(this.props);
-      }}>Search</button>
+      }}>Home</button>
       </Segment>
     );
   }
@@ -28,4 +26,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ changeView }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

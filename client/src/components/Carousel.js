@@ -1,43 +1,65 @@
 import React from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import { Segment } from 'semantic-ui-react';
+import { Parallax } from 'react-parallax';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import '../styles/Carousel.css';
 
-export default class extends React.Component {
+export default class Carousel extends React.Component {
   render() {
     console.log(document.getElementsByClassName('carousel__next-button'));
     return (
+      <div style={styles.paddingAdjust}>
       <Segment style={styles.slider}>
-        <CarouselProvider naturalSlideWidth={100} naturalSlideHeight={40} totalSlides={3} touchEnabled>
+        <CarouselProvider naturalSlideWidth={2} naturalSlideHeight={1} totalSlides={3} touchEnabled>
           <Slider>
-            <Slide index={0} style={styles.slide('https://imgur.com/muZE5H7')}>
+            <Slide
+              index={0}
+              style={styles.slide(
+                'https://i.imgur.com/O0BvsKO.jpg'
+              )}
+            >
               <div className="Carousel-Slide-bottom-text">
-                <p>Pretty flowers.</p>
+                <p>Heart of the cards</p>
               </div>
             </Slide>
-            <Slide index={1} style={styles.slide('https://imgur.com/2tKtziE')}>
+            <Slide
+              index={1}
+              style={styles.slide('https://i.ytimg.com/vi/BGtROJeMPeE/maxresdefault.jpg')}
+            >
               <div className="Carousel-Slide-bottom-text">
-                <p>Pretty flowers.</p>
+                <p>Leage of Legends Tournament</p>
               </div>
             </Slide>
-            <Slide index={2} style={styles.slide('https://imgur.com/O0BvsKO')}>
+            <Slide
+              index={2}
+              style={styles.slide(
+                'https://i.imgur.com/muZE5H7.jpg'
+              )}
+            >
               <div className="Carousel-Slide-bottom-text">
-                <p>Pretty flowers.</p>
+                <p>Flowers</p>
               </div>
             </Slide>
           </Slider>
-          <div className="Thing-buttons">
+          <div className="Carousel-buttons" style={styles.buttonHolder}>
             <ButtonBack>
-              <img className="Thing-button-left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Arrow_sans_left.svg/2000px-Arrow_sans_left.svg.png" />
+              <img
+                className="Carousel-button-left"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Arrow_sans_left.svg/2000px-Arrow_sans_left.svg.png"
+              />
             </ButtonBack>
             <ButtonNext>
-              <img className="Thing-button-right" src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/arrow_sans_right-512.png" />
+              <img
+                className="Carousel-button-right"
+                src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/arrow_sans_right-512.png"
+              />
             </ButtonNext>
           </div>
         </CarouselProvider>
       </Segment>
+      </div>
     );
   }
 }
@@ -45,7 +67,16 @@ export default class extends React.Component {
 const styles = {
   slide: img => {
     return {
-      backgroundImage: `url(${img})`
+      backgroundImage: `url(${img})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'bottom'
     };
+  },
+  buttonHolder: {
+    maxHeight: 0
+  },
+  paddingAdjust: {
+    padding: '0 80px 0 80px', 
+    maxHeight: '100vh'
   }
 };
