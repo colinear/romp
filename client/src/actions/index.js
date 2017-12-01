@@ -1,9 +1,10 @@
 // Imports
 import axios from 'axios';
 
+import CLIENT_ID from '../../twitch.js';
+
 // Constants
-const ROOT_URL = 'https://api.twitch.tv/kraken/games/top';
-const CLIENT_ID = '../../twitch.js';
+const ROOT_URL = 'https://api.twitch.tv/kraken/streams/';
 
 // Actions object
 let actions = {};
