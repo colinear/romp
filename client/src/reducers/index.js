@@ -1,13 +1,10 @@
+import _ from 'lodash';
 import { combineReducers } from 'redux';
-
-const rootReducer = combineReducers({
-  counter: CounterReducer,
-  view: ViewReducer
-});
 
 const initialState = {
   view: 'HomePage',
-  counter: 0
+  counter: 0,
+  posts: {}
 };
 
 var CounterReducer = function(state = initialState.counter, action) {
@@ -21,13 +18,30 @@ var CounterReducer = function(state = initialState.counter, action) {
   }
 };
 
+var PostsReducer = function(state = initialState.posts, action) {
+  switch (action.type) {
+    case 'FETCH_POSTS': 
+      return _.mapKeys(action.payload.data, 'id');
+    default: {
+      return state;
+    }
+  }
+};
+
 var ViewReducer = function(state = initialState.view, action) {
   switch(action.type) {
     case 'CHANGE_VIEW':
+
       return action.view;
     default:
       return state;
   }
 };
+
+const rootReducer = combineReducers({
+  counter: CounterReducer,
+  view: ViewReducer,
+  posts: PostsReducer
+});
 
 export default rootReducer;

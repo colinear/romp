@@ -16,6 +16,7 @@
     "axios": "^0.17.1",
     "bcrypt-nodejs": "0.0.3",
     "express": "^4.13.3",
+    "lodash": "^4.17.4",
     "mongoose": "^4.13.5",
     "nodemon": "^1.12.1",
     "pure-react-carousel": "^1.9.11",

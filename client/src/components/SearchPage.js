@@ -1,18 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
-import { changeView } from '../actions/index.js';
-import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 class SearchPage extends React.Component {
   render() {
     return (
       <Segment>
-        <p>Hello</p>
-        <button onClick={() => {
-        this.props.changeView('HomePage')
-        console.log(this.props);
-      }}>Home</button>
+        <Link to='/'><button>Home</button></Link>
       </Segment>
     );
   }
@@ -22,8 +17,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changeView }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
+export default connect(mapStateToProps)(SearchPage);
