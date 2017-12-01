@@ -1,0 +1,38 @@
+.Thing-buttons button {
+  top: '40%';
+  position: 'absolute';
+  border: none;
+  background: none;
+  font-size: 10rem;
+  opacity: 0.8;
+}
+
+.Thing-buttons img {
+  height: 16%;
+  width: 8%;
+}
+
+.Thing-button-left {
+  top: 45%;
+  left: 5%;
+  position: absolute;
+  width: 10vw;
+  height: 10vw;
+}
+
+.Thing-button-right {
+  top: 45%;
+  right: 5%;
+  position: absolute;
+  width: 10vw;
+  height: 10vw;
+}
+
+
+.Thing-buttons button:focus {
+  outline: none;
+}
+
+.ui .segment {
+  padding: 0;
+}
