@@ -16,12 +16,23 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/users', (req, res) => {
-  User.findAllUsers()
+  User.getAllUsers()
     .then((users) => {
-      res.send(users)
+      res.json(users)
     })
-  // console.log('all users: ', allUsers)
-  // res.send(allUsers);
-})
+    .catch((err) => {
+      res.status(401).send({err})
+    })
+});
+
+router.get('/users/:username', (req, res) => {
+  User.getUser(req.params.username)
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      res.status(401).send({err});
+    })
+});
 
 module.exports = router;
