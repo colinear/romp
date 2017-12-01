@@ -3,7 +3,6 @@ var EventSchema = require('../../../db/schema/Event.js');
 var Event = {};
 
 Event.createEvent = (teams, location, user_id, name, description, notes) => {
-
   //create new event
   var newEvent = new EventSchema ();
   newEvent.teams = teams,
@@ -18,7 +17,7 @@ Event.createEvent = (teams, location, user_id, name, description, notes) => {
   newEvent.save((err) => {
     if (err) {
       // send message to client that username is taken
-      console.error('error with event')
+      console.log('error with event', err)
     } else {
       console.log('event added')
     }

@@ -1,9 +1,7 @@
-var UserSchema = require('../../../db/schema/User.js');
-
-var User = {};
+var User = require('../../../db/schema/User.js');
 
 User.getUser = (username) => {
-  return UserSchema.find({'username': username}).exec((err, user) => {
+  return User.find({'username': username}).exec((err, user) => {
     if (err) {throw err}
 
     // returns empty array
@@ -18,7 +16,7 @@ User.getUser = (username) => {
 //get all users
 //We won't need this for our app, but good for testing db
 User.getAllUsers = () => {
-  return UserSchema.find({}).exec((err, users) => {
+  return User.find({}).exec((err, users) => {
     if (err) {throw err}
     return users;
   });
@@ -28,7 +26,7 @@ User.getAllUsers = () => {
 User.createUser = (username, password, email, firstName, lastName, profilePicURL) => {
 
   //create new user
-  var newUser = new UserSchema();
+  var newUser = new User();
   newUser.username = username;
   newUser.password = newUser.generateHash(password);
   newUser.email = email;
