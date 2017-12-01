@@ -2,6 +2,7 @@ var router = require('express').Router();
 var User = require('./models/User.js');
 
 router.post('/signup', (req, res) => {
+  console.log("req: ", req.body)
   var username = req.body.username;
   var password = req.body.password;
   var email = req.body.email;
@@ -19,6 +20,8 @@ router.get('/users', (req, res) => {
     .then((users) => {
       res.send(users)
     })
+  // console.log('all users: ', allUsers)
+  // res.send(allUsers);
 })
 
 module.exports = router;
