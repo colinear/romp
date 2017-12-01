@@ -18,9 +18,7 @@ User.getUser = username => {
 //We won't need this for our app, but good for testing db
 User.getAllUsers = () => {
   return User.find({}).exec((err, users) => {
-    if (err) {
-      throw err;
-    }
+    if (err) {throw err}
     return users;
   });
 };
