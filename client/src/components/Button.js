@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { increment, decrement } from '../actions/actions_counter.js';
+import { increment, decrement } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
 const Button = (props) => (
   <button onClick={props.increment}>Click Me</button>
 );
-
 
 function mapStateToProps(state) {
   return undefined;

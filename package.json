@@ -13,6 +13,7 @@
     "eject": "cd client && react-scripts eject"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "bcrypt-nodejs": "0.0.3",
     "express": "^4.13.3",
     "mongoose": "^4.13.5",
@@ -26,8 +27,10 @@
     "react-redux": "^5.0.6",
     "react-responsive-carousel": "^3.1.29",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.17",
     "redux": "^3.7.2",
+    "redux-promise": "^0.5.3",
     "semantic-ui": "^2.2.13",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.0",

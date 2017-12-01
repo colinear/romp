@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 // Components
 import BottomNavBar from './BottomNavBar.js';
@@ -17,23 +18,19 @@ class App extends Component {
     super(props);
   }
   render() {
-    let content;
+
     console.log(this.props);
-    if (this.props.view === 'HomePage') {
-      content = <HomePage />
-    } else if (this.props.view === 'SearchPage') {
-      content = <SearchPage />
-    } else {
-      content = <HomePage />
-    }
-    console.log(this.props);
+
     return (
-      <div className="App">
-        <TopNavBar />
-        <BottomNavBar />
-        {content}
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <TopNavBar />
+          <BottomNavBar />
+          <Route path="/" component={HomePage} />
+          <Route path="/search" component={SearchPage} />
+          <Footer />
+        </div>
+      </BrowserRouter>
     );
   }
 }

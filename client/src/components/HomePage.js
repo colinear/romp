@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
-import { changeView } from '../actions/actions_homepage.js';
+import { changeView } from '../actions/index.js';
 import { bindActionCreators } from 'redux';
 
 import Carousel from './Carousel.js';
