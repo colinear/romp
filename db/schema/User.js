@@ -3,11 +3,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  username: {type: String, required: true, index: {unique: true}},
-  password: {type: String, required: true},
-  email: {type: String, required: true},
-  firstName: {type: String, required: true},
-  lastName: {type: String, required: true},
+  username: {type: String, unique: true, required: true, minlength: 4},
+  password: {type: String, required: true, minlength: 7},
+  email: {type: String, required: true, minlength: 7},
+  firstName: {type: String, required: true, minlength: 2},
+  lastName: {type: String, required: true, minlength: 2},
   friends: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   event: [{ type: Schema.Types.ObjectId, ref: 'events' }],
   team: [{ type: Schema.Types.ObjectId, ref: 'teams' }],
