@@ -20,8 +20,6 @@ router.get('/users', (req, res) => {
     .then((users) => {
       res.send(users)
     })
-  // console.log('all users: ', allUsers)
-  // res.send(allUsers);
 })
 
 module.exports = router;

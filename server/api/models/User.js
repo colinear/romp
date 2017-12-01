@@ -17,7 +17,7 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
   //save user to db
   newUser.save((err) => {
     if (err) {
-      // send message to client that username is taken
+      // *** need to send message to client that username is taken
       console.error('error with username')
     } else {
       console.log('user added')
@@ -26,7 +26,7 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
 };
 
 //get all users
-//We actually won't need this for our app, but good for testing db
+//We won't need this for our app, but good for testing db
 User.findAllUsers = () => {
   return UserSchema.find({}).exec((err, users) => {
     return users;
