@@ -2,7 +2,6 @@ import React from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import { Segment } from 'semantic-ui-react';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { Icon } from 'semantic-ui-react';
 
 import '../styles/Carousel.css';
 

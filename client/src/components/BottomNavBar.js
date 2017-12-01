@@ -14,7 +14,7 @@ class BottomNavBar extends React.Component {
   render() {
     const { activeItem } = this.state;
     return (
-      <Sticky pushing>
+      <div>
         <Menu attached="top" className="NavBar-bottom-menu">
           <Dropdown item icon="wrench" simple>
             <Dropdown.Menu>
@@ -46,7 +46,7 @@ class BottomNavBar extends React.Component {
             </div>
           </Menu.Menu>
         </Menu>
-      </Sticky>
+      </div>
     );
   }
 }
