@@ -25,9 +25,15 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
   });
 };
 
+User.getUser = (username) => {
+  return UserSchema.find({'username': username}).exec((err, user) => {
+    return user;
+  });
+};
+
 //get all users
 //We won't need this for our app, but good for testing db
-User.findAllUsers = () => {
+User.getAllUsers = () => {
   return UserSchema.find({}).exec((err, users) => {
     return users;
   });
