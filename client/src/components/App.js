@@ -1,6 +1,10 @@
 // Libraries
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+
+import actions from '../actions/index.js';
 
 // Components
 import BottomNavBar from './BottomNavBar.js';
@@ -13,27 +17,23 @@ import TopNavBar from './TopNavBar.js';
 import '../styles/App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
-    let content;
-    console.log(this.props);
-    if (this.props.view === 'HomePage') {
-      content = <HomePage />
-    } else if (this.props.view === 'SearchPage') {
-      content = <SearchPage />
-    } else {
-      content = <HomePage />
-    }
-    console.log(this.props);
+    console.log('App props: ', this.props);
+
     return (
-      <div className="App">
-        <TopNavBar />
-        <BottomNavBar />
-        {content}
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <div className="App-navbars">
+            <TopNavBar />
+            <BottomNavBar />
+          </div>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/search" component={SearchPage} />
+          </Switch>
+          <Footer />
+        </div>
+      </BrowserRouter>
     );
   }
 }
@@ -42,4 +42,9 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

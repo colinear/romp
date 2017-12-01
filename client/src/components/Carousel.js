@@ -1,14 +1,12 @@
 import React from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import { Segment } from 'semantic-ui-react';
-import { Parallax } from 'react-parallax';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import '../styles/Carousel.css';
 
 export default class Carousel extends React.Component {
   render() {
-    console.log(document.getElementsByClassName('carousel__next-button'));
     return (
       <div style={styles.paddingAdjust}>
       <Segment style={styles.slider}>
@@ -48,12 +46,14 @@ export default class Carousel extends React.Component {
               <img
                 className="Carousel-button-left"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Arrow_sans_left.svg/2000px-Arrow_sans_left.svg.png"
+                alt="back arrow"
               />
             </ButtonBack>
             <ButtonNext>
               <img
                 className="Carousel-button-right"
                 src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/arrow_sans_right-512.png"
+                alt="forward arrow"
               />
             </ButtonNext>
           </div>
