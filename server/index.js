@@ -10,8 +10,8 @@ var routes = require('./api/route.js');
 
 var app = express();
 app.use(bodyParser.json());
-app.set('port', (process.env.PORT || 3000));
 app.use(express.static(path.join(__dirname, '../client/build')));
+app.set('port', (process.env.PORT || 3000));
 
 app.use('/', routes);
 
