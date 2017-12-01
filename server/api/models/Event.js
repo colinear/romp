@@ -1,10 +1,10 @@
-var EventSchema = require('../../../db/schema/Event.js');
+var Event = require('../../../db/schema/Event.js');
 
 var Event = {};
 
 Event.createEvent = (teams, location, user_id, name, description, notes) => {
   //create new event
-  var newEvent = new EventSchema ();
+  var newEvent = new Event ();
   newEvent.teams = teams,
   newEvent.location = location,
   newEvent.user_id = user_id

@@ -56,4 +56,14 @@ router.post('/event', (req, res) => {
   res.end();
 });
 
+router.post('/event', (req, res) => {
+  console.log('event req', req.body)
+  var players = req.body.players;
+  var name = req.body.name;
+  var description = req.body.description;
+  var notes = req.body.notes;
+  Event.createEvent(name, description, notes)
+  res.end()
+})
+
 module.exports = router;
