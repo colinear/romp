@@ -7,7 +7,9 @@ class SearchPage extends React.Component {
   render() {
     return (
       <Segment>
-        <Link to='/'><button>Home</button></Link>
+        <Link to="/">
+          <button>Home</button>
+        </Link>
       </Segment>
     );
   }

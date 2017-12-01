@@ -11,7 +11,7 @@ var routes = require('./api/route.js');
 var app = express();
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.set('port', (process.env.PORT || 3000));
+app.set('port', process.env.PORT || 3000);
 
 app.use('/', routes);
 
@@ -20,5 +20,5 @@ app.get('/', function(req, res) {
 });
 
 app.listen(app.get('port'), function() {
-  console.log("Romp is running at localhost:" + app.get('port'));
+  console.log('Romp is running at localhost:' + app.get('port'));
 });
