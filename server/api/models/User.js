@@ -36,7 +36,6 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
   newUser.lastName = lastName;
   newUser.profilePicURL = profilePicURL;
 
-  console.log('user', newUser)
   //save user to db
   newUser.save((err) => {
     if (err) {
