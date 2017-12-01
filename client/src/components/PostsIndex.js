@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import actions from '../actions/index.js'
+import actions from '../actions/index.js';
 
 class PostsIndex extends React.Component {
   componentDidMount() {
-    // this.props.fetchPosts();
+    this.props.fetchPosts();
   }
 
   render() {
