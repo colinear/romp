@@ -12,11 +12,21 @@ export default class extends React.Component {
       <Segment style={styles.slider}>
         <CarouselProvider naturalSlideWidth={100} naturalSlideHeight={40} totalSlides={3} touchEnabled>
           <Slider>
-            <Slide index={0} style={styles.slide('https://images7.alphacoders.com/411/thumb-1920-411820.jpg')}>
-              aaaa
+            <Slide index={0} style={styles.slide('https://imgur.com/muZE5H7')}>
+              <div className="Carousel-Slide-bottom-text">
+                <p>Pretty flowers.</p>
+              </div>
             </Slide>
-            <Slide index={1}>I am the second Slide.</Slide>
-            <Slide index={2}>I am the third Slide.</Slide>
+            <Slide index={1} style={styles.slide('https://imgur.com/2tKtziE')}>
+              <div className="Carousel-Slide-bottom-text">
+                <p>Pretty flowers.</p>
+              </div>
+            </Slide>
+            <Slide index={2} style={styles.slide('https://imgur.com/O0BvsKO')}>
+              <div className="Carousel-Slide-bottom-text">
+                <p>Pretty flowers.</p>
+              </div>
+            </Slide>
           </Slider>
           <div className="Thing-buttons">
             <ButtonBack>

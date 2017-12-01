@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var MONGODB_URI = require('../db/mongo.js');
 
-mongoose.connect(MONGODB_URI);
+mongoose.createConnection(MONGODB_URI);
 
 var routes = require('./api/route.js');
 
@@ -19,6 +19,6 @@ app.get('/', function(req, res) {
   res.send('Hello World!');
 });
 
-app.listen(app.get('port'), function() {
+app.listen(3000, function() {
   console.log("Romp is running at localhost:" + app.get('port'));
 });

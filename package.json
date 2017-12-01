@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cd client && react-scripts build && react-scripts start && cd ../server && node index.js",
     "client": "cd client && react-scripts start",
-    "server": "nodemon server/index.js",
+    "server": "node server/index.js",
     "build": "cd client && react-scripts build",
     "test": "cd client && react-scripts test --env=jsdom",
     "eject": "cd client && react-scripts eject"
@@ -16,6 +16,7 @@
     "bcrypt-nodejs": "0.0.3",
     "express": "^4.13.3",
     "mongoose": "^4.13.5",
+    "nodemon": "^1.12.1",
     "pure-react-carousel": "^1.9.11",
     "react": "^16.2.0",
     "react-carousel": "^4.3.0",

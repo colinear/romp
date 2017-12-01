@@ -28,6 +28,18 @@
   height: 10vw;
 }
 
+.Carousel-Slide-bottom-text {
+  color: white;
+  padding: 2%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2em;
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 
 .Thing-buttons button:focus {
   outline: none;
