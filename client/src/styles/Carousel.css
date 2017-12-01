@@ -1,18 +1,20 @@
-.Thing-buttons button {
+.Carousel-buttons button {
   top: '40%';
   position: 'absolute';
   border: none;
   background: none;
   font-size: 10rem;
   opacity: 0.8;
+  height: 0;
+  max-height: 0;
 }
 
-.Thing-buttons img {
+.Carousel-buttons img {
   height: 16%;
   width: 8%;
 }
 
-.Thing-button-left {
+.Carousel-button-left {
   top: 45%;
   left: 5%;
   position: absolute;
@@ -20,7 +22,7 @@
   height: 10vw;
 }
 
-.Thing-button-right {
+.Carousel-button-right {
   top: 45%;
   right: 5%;
   position: absolute;
@@ -28,8 +30,19 @@
   height: 10vw;
 }
 
+.Carousel-Slide-bottom-text {
+  color: white;
+  padding: 2%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2em;
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-.Thing-buttons button:focus {
+.Carousel-buttons button:focus {
   outline: none;
 }
 
