@@ -17,23 +17,15 @@ router.post('/login', (req, res) => {
 
   helpers.loginUser(username, password)
     .then((user) => {
-      console.log('user in login: ', user)
-      //success
       if (user) {
         req.session.userId = user._id;
         res.json(user);
       }
-      // no user returned
       res.end();
     })
     .catch((err) => {
       res.status(401).send({ err });
     });
-
-  // make sure user exsists already
-  // find user
-    // check that password matches
-      // req.session.userId = user._id;
 });
 
 router.get('/logout', (req, res) => {
@@ -54,7 +46,7 @@ router.get('/users', (req, res) => {
 router.get('/users/:username', (req, res) => {
   helpers.getUser(req.params.username)
     .then(user => {
-      res.json(user);
+      res.end(JSON.stringify(user));
     })
     .catch(err => {
       res.status(401).send({ err });
@@ -79,6 +71,6 @@ router.post('/events', (req, res) => {
 
 router.post('/joinEvent', (req, res) => {
   
-})
+});
 
 module.exports = router;
