@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.loginUser(username, password)
+  helpers.loginUser(username, password)
     .then((user) => {
       console.log('user in login: ', user)
       //success

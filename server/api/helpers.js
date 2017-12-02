@@ -73,4 +73,24 @@ helpers.createUser = async (newUserData, callback) => {
   newUser.save(callback);
 };
 
+helpers.loginUser = (username, password) => {
+  console.log('User obj in schema: ', User.prototype.validPassword)
+  return User.findOne({ username: username }, (err, user) => {
+    if (err) { throw err }
+    if (user.length <= 0) {
+      console.log('USER DOES NOT EXIST');
+      return;
+    }
+    if (!user.validPassword(password)) {
+      console.log('Password Incorrect');
+      return;
+    }
+
+    if (user.validPassword(password)) {
+      console.log('it worked!!')
+    }
+    return user;
+  });
+};
+
 module.exports = helpers;
