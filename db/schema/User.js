@@ -25,4 +25,5 @@ userSchema.methods.validPassword = function(password) {
 }
 
 var User = mongoose.model('users', userSchema);
+// console.log('User schema: ', userSchema)
 module.exports = User;
