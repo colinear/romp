@@ -24,4 +24,4 @@ yarn-error.log*
 
 db/mongo.js
 server/twitch.js
-client/twitch.js
+client/src/twitch.js

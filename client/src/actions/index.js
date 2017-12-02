@@ -1,16 +1,16 @@
 // Imports
 import axios from 'axios';
 
-import CLIENT_ID from '../../twitch.js';
+const CLIENT_ID = require('../twitch.js');
 
 // Constants
-const ROOT_URL = 'https://api.twitch.tv/kraken/streams/';
+const ROOT_URL = 'https://api.twitch.tv/kraken/streams';
 
 // Actions object
 let actions = {};
 
-actions.fetchPosts = () => {
-  const request = axios({
+actions.fetchPosts = async () => {
+  const request = await axios({
     method: 'GET',
     url: ROOT_URL,
     headers: { 'Client-ID': CLIENT_ID }
@@ -18,7 +18,7 @@ actions.fetchPosts = () => {
 
   return {
     type: 'FETCH_POSTS',
-    payload: request
+    payload: request.data
   };
 };
 

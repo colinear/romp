@@ -1,24 +1,15 @@
 var Event = require('../../../db/schema/Event.js');
+var Game = require('../../../db/schema/Game.js');
+var User = require('../../../db/schema/User.js');
 
-Event.createEvent = (teams, location, user_id, name, description, notes) => {
+Event.createEvent = (eventData, callback) => {
   //create new event
-  var newEvent = new Event ();
-  newEvent.teams = teams,
-  newEvent.location = location,
-  newEvent.user_id = user_id
-  newEvent.name = name,
-  newEvent.description = description,
-  newEvent.notes = notes,
+  var newEvent = new Event (eventData);
 
-  console.log('NEW EVENT:', newEvent)
+  console.log('SERVER: NEW EVENT:', newEvent)
   //save event to db
   newEvent.save((err) => {
-    if (err) {
-      // send message to client that username is taken
-      console.log('error with event', err)
-    } else {
-      console.log('event added')
-    }
+    callback(err, 'SERVER: Event added.')
   });
 };
 
@@ -29,7 +20,26 @@ Event.getAllEvents = () => {
   });
 };
 
-Event.searchEvent = (name, game, description) => {
+Event.searchEvents = async (name, game, callback) => {
+  if (name) {
+    let err, events = await Event.find({name});
+    callback(err, events);
+  } else if (game) {
+    var err, game = await Game.find({name: game}, '_id');
+    if (err) callback(err);
+    var err, events = await Event.find({game});
+    callback(err, events);
+  } else if (!name && !game) {
+    var err, events = await Event.find({});
+    callback(err, events);
+  }
+};
+
+Event.joinEvent = async (username, event, callback) => {
+  if (!username || !event) {
+    callback('Server: username or event not supplied');
+  }
+  User.find({username: username}, '_id')
 
 }
 
