@@ -12,16 +12,23 @@ router.post('/signup', (req, res) => {
 
   User.createUser(username, password, email, firstName, lastName, profilePicURL)
     .then((user) => {
-      console.log('user in route', user)
+      // console.log('user in route', user)
       req.session.userId = user._id;
-      console.log('req.session: ', req.session);
-      res.end();
+      // console.log('req.session: ', req.session);
+      res.send(user);
     })
     .catch((err) => {
       console.log("error!! in route")
       res.status(401).send({ err });
     })
 
+});
+
+router.post('/login', (req, res) => {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.
 });
 
 router.get('/users', (req, res) => {
