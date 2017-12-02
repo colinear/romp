@@ -24,7 +24,7 @@ helpers.getAllEvents = () => {
 
 helpers.searchEvents = async (name, game, callback) => {
   if (name) {
-    let err, events = await Event.find({name: name.toLowerCase()});
+    let err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
     callback(err, events);
   } else if (game) {
     var err, game = await Game.find({name: game.toLowerCase()}, '_id');

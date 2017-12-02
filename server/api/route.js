@@ -5,7 +5,7 @@ router.post('/signup', (req, res) => {
   console.log(req.body);
   helpers.createUser(req.body, (err, user) => {
     console.log('Create user callback return: ', err, user);
-    if (err) throw err;
+    if (err) res.status(400).send({err});
     req.session.userId = user._id;
     res.end();
   });
@@ -55,7 +55,7 @@ router.get('/users/:username', (req, res) => {
 
 router.post('/createEvent', (req, res) => {
   helpers.createEvent(req.body, (err, message) => {
-    if (err) throw err;
+    if (err) res.status(400).send({err});
     res.end(message);
   });
 });
