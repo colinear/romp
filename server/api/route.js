@@ -15,7 +15,7 @@ router.post('/signup', (req, res) => {
       // console.log('user in route', user)
       req.session.userId = user._id;
       // console.log('req.session: ', req.session);
-      res.send(user);
+      res.json(user);
     })
     .catch((err) => {
       console.log("error!! in route")
@@ -28,7 +28,30 @@ router.post('/login', (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.
+  User.loginUser(username, password)
+    .then((user) => {
+      console.log('user in login: ', user)
+      //success
+      if (user) {
+        req.session.userId = user._id;
+        res.json(user);
+      }
+      // no user returned
+      res.end();
+    })
+    .catch((err) => {
+      res.status(401).send({ err });
+    });
+
+  // make sure user exsists already
+  // find user
+    // check that password matches
+      // req.session.userId = user._id;
+});
+
+router.get('/logout', (req, res) => {
+  delete req.session.user_id;
+  res.send('success')
 });
 
 router.get('/users', (req, res) => {
