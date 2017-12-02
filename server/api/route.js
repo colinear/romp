@@ -50,22 +50,13 @@ router.post('/createEvent', (req, res) => {
   });
 });
 
-router.post('/searchEvent', (req, res) => {
-  console.log('/searchEvent req.body: ', req.body);
-  Event.searchEvent(req.body.name, req.body.game, (err, events) => {
-    if (err) throw err;
+router.post('/events', (req, res) => {
+  Event.searchEvents(req.body.name, req.body.game, (err, events) => {
+    if (err) {
+      res.status(400).send({err});
+    };
     res.end(String(events));
   });
-});
-
-router.get('/events', (req, res) => {
-  Event.getAllEvents()
-    .then(event => {
-      res.json(event);
-    })
-    .catch(err => {
-      res.status(401).send({ err });
-    });
 });
 
 module.exports = router;

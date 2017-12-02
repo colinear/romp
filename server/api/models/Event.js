@@ -1,5 +1,5 @@
 var Event = require('../../../db/schema/Event.js');
-var Game = require('../../db/schema/Game.js');
+var Game = require('../../../db/schema/Game.js');
 
 Event.createEvent = (eventData, callback) => {
   //create new event
@@ -19,18 +19,19 @@ Event.getAllEvents = () => {
   });
 };
 
-Event.searchEvent = (name, game, callback) => {
+Event.searchEvents = async (name, game, callback) => {
   if (name) {
-    Event.find({name: name}).exec((err, events) => {
-      console.log(events);
-      callback(err, events);
-
-    });
+    let err, events = await Event.find({name});
+    callback(err, events);
   } else if (game) {
-    Event.find({game: game}).exec((err, events) => {
-      callback(err, events);
-    });
+    var err, game = await Game.find({name: game}, '_id');
+    if (err) callback(err);
+    var err, events = await Event.find({game});
+    callback(err, events);
+  } else if (!name && !game) {
+    var err, events = await Event.find({});
+    callback(err, events);
   }
-}
+};
 
 module.exports = Event;
