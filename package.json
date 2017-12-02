@@ -33,10 +33,12 @@
     "react-scripts": "^1.0.17",
     "redux": "^3.7.2",
     "redux-promise": "^0.5.3",
+    "redux-saga": "^0.16.0",
     "semantic-ui": "^2.2.13",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.0",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "twitch-embed": "^1.1.4"
   },
   "devDependencies": {
     "react-scripts": "1.0.17"

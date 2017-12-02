@@ -3,14 +3,27 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions/index.js';
 
+// import TwitchVideoEmbed from './TwitchVideoEmbed.js';
+
 class PostsIndex extends React.Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
 
   render() {
-    console.log(this.props);
-    return <div> Posts Index </div>;
+    let videos = <div>Loading...</div>;
+    if (this.props.posts.streams) {
+      // Map streams to divs that will contain the embeddable twitch videos. 
+      videos = this.props.posts.streams.map((video, index) => {
+        return (
+          <span>{video._id}</span>
+          // <TwitchVideoEmbed video={video._id} />
+        );
+      });
+    // Limit videos to two for easier display for now.
+      videos = videos.slice(0, 2);
+    }
+    return <div>Video IDs coming back: {videos}</div>;
   }
 }
 
