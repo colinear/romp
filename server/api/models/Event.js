@@ -1,24 +1,14 @@
 var Event = require('../../../db/schema/Event.js');
+var Game = require('../../db/schema/Game.js');
 
-Event.createEvent = (teams, location, user_id, name, description, notes) => {
+Event.createEvent = (eventData, callback) => {
   //create new event
-  var newEvent = new Event ();
-  newEvent.teams = teams,
-  newEvent.location = location,
-  newEvent.user_id = user_id
-  newEvent.name = name,
-  newEvent.description = description,
-  newEvent.notes = notes,
+  var newEvent = new Event (eventData);
 
-  console.log('NEW EVENT:', newEvent)
+  console.log('SERVER: NEW EVENT:', newEvent)
   //save event to db
   newEvent.save((err) => {
-    if (err) {
-      // send message to client that username is taken
-      console.log('error with event', err)
-    } else {
-      console.log('event added')
-    }
+    callback(err, 'SERVER: Event added.')
   });
 };
 
@@ -29,8 +19,18 @@ Event.getAllEvents = () => {
   });
 };
 
-Event.searchEvent = (name, game, description) => {
+Event.searchEvent = (name, game, callback) => {
+  if (name) {
+    Event.find({name: name}).exec((err, events) => {
+      console.log(events);
+      callback(err, events);
 
+    });
+  } else if (game) {
+    Event.find({game: game}).exec((err, events) => {
+      callback(err, events);
+    });
+  }
 }
 
 module.exports = Event;

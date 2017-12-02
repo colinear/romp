@@ -11,17 +11,16 @@ router.post('/signup', (req, res) => {
   var profilePicURL = req.body.profilePicURL;
 
   User.createUser(username, password, email, firstName, lastName, profilePicURL)
-    .then((user) => {
-      console.log('user in route', user)
+    .then(user => {
+      console.log('user in route', user);
       req.session.userId = user._id;
       console.log('req.session: ', req.session);
       res.end();
     })
-    .catch((err) => {
-      console.log("error!! in route")
+    .catch(err => {
+      console.log('error!! in route');
       res.status(401).send({ err });
-    })
-
+    });
 });
 
 router.get('/users', (req, res) => {
@@ -44,17 +43,20 @@ router.get('/users/:username', (req, res) => {
     });
 });
 
-router.post('/events', (req, res) => {
-  console.log('event req', req.body)
-  var teams = req.body.teams;
-  var location = req.body.location;
-  var user_id = req.body.user_id;
-  var name = req.body.name;
-  var description = req.body.description;
-  var notes = req.body.notes;
-  Event.createEvent(teams, location, user_id, name, description, notes);
-  res.end()
-})
+router.post('/createEvent', (req, res) => {
+  Event.createEvent(req.body, (err, message) => {
+    if (err) throw err;
+    res.end(message);
+  });
+});
+
+router.post('/searchEvent', (req, res) => {
+  console.log('/searchEvent req.body: ', req.body);
+  Event.searchEvent(req.body.name, req.body.game, (err, events) => {
+    if (err) throw err;
+    res.end(String(events));
+  });
+});
 
 router.get('/events', (req, res) => {
   Event.getAllEvents()

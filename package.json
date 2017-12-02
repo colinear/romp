@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cd client && react-scripts build && react-scripts start && cd ../server && node index.js",
     "client": "cd client && react-scripts start",
-    "server": "node server/index.js",
+    "server": "nodemon server/index.js",
     "build": "cd client && react-scripts build",
     "test": "cd client && react-scripts test --env=jsdom",
     "eject": "cd client && react-scripts eject"
