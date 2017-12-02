@@ -2,12 +2,14 @@
 var User = require('../../../db/schema/User.js');
 
 User.getUser = (username) => {
-  return User.find({ username: username }).exec((err, user) => {
+  return User.find({ username: username })
+  .select('-password')
+  .exec((err, user) => {
     if (err) {
       throw err;
     }
 
-    // returns empty array
+    // if user is not found (returns empty array)
     if (user.length <= 0) {
       console.log('USER DOES NOT EXIST');
     }
@@ -34,6 +36,8 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
   newUser.lastName = lastName;
   newUser.profilePicURL = profilePicURL;
 
+  // console.log('password in model: ', newUser.validPassword(password))
+
   //save user to db
   return newUser.save((err, user) => {
     if (err) {
@@ -47,4 +51,33 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
   });
 };
 
+User.loginUser = (username, password) => {
+  return User.find({ username: username }).exec((err, user) => {
+    console.log('user in model: ', user);
+    if (err) {
+      throw err;
+    }
+    // if user is not found (returns empty array)
+    if (user.length <= 0) {
+      console.log('USER DOES NOT EXIST');
+      return;
+    }
+    // if user is found but password is incorrect
+    // if (!user.validPassword(password)) {
+    //   console.log('Password Incorrect');
+    //   return;
+    // }
+
+    return user;
+  });
+};
+
 module.exports = User;
+
+
+
+
+
+
+
+
