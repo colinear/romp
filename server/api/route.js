@@ -3,7 +3,6 @@ var User = require('./models/User.js');
 var Event = require('./models/Event.js');
 
 router.post('/signup', (req, res) => {
-  console.log('req: ', req.body);
   var username = req.body.username;
   var password = req.body.password;
   var email = req.body.email;
@@ -11,9 +10,18 @@ router.post('/signup', (req, res) => {
   var lastName = req.body.lastName;
   var profilePicURL = req.body.profilePicURL;
 
-  User.createUser(username, password, email, firstName, lastName, profilePicURL);
+  User.createUser(username, password, email, firstName, lastName, profilePicURL)
+    .then((user) => {
+      console.log('user in route', user)
+      req.session.userId = user._id;
+      console.log('req.session: ', req.session);
+      res.end();
+    })
+    .catch((err) => {
+      console.log("error!! in route")
+      res.status(401).send({ err });
+    })
 
-  res.end();
 });
 
 router.get('/users', (req, res) => {
