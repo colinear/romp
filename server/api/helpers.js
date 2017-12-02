@@ -24,10 +24,10 @@ helpers.getAllEvents = () => {
 
 helpers.searchEvents = async (name, game, callback) => {
   if (name) {
-    let err, events = await Event.find({name});
+    let err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
     callback(err, events);
   } else if (game) {
-    var err, game = await Game.find({name: game}, '_id');
+    var err, game = await Game.find({name: game.toLowerCase()}, '_id');
     if (err) callback(err);
     var err, events = await Event.find({game});
     callback(err, events);
@@ -46,7 +46,7 @@ helpers.joinEvent = async (username, event, callback) => {
 }
 
 helpers.getUser = username => {
-  return User.find({ username: username }).exec((err, user) => {
+  return User.findOne({ username: username }).exec((err, user) => {
     if (err) {
       throw err;
     }
@@ -71,6 +71,23 @@ helpers.createUser = async (newUserData, callback) => {
   newUser.password = newUser.generateHash(newUser.password);
   console.log(newUser);
   newUser.save(callback);
+};
+
+helpers.loginUser = (username, password, callback) => {
+  return User.findOne({ username: username }, (err, user) => {
+    if (err) { throw err }
+    if (user.username.length <= 0) {
+      console.log(`SERVER: User ${username} does not exist.`);
+      return;
+    }
+    if (!user.validPassword(password)) {
+      console.log('$SERVER: {username} entered an incorrect password.');
+      return;
+    } else if (user.validPassword(password)) {
+      console.log(`SERVER: Password for ${username} is correct.`)
+    }
+    return user;
+  });
 };
 
 module.exports = helpers;
