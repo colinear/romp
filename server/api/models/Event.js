@@ -1,5 +1,6 @@
 var Event = require('../../../db/schema/Event.js');
 var Game = require('../../../db/schema/Game.js');
+var User = require('../../../db/schema/User.js');
 
 Event.createEvent = (eventData, callback) => {
   //create new event
@@ -33,5 +34,13 @@ Event.searchEvents = async (name, game, callback) => {
     callback(err, events);
   }
 };
+
+Event.joinEvent = async (username, event, callback) => {
+  if (!username || !event) {
+    callback('Server: username or event not supplied');
+  }
+  User.find({username: username}, '_id')
+
+}
 
 module.exports = Event;
