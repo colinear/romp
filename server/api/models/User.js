@@ -1,6 +1,7 @@
+
 var User = require('../../../db/schema/User.js');
 
-User.getUser = username => {
+User.getUser = (username) => {
   return User.find({ username: username }).exec((err, user) => {
     if (err) {
       throw err;
