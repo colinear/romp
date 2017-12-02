@@ -52,22 +52,25 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
 };
 
 User.loginUser = (username, password) => {
-  return User.find({ username: username }).exec((err, user) => {
-    console.log('user in model: ', user);
-    if (err) {
-      throw err;
-    }
+  console.log('User obj in schema: ', User.prototype.validPassword)
+  return User.findOne({ username: username }, (err, user) => {
+    // console.log( 'user instance: ', user instanceof User);
+    // console.log('user in model: ', user);
+    if (err) { throw err }
     // if user is not found (returns empty array)
     if (user.length <= 0) {
       console.log('USER DOES NOT EXIST');
       return;
     }
     // if user is found but password is incorrect
-    // if (!user.validPassword(password)) {
-    //   console.log('Password Incorrect');
-    //   return;
-    // }
+    if (!user.validPassword(password)) {
+      console.log('Password Incorrect');
+      return;
+    }
 
+    if (user.validPassword(password)) {
+      console.log('it worked!!')
+    }
     return user;
   });
 };
