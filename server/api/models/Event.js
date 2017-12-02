@@ -1,7 +1,5 @@
 var Event = require('../../../db/schema/Event.js');
 
-var Event = {};
-
 Event.createEvent = (teams, location, user_id, name, description, notes) => {
   //create new event
   var newEvent = new Event ();
@@ -23,5 +21,16 @@ Event.createEvent = (teams, location, user_id, name, description, notes) => {
     }
   });
 };
+
+Event.getAllEvents = () => {
+  return Event.find({}).exec((err, events) => {
+    if (err) {throw err}
+    return events;
+  });
+};
+
+Event.searchEvent = (name, game, description) => {
+
+}
 
 module.exports = Event;

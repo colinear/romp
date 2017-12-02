@@ -44,19 +44,7 @@ router.get('/users/:username', (req, res) => {
     });
 });
 
-router.post('/event', (req, res) => {
-  console.log('event req', req.body);
-  var teams = req.body.teams;
-  var location = req.body.location;
-  var user_id = req.body.user_id;
-  var name = req.body.name;
-  var description = req.body.description;
-  var notes = req.body.notes;
-  Event.createEvent(teams, location, user_id, name, description, notes);
-  res.end();
-});
-
-router.post('/event', (req, res) => {
+router.post('/events', (req, res) => {
   console.log('event req', req.body)
   var teams = req.body.teams;
   var location = req.body.location;
@@ -64,8 +52,18 @@ router.post('/event', (req, res) => {
   var name = req.body.name;
   var description = req.body.description;
   var notes = req.body.notes;
-  Event.createEvent(teams, location, user_id, name, description, notes)
+  Event.createEvent(teams, location, user_id, name, description, notes);
   res.end()
 })
+
+router.get('/events', (req, res) => {
+  Event.getAllEvents()
+    .then(event => {
+      res.json(event);
+    })
+    .catch(err => {
+      res.status(401).send({ err });
+    });
+});
 
 module.exports = router;
