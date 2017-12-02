@@ -36,12 +36,14 @@ User.createUser = (username, password, email, firstName, lastName, profilePicURL
   newUser.profilePicURL = profilePicURL;
 
   //save user to db
-  newUser.save(err => {
+  return newUser.save((err, user) => {
     if (err) {
       // *** need to send message to client that username is taken
       console.error('error with username');
+      throw err;
     } else {
-      console.log('user added');
+      console.log('user added: ', user);
+      return user;
     }
   });
 };
