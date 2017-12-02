@@ -14,7 +14,7 @@ actions.fetchPosts = async () => {
     method: 'GET',
     url: ROOT_URL,
     headers: { 'Client-ID': CLIENT_ID }
-  })
+  });
 
   return {
     type: 'FETCH_POSTS',

@@ -5,14 +5,14 @@ var eventSchema = new Schema({
   game: {type: Schema.Types.ObjectId, ref: 'games'},
   teams: [{type: Schema.Types.ObjectId, ref: 'teams'}],
   location: {type: String, required: true},
-  user_id: {type: Schema.Types.ObjectId, ref: 'users'},
-  winner: {type: Schema.Types.ObjectId, ref: 'users'},
+  creator: {type: Schema.Types.ObjectId, ref: 'users'},
+  winner: {type: Schema.Types.ObjectId, ref: 'teams'},
   // timestamps: {createdAt: 'created_at'},
   name: {type: String, required: true},
   description: String,
   notes: String,
   chat: {myJsonProperty: Object},
-  spectators: {type: Schema.Types.ObjectId, ref: 'users'},
+  spectators: [{type: Schema.Types.ObjectId, ref: 'users'}],
   liveStream: [],
 });
 
