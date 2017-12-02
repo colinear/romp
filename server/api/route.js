@@ -1,28 +1,6 @@
 const router = require('express').Router();
 const helpers = require('./helpers.js');
 
-
-// router.post('/signup', (req, res) => {
-//   var username = req.body.username;
-//   var password = req.body.password;
-//   var email = req.body.email;
-//   var firstName = req.body.firstName;
-//   var lastName = req.body.lastName;
-//   var profilePicURL = req.body.profilePicURL;
-
-//   helpers.createUser(username, password, email, firstName, lastName, profilePicURL)
-//     .then(user => {
-//       console.log('user in route', user);
-//       req.session.userId = user._id;
-//       console.log('req.session: ', req.session);
-//       res.end();
-//     })
-//     .catch(err => {
-//       console.log('error!! in route');
-//       res.status(401).send({ err });
-//     });
-// });
-
 router.post('/signup', (req, res) => {
   console.log(req.body);
   helpers.createUser(req.body, (err, user) => {
