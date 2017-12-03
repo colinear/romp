@@ -1,7 +1,7 @@
 // Imports
 import axios from 'axios';
 
-// const CLIENT_ID = require('../twitch.js');
+const CLIENT_ID = require('../twitch.js');
 
 // Constants
 const ROOT_URL = 'https://api.twitch.tv/kraken/streams';

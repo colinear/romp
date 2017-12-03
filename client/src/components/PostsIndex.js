@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import actions from '../actions/index.js';
+import { actions } from '../actions/index.js';
 
 // import TwitchVideoEmbed from './TwitchVideoEmbed.js';
 
