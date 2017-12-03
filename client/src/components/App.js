@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
-import actions from '../actions/index.js';
+import { actions } from '../actions/index.js';
 
 // Components
 import BottomNavBar from './BottomNavBar.js';

@@ -39,10 +39,12 @@ helpers.searchEvents = async (name, game, callback) => {
 
 helpers.joinEvent = async (username, event, callback) => {
   if (!username || !event) {
-    callback('Server: username or event not supplied');
+    callback('SERVER: username or event not supplied');
   }
-  User.find({username: username}, '_id')
-
+  var err, userID = await User.findOne({username}, '_id');
+  if (err) callback(err);
+  var err, event = await Event.findOneAndUpdate({name: event}, { $push: {users: userID}});
+  callback(null, `SERVER: User ${username} successfully added to event ${event.name}!`)
 }
 
 helpers.getUser = username => {

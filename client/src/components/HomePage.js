@@ -4,7 +4,7 @@ import { Segment } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
-import actions from '../actions/index.js';
+import { actions } from '../actions/index.js';
 import PostsIndex from './PostsIndex.js';
 
 import Carousel from './Carousel.js';

@@ -21,7 +21,7 @@ var CounterReducer = function(state = initialState.counter, action) {
 var PostsReducer = function(state = initialState.posts, action) {
   switch (action.type) {
     case 'FETCH_POSTS':
-      return action.payload;
+      return action.payload.data;
     default: {
       return state;
     }

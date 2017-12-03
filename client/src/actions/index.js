@@ -6,39 +6,46 @@ const CLIENT_ID = require('../twitch.js');
 // Constants
 const ROOT_URL = 'https://api.twitch.tv/kraken/streams';
 
-// Actions object
-let actions = {};
+// action.type constants
+export const FETCH_POSTS = 'FETCH_POSTS';
+export const CHANGE_VIEW = 'CHANGE_VIEW';
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
 
-actions.fetchPosts = async () => {
-  const request = await axios({
+// Actions object
+// TODO: Should actions be assigned within object assignment?
+// NOTE: This export might look confusing, but it's not exporting 
+//  the object before its methods are being added.
+export const actions = {};
+
+actions.fetchPosts = () => {
+  const request = axios({
     method: 'GET',
     url: ROOT_URL,
     headers: { 'Client-ID': CLIENT_ID }
   });
 
   return {
-    type: 'FETCH_POSTS',
-    payload: request.data
+    type: FETCH_POSTS,
+    payload: request
   };
 };
 
 actions.changeView = state => {
   return {
-    type: 'CHANGE_VIEW',
+    type: CHANGE_VIEW,
     view: state
   };
 };
 
 actions.increment = () => {
   return {
-    type: 'INCREMENT'
+    type: INCREMENT
   };
 };
 
 actions.decrement = () => {
   return {
-    type: 'DECREMENT'
+    type: DECREMENT
   };
 };
-
-export default actions;

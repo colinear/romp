@@ -5,11 +5,11 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import promise from 'redux-promise';
+import ReduxPromise from 'redux-promise';
 import rootReducer from './reducers/index.js';
 
 // let store = createStore(rootReducer);
-let store = applyMiddleware(promise)(createStore)(rootReducer);
+let store = applyMiddleware(ReduxPromise)(createStore)(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
