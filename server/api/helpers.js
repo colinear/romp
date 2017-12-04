@@ -22,9 +22,9 @@ helpers.getAllEvents = () => {
   });
 };
 
-helpers.searchEvents = async (name, game, callback) => {
+helpers.searchEvents = async ((name, game, callback) => {
   if (name) {
-    let err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
+    var err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
     callback(err, events);
   } else if (game) {
     var err, game = await Game.find({name: game.toLowerCase()}, '_id');
@@ -35,7 +35,7 @@ helpers.searchEvents = async (name, game, callback) => {
     var err, events = await Event.find({});
     callback(err, events);
   }
-};
+});
 
 helpers.joinEvent = async (username, event, callback) => {
   if (!username || !event) {
