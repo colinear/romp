@@ -18,7 +18,7 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
 app.use('/', routes);
 

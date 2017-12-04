@@ -52,9 +52,7 @@ helpers.getUser = username => {
     if (err) {
       throw err;
     }
-
-    // returns empty array
-    if (user.length <= 0) {
+    if (!user) {
       console.log('USER DOES NOT EXIST');
     }
     return user;
@@ -71,8 +69,10 @@ helpers.getAllUsers = () => {
 helpers.createUser = async (newUserData, callback) => {
   let newUser = new User(newUserData);
   newUser.password = newUser.generateHash(newUser.password);
-  console.log(newUser);
-  newUser.save(callback);
+  newUser.save((err) => {
+    if (err) callback(err, null, 'SERVER: USER ALREADY EXISTS'); 
+    else callback(null, newUser, `SERVER: NEW USER ${newUser.username} SAVED`);
+  });
 };
 
 helpers.loginUser = (username, password, callback) => {
@@ -83,7 +83,7 @@ helpers.loginUser = (username, password, callback) => {
       return;
     }
     if (!user.validPassword(password)) {
-      console.log('$SERVER: {username} entered an incorrect password.');
+      console.log(`SERVER: ${username} entered an incorrect password.`);
       return;
     } else if (user.validPassword(password)) {
       console.log(`SERVER: Password for ${username} is correct.`)

@@ -2,12 +2,12 @@ const router = require('express').Router();
 const helpers = require('./helpers.js');
 
 router.post('/signup', (req, res) => {
-  console.log(req.body);
-  helpers.createUser(req.body, (err, user) => {
-    console.log('Create user callback return: ', err, user);
-    if (err) res.status(400).send({ err });
-    req.session.userId = user._id;
-    res.end();
+  helpers.createUser(req.body, (err, user, message) => {
+    if (err) res.end(message);
+    else {
+      req.session.userId = user._id;
+      res.end(message);
+    }
   });
 });
 
@@ -49,6 +49,7 @@ router.get('/users/:username', (req, res) => {
   helpers
     .getUser(req.params.username)
     .then(user => {
+      console.log('USER IN ROUTE', user);
       res.end(JSON.stringify(user));
     })
     .catch(err => {
