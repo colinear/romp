@@ -8,6 +8,8 @@ import { actions } from '../actions/index.js';
 import PostsIndex from './PostsIndex.js';
 
 import Carousel from './Carousel.js';
+import SignupForm from './SignupForm.js';
+import RedButton from './RedButton.js';
 
 class HomePage extends React.Component {
   render() {
@@ -17,7 +19,6 @@ class HomePage extends React.Component {
         <Link to={'/search'}>
           <button>Search</button>
         </Link>
-        <PostsIndex />
       </Segment>
     );
   }

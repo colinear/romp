@@ -7,7 +7,7 @@ const initialState = {
   posts: {}
 };
 
-var CounterReducer = function(state = initialState.counter, action) {
+var counterReducer = function(state = initialState.counter, action) {
   switch (action.type) {
     case 'INCREMENT':
       return state + 1;
@@ -18,7 +18,7 @@ var CounterReducer = function(state = initialState.counter, action) {
   }
 };
 
-var PostsReducer = function(state = initialState.posts, action) {
+var postsReducer = function(state = initialState.posts, action) {
   switch (action.type) {
     case 'FETCH_POSTS':
       return action.payload.data;
@@ -28,7 +28,7 @@ var PostsReducer = function(state = initialState.posts, action) {
   }
 };
 
-var ViewReducer = function(state = initialState.view, action) {
+var viewReducer = function(state = initialState.view, action) {
   switch (action.type) {
     case 'CHANGE_VIEW':
       return action.view;
@@ -38,9 +38,9 @@ var ViewReducer = function(state = initialState.view, action) {
 };
 
 const rootReducer = combineReducers({
-  counter: CounterReducer,
-  view: ViewReducer,
-  posts: PostsReducer
+  counter: counterReducer,
+  view: viewReducer,
+  posts: postsReducer
 });
 
 export default rootReducer;

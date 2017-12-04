@@ -3,6 +3,8 @@ import { Menu } from 'semantic-ui-react';
 
 import 'semantic-ui-css/semantic.min.css';
 
+import CredentialsModal from './CredentialsModal.js';
+
 class BottomNavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +33,7 @@ class BottomNavBar extends React.Component {
         </Menu.Item>
 
         <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={this.handleItemClick}>
-          Sign-in
+          <CredentialsModal />
         </Menu.Item>
       </Menu>
     );
