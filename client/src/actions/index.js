@@ -11,10 +11,12 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
+export const LOGIN = 'LOGIN';
+export const SIGNUP = 'SIGNUP';
 
 // Actions object
 // TODO: Should actions be assigned within object assignment?
-// NOTE: This export might look confusing, but it's not exporting 
+// NOTE: This export might look confusing, but it's not exporting
 //  the object before its methods are being added.
 export const actions = {};
 
@@ -31,10 +33,10 @@ actions.fetchPosts = () => {
   };
 };
 
-actions.changeView = state => {
+actions.changeView = view => {
   return {
     type: CHANGE_VIEW,
-    view: state
+    view
   };
 };
 
@@ -47,5 +49,17 @@ actions.increment = () => {
 actions.decrement = () => {
   return {
     type: DECREMENT
+  };
+};
+
+actions.login = () => {
+  return {
+    type: LOGIN
+  };
+};
+
+actions.signup = () => {
+  return {
+    type: SIGNUP
   };
 };
