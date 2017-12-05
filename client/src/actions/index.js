@@ -13,6 +13,7 @@ export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
 export const LOGIN = 'LOGIN';
 export const SIGNUP = 'SIGNUP';
+export const LOGOUT = 'LOGOUT';
 
 // Actions object
 // TODO: Should actions be assigned within object assignment?
@@ -61,5 +62,11 @@ actions.login = () => {
 actions.signup = () => {
   return {
     type: SIGNUP
+  };
+};
+
+actions.logout = () => {
+  return {
+    type: LOGOUT
   };
 };
