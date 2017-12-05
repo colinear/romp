@@ -3,6 +3,7 @@ import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
 import SignupForm from './SignupForm.js';
 import LoginForm from './LoginForm.js';
+
 import '../styles/CredentialsModal.css';
 
 export default class CredentialsModal extends Component {
@@ -57,7 +58,7 @@ export default class CredentialsModal extends Component {
         <Modal.Content>{view}</Modal.Content>
         <Modal.Actions>
           <Button className="CredentialsModal-toggle-mode-button" content={buttonText} onClick={this.toggleMode} />
-          <Button size="medium" onClick={this.handleClose}>
+          <Button color="black" size="medium"onClick={this.handleClose}>
             Cancel
           </Button>
           <Button color="blue" size="medium" onClick={this.handleClose}>
