@@ -1,8 +1,16 @@
 const Event = require('../../db/schema/Event.js');
 const Game = require('../../db/schema/Game.js');
 const User = require('../../db/schema/User');
+const jwt = require('jwt-simple');
+const config = require('../config');
 
 let helpers = {};
+
+helpers.tokenForUser = (user) => {
+  console.log('TOKEN USER: ', user);
+  const timestamp = new Date().getTime();
+  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret)
+}
 
 helpers.createEvent = (eventData, callback) => {
   //create new event
@@ -80,15 +88,15 @@ helpers.loginUser = (username, password, callback) => {
     if (err) { throw err }
     if (user.username.length <= 0) {
       console.log(`SERVER: User ${username} does not exist.`);
-      return;
+      // return;
     }
     if (!user.validPassword(password)) {
       console.log(`SERVER: ${username} entered an incorrect password.`);
-      return;
+      // return;
     } else if (user.validPassword(password)) {
       console.log(`SERVER: Password for ${username} is correct.`)
+      // return user;
     }
-    return user;
   });
 };
 
