@@ -5,8 +5,7 @@ export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      email: 'aaaa'
     };
   }
 
@@ -16,14 +15,13 @@ export default class LoginForm extends React.Component {
     return (
       <div className="LoginForm">
         <Form>
-          <Form.Field>
+          <Form.Field required>
             <label>Email</label>
-            <input placeholder="First Name" />
+            <input placeholder="Email" />
           </Form.Field>
           <Form.Field>
             <Checkbox label="I agree to the Terms and Conditions" />
           </Form.Field>
-          <Button type="submit">Submit</Button>
         </Form>
       </div>
     );

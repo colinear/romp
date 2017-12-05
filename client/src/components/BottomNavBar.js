@@ -1,8 +1,6 @@
 import React from 'react';
 import { Dropdown, Icon, Menu, Sticky } from 'semantic-ui-react';
 
-import 'semantic-ui-css/semantic.min.css';
-
 class BottomNavBar extends React.Component {
   constructor(props) {
     super(props);

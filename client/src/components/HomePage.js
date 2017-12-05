@@ -9,13 +9,11 @@ import PostsIndex from './PostsIndex.js';
 
 import Carousel from './Carousel.js';
 import SignupForm from './SignupForm.js';
-import RedButton from './RedButton.js';
 
 class HomePage extends React.Component {
   render() {
     return (
       <Segment>
-        <Carousel />
         <Link to={'/search'}>
           <button>Search</button>
         </Link>
