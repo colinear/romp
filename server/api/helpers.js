@@ -22,7 +22,7 @@ helpers.getAllEvents = () => {
   });
 };
 
-helpers.searchEvents = async ((name, game, callback) => {
+helpers.searchEvents = async (name, game, callback) => {
   if (name) {
     var err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
     callback(err, events);
@@ -35,7 +35,7 @@ helpers.searchEvents = async ((name, game, callback) => {
     var err, events = await Event.find({});
     callback(err, events);
   }
-});
+};
 
 helpers.joinEvent = async (username, event, callback) => {
   if (!username || !event) {
@@ -70,7 +70,7 @@ helpers.createUser = async (newUserData, callback) => {
   let newUser = new User(newUserData);
   newUser.password = newUser.generateHash(newUser.password);
   newUser.save((err) => {
-    if (err) callback(err, null, 'SERVER: USER ALREADY EXISTS'); 
+    if (err) callback(err, null, 'SERVER: USER ALREADY EXISTS');
     else callback(null, newUser, `SERVER: NEW USER ${newUser.username} SAVED`);
   });
 };
