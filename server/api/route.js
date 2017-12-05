@@ -1,12 +1,17 @@
 const router = require('express').Router();
 const helpers = require('./helpers.js');
+const passportService = require('../services/passport');
+const passport = require('passport');
+
+const requireAuth = passport.authenticate('jwt', { session: false });
+const requireLogin = passport.authenticate('local', { session: false });
 
 router.post('/signup', (req, res) => {
   helpers.createUser(req.body, (err, user, message) => {
     if (err) res.end(message);
     else {
       req.session.userId = user._id;
-      res.end(message);
+      res.json({ token: helpers.tokenForUser(user) });;
     }
   });
 });
@@ -19,10 +24,10 @@ router.post('/login', (req, res) => {
     .loginUser(username, password)
     .then(user => {
       if (user) {
-        req.session.userId = user._id;
-        res.json(user);
+        console.log('USER IN LOGIN: ', user);
+        // req.session.userId = user._id;
+        res.send({ token: helpers.tokenForUser(user) });
       }
-      res.end();
     })
     .catch(err => {
       res.status(401).send({ err });
