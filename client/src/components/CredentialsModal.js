@@ -31,16 +31,15 @@ export default class CredentialsModal extends Component {
   render() {
     // If login is true, render login component and appropriate text. Otherwise, render signup
     // component and the appropriate text.
-    let text, view, buttonText;
+    let text, view, oppText;
     if (this.state.login) {
       text = 'Log In';
       view = <LoginForm />;
-
-      buttonText = 'Sign Up';
+      oppText = 'Sign Up';
     } else {
       text = 'Sign Up';
       view = <SignupForm />;
-      buttonText = 'Log In';
+      oppText = 'Log In';
     }
 
     return (
@@ -54,10 +53,10 @@ export default class CredentialsModal extends Component {
         onClose={this.handleClose}
         size="tiny"
       >
-        <Header icon="id card" content="Sign Up" />
+        <Header icon="id card" content={text} />
         <Modal.Content>{view}</Modal.Content>
         <Modal.Actions>
-          <Button className="CredentialsModal-toggle-mode-button" content={buttonText} onClick={this.toggleMode} />
+          <Button className="CredentialsModal-toggle-mode-button" content={oppText} onClick={this.toggleMode} />
           <Button color="black" size="medium"onClick={this.handleClose}>
             Cancel
           </Button>

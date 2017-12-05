@@ -41,12 +41,14 @@ actions.changeView = view => {
   };
 };
 
+// TODO: Remove increment action?
 actions.increment = () => {
   return {
     type: INCREMENT
   };
 };
 
+// TODO: Remove decrement action?
 actions.decrement = () => {
   return {
     type: DECREMENT

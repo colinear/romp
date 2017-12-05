@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, IndexRoute } from 'react-router';
 import { bindActionCreators } from 'redux';
 
 import { actions } from '../actions/index.js';
@@ -29,8 +30,10 @@ class App extends Component {
             <BottomNavBar />
           </div>
           <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/search" component={SearchPage} />
+            <Router history={browserHistory}>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/search" component={SearchPage} />
+            </Router>
           </Switch>
           <Footer />
         </div>
@@ -39,13 +42,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return state;
-}
+// function mapStateToProps(state) {
+//   return state;
+// }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators(actions, dispatch);
+// }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;

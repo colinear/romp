@@ -16,6 +16,7 @@ const initialState = {
   posts: {}
 };
 
+// TODO: Remove counterReducer?
 var counterReducer = function(state = initialState.counter, action) {
   console.log(state);
   switch (action.type) {
