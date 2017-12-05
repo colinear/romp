@@ -6,7 +6,8 @@ import {
   INCREMENT, 
   DECREMENT, 
   LOGIN,
-  SIGNUP
+  SIGNUP,
+  LOGOUT,
 } from '../actions/index.js';
 
 const initialState = {
@@ -52,6 +53,8 @@ var credentialsReducer = function(state = initialState.view, action) {
       return 'login'
     case SIGNUP:
       return 'signup'
+    case LOGOUT:
+      return 'logout'
     default:
       return state;
   }

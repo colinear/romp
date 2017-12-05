@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 
 import CredentialsModal from './CredentialsModal.js';
 
-class BottomNavBar extends React.Component {
+class TopNavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -33,9 +33,15 @@ class BottomNavBar extends React.Component {
         <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={this.handleItemClick}>
           <CredentialsModal />
         </Menu.Item>
+
+
+        {/* adding log out button, need to toggle and show only when user logged in */}  
+        <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.handleItemClick}>
+          Logout
+        </Menu.Item>
       </Menu>
     );
   }
 }
 
-export default BottomNavBar;
+export default TopNavBar;
