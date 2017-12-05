@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  username: {type: String, unique: true, required: true, minlength: 4},
+  username: {type: String, unique: true, lowercase: true, required: true, minlength: 4},
   password: {type: String, required: true, minlength: 7},
   email: {type: String, required: true, minlength: 7},
   firstName: {type: String, minlength: 2},
@@ -24,6 +24,8 @@ userSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 }
 
+// creates a model class
 var User = mongoose.model('users', userSchema);
+
 // console.log('User schema: ', userSchema)
 module.exports = User;
