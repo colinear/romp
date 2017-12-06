@@ -15,13 +15,32 @@ var userSchema = new Schema({
   profilePicURL: String,
 });
 
-userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
+// userSchema.methods.generateHash = function(password) {
+//   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+// };
+
+userSchema.pre('save', function(next) {
+  const user = this;
+
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) { return next(err) }
+
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) { return next(err) }
+
+      user.password = hash;
+      next();
+    })
+  })
+});
 
 // user method to check if password is valid
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
+userSchema.methods.validPassword = function(password, callback) {
+  bcrypt.compare(password, this.password, function(err, isMatch) {
+    // this.password is the salt+hashedPassword
+    if (err) { return callback(err) }
+    callback(null, isMatch);
+  })
 }
 
 // creates a model class
