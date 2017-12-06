@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  username: {type: String, unique: true, required: true, minlength: 4},
+  username: {type: String, unique: true, lowercase: true, required: true, minlength: 4},
   password: {type: String, required: true, minlength: 7},
   email: {type: String, required: true, minlength: 7},
   firstName: {type: String, minlength: 2},
@@ -15,15 +15,36 @@ var userSchema = new Schema({
   profilePicURL: String,
 });
 
-userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
+// userSchema.methods.generateHash = function(password) {
+//   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+// };
+
+userSchema.pre('save', function(next) {
+  const user = this;
+
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) { return next(err) }
+
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) { return next(err) }
+
+      user.password = hash;
+      next();
+    })
+  })
+});
 
 // user method to check if password is valid
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
+userSchema.methods.validPassword = function(password, callback) {
+  bcrypt.compare(password, this.password, function(err, isMatch) {
+    // this.password is the salt+hashedPassword
+    if (err) { return callback(err) }
+    callback(null, isMatch);
+  })
 }
 
+// creates a model class
 var User = mongoose.model('users', userSchema);
+
 // console.log('User schema: ', userSchema)
 module.exports = User;

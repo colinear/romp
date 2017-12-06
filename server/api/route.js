@@ -1,33 +1,15 @@
 const router = require('express').Router();
 const helpers = require('./helpers.js');
+const passportService = require('../services/passport');
+const passport = require('passport');
 
-router.post('/signup', (req, res) => {
-  helpers.createUser(req.body, (err, user, message) => {
-    if (err) res.end(message);
-    else {
-      req.session.userId = user._id;
-      res.end(message);
-    }
-  });
-});
+const requireAuth = passport.authenticate('jwt', { session: false });
+const requireLogin = passport.authenticate('local', { session: false });
 
-router.post('/login', (req, res) => {
-  var username = req.body.username;
-  var password = req.body.password;
 
-  helpers
-    .loginUser(username, password)
-    .then(user => {
-      if (user) {
-        req.session.userId = user._id;
-        res.json(user);
-      }
-      res.end();
-    })
-    .catch(err => {
-      res.status(401).send({ err });
-    });
-});
+router.post('/signup', helpers.createUser);
+
+router.post('/login', requireLogin, helpers.loginUser);
 
 router.get('/logout', (req, res) => {
   delete req.session.user_id;

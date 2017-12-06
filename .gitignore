@@ -25,3 +25,5 @@ yarn-error.log*
 db/mongo.js
 server/twitch.js
 client/src/twitch.js
+
+server/config.js

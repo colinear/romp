@@ -1,8 +1,48 @@
 const Event = require('../../db/schema/Event.js');
 const Game = require('../../db/schema/Game.js');
 const User = require('../../db/schema/User');
+const jwt = require('jwt-simple');
+const config = require('../config');
 
 let helpers = {};
+
+helpers.tokenForUser = (user) => {
+  console.log('TOKEN USER: ', user);
+  const timestamp = new Date().getTime();
+  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret)
+};
+
+helpers.loginUser = function(req, res, next) {
+  console.log("HELLO");
+  // user already auth'd, just need to give token
+  res.send({ token: helpers.tokenForUser(req.user) });
+};
+
+helpers.createUser = function(req, res, next) {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  if (!username || !password) {
+    return res.status(422).send({ error: 'You must provide username and password' })
+  }
+
+  User.findOne({ username: username }, function(err, existingUser) {
+    if (err) { return next(err) }
+    if (existingUser) {
+      return res.status(422).send({ error: 'username is in use' });
+    }
+
+    const user = new User(req.body);
+    user.save(function(err) {
+      if (err) { return next(err) }
+
+      // need to send back identifying token
+      res.json({ token: helpers.tokenForUser(user) });
+    });
+  });
+}
+
+
 
 helpers.createEvent = (eventData, callback) => {
   //create new event
@@ -24,7 +64,7 @@ helpers.getAllEvents = () => {
 
 helpers.searchEvents = async (name, game, callback) => {
   if (name) {
-    let err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
+    var err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
     callback(err, events);
   } else if (game) {
     var err, game = await Game.find({name: game.toLowerCase()}, '_id');
@@ -66,30 +106,30 @@ helpers.getAllUsers = () => {
   });
 };
 
-helpers.createUser = async (newUserData, callback) => {
-  let newUser = new User(newUserData);
-  newUser.password = newUser.generateHash(newUser.password);
-  newUser.save((err) => {
-    if (err) callback(err, null, 'SERVER: USER ALREADY EXISTS'); 
-    else callback(null, newUser, `SERVER: NEW USER ${newUser.username} SAVED`);
-  });
-};
+// helpers.createUser = async (newUserData, callback) => {
+//   let newUser = new User(newUserData);
+//   newUser.password = newUser.generateHash(newUser.password);
+//   newUser.save((err) => {
+//     if (err) callback(err, null, 'SERVER: USER ALREADY EXISTS');
+//     else callback(null, newUser, `SERVER: NEW USER ${newUser.username} SAVED`);
+//   });
+// };
 
-helpers.loginUser = (username, password, callback) => {
-  return User.findOne({ username: username }, (err, user) => {
-    if (err) { throw err }
-    if (user.username.length <= 0) {
-      console.log(`SERVER: User ${username} does not exist.`);
-      return;
-    }
-    if (!user.validPassword(password)) {
-      console.log(`SERVER: ${username} entered an incorrect password.`);
-      return;
-    } else if (user.validPassword(password)) {
-      console.log(`SERVER: Password for ${username} is correct.`)
-    }
-    return user;
-  });
-};
+// helpers.loginUser = (username, password, callback) => {
+//   return User.findOne({ username: username }, (err, user) => {
+//     if (err) { throw err }
+//     if (user.username.length <= 0) {
+//       console.log(`SERVER: User ${username} does not exist.`);
+//       // return;
+//     }
+//     if (!user.validPassword(password)) {
+//       console.log(`SERVER: ${username} entered an incorrect password.`);
+//       // return;
+//     } else if (user.validPassword(password)) {
+//       console.log(`SERVER: Password for ${username} is correct.`)
+//       // return user;
+//     }
+//   });
+// };
 
 module.exports = helpers;
