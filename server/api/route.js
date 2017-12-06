@@ -6,6 +6,7 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
 
+
 router.post('/signup', helpers.createUser);
 
 router.post('/login', requireLogin, helpers.loginUser);

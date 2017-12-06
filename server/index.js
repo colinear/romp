@@ -9,22 +9,11 @@ var app = express();
 
 mongoose.connect(MONGODB_URI, { useMongoClient: true });
 
-app.use(session({
-  secret: 'romp secrets',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 600000 }
-}));
-
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.set('port', process.env.PORT || 3001);
 
 app.use('/', routes);
-
-app.get('/', function(req, res) {
-  res.send('Hello World!');
-});
 
 app.listen(app.get('port'), function() {
   console.log('Romp is running at localhost:' + app.get('port'));

@@ -17,12 +17,12 @@ const localLogin = new LocalStrategy({}, (username, password, done) => {
   })
 })
 
-const JwtOptions = {
+const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: config.secret
 };
 
-const JwtLogin = new JwtStrategy(JwtOptions, (payload, done) => {
+const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   User.findById(payload.sub, (err, user) => {
     if (err) return done(err, false);
     if (user) {
@@ -33,5 +33,5 @@ const JwtLogin = new JwtStrategy(JwtOptions, (payload, done) => {
   })
 })
 
-passport.use(JwtLogin);
+passport.use(jwtLogin);
 passport.use(localLogin);
