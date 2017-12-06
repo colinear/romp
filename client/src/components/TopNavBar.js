@@ -15,6 +15,12 @@ class TopNavBar extends React.Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
+  handleLoginButtonClick = () => {
+    if (!this.props.auth.authenticated) {
+      this.props.triggerAuth(true);
+    }
+  }
+
   render() {
     const { activeItem } = this.state;
     return (
@@ -44,6 +50,10 @@ class TopNavBar extends React.Component {
       </Menu>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return state;
 }
 
 function mapDispatchToProps(dispatch) {

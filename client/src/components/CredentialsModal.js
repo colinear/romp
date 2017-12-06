@@ -34,6 +34,7 @@ class CredentialsModal extends Component {
 
   handleLogin = () => {
     const { username, password } = this.state.payload;
+    console.log(this.state.payload);
     this.props.loginUser({ username, password });
   };
 

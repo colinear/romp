@@ -23,16 +23,14 @@ class LoginForm extends React.Component {
     let value = e.target.value;
     if (name === 'username') {
       this.setState({ username: value });
-    } else if (name === 'password1') {
+    } else if (name === 'password') {
       this.setState({ password: value });
     }
-
     const { username, password } = this.state;
     this.props.setPayload({ username, password });
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="SignupForm">
         <Form>

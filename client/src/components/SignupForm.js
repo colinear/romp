@@ -22,20 +22,9 @@ class SignupForm extends React.Component {
     this.props.loginUser({ email, password });
   }
 
-  // onSubmitHandler = () => {
-  //   if (this.state.password1 === this.state.password2 && this.state.terms === true) {
-  //     this.setState({ passwordError: false });
-  //     // Submit to server
-  //   } else {
-  //     // Give error
-  //     this.setState({ passwordError: true });
-  //   }
-  // };
-
   onChange = e => {
     let name = e.target.name;
     let value = e.target.value;
-    console.log(name, value);
     if (name === 'username') {
       this.setState({ username: value });
     } else if (name === 'password1') {
