@@ -36,13 +36,11 @@ helpers.createUser = function(req, res, next) {
     user.save(function(err) {
       if (err) { return next(err) }
 
-      // need to send back identifying token
+      // send back identifying token
       res.json({ token: helpers.tokenForUser(user) });
     });
   });
 }
-
-
 
 helpers.createEvent = (eventData, callback) => {
   //create new event
@@ -105,31 +103,5 @@ helpers.getAllUsers = () => {
     return users;
   });
 };
-
-// helpers.createUser = async (newUserData, callback) => {
-//   let newUser = new User(newUserData);
-//   newUser.password = newUser.generateHash(newUser.password);
-//   newUser.save((err) => {
-//     if (err) callback(err, null, 'SERVER: USER ALREADY EXISTS');
-//     else callback(null, newUser, `SERVER: NEW USER ${newUser.username} SAVED`);
-//   });
-// };
-
-// helpers.loginUser = (username, password, callback) => {
-//   return User.findOne({ username: username }, (err, user) => {
-//     if (err) { throw err }
-//     if (user.username.length <= 0) {
-//       console.log(`SERVER: User ${username} does not exist.`);
-//       // return;
-//     }
-//     if (!user.validPassword(password)) {
-//       console.log(`SERVER: ${username} entered an incorrect password.`);
-//       // return;
-//     } else if (user.validPassword(password)) {
-//       console.log(`SERVER: Password for ${username} is correct.`)
-//       // return user;
-//     }
-//   });
-// };
 
 module.exports = helpers;
