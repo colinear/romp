@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, Form, Segment } from 'semantic-ui-react';
+import * as actions from '../actions';
 
 export default class LoginForm extends React.Component {
   constructor(props) {
