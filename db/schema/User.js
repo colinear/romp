@@ -15,19 +15,13 @@ var userSchema = new Schema({
   profilePicURL: String,
 });
 
-// userSchema.methods.generateHash = function(password) {
-//   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-// };
-
 userSchema.pre('save', function(next) {
   const user = this;
-
   bcrypt.genSalt(10, function(err, salt) {
     if (err) { return next(err) }
-
+    
     bcrypt.hash(user.password, salt, null, function(err, hash) {
       if (err) { return next(err) }
-
       user.password = hash;
       next();
     })
@@ -46,5 +40,4 @@ userSchema.methods.validPassword = function(password, callback) {
 // creates a model class
 var User = mongoose.model('users', userSchema);
 
-// console.log('User schema: ', userSchema)
 module.exports = User;
