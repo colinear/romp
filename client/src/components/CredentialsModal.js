@@ -29,7 +29,18 @@ class CredentialsModal extends Component {
     this.setState({ login });
   };
 
+  handleLogin() {
+
+  }
+
   render() {
+
+    // TODO:
+    // If not logged in and no error, user may open and close modal at will.
+    // If not logged in and error, prevent from leaving.
+    // If logged in, show different message.
+    let open = this.props.needsAuth;
+
     // If login is true, render login component and appropriate text. Otherwise, render signup
     // component and the appropriate text.
     let text, view, oppText;
@@ -43,21 +54,8 @@ class CredentialsModal extends Component {
       oppText = 'Log In';
     }
 
-    if (this.props.needsAuth) {
-      this.setState({modalOpen: true});
-    }
-
     return (
-      <Modal
-        trigger={
-          <Button color="black" onClick={this.handleOpen}>
-            {text}
-          </Button>
-        }
-        open={this.state.modalOpen}
-        onClose={this.handleClose}
-        size="tiny"
-      >
+      <Modal trigger={<div />} open={open} onClose={this.handleClose} size="tiny">
         <Header icon="id card" content={text} />
         <Modal.Content>{view}</Modal.Content>
         <Modal.Actions>
@@ -74,8 +72,8 @@ class CredentialsModal extends Component {
   }
 }
 
-function mapStateToProps({ needsAuth }) {
-  return { needsAuth };
+function mapStateToProps(state) {
+  return state;
 }
 
 export default connect(mapStateToProps)(CredentialsModal);
