@@ -5,13 +5,13 @@ import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 
-import App from './components/app';
+import App from './components/App';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
-import Feature from './components/feature';
+import Feature from './components/Feature';
 import RequireAuth from './components/auth/require_auth';
-import Welcome from './components/welcome';
+import Welcome from './components/Welcome';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 

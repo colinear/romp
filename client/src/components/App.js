@@ -1,7 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
 
-import Header from './header';
+import Header from './Header';
+import 'semantic-ui-css/semantic.min.css';
 
 export default class App extends Component {
   render() {
