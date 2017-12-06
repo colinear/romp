@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Checkbox, Form, Segment } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,23 +13,75 @@ export default class LoginForm extends React.Component {
     };
   }
 
+  handleFormSubmit({ email, password }) {
+    // Need to do something to log user in
+    this.props.loginUser({ email, password });
+  }
+
+  onChange = e => {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === 'username') {
+      this.setState({ username: value });
+    } else if (name === 'password1') {
+      this.setState({ password: value });
+    }
+
+    const { username, password } = this.state;
+    this.props.setPayload({ username, password });
+  };
+
   render() {
+    console.log(this.props);
     return (
-      <div className="LoginForm">
+      <div className="SignupForm">
         <Form>
-           <Form.Field required>
+          <Form.Field required>
             <label>Username</label>
-            <input name="username" placeholder="Username" />
+            <input name="username" placeholder="Username" onChange={this.onChange} />
           </Form.Field>
           <Form.Field required>
             <label>Password</label>
-            <input name="password" placeholder="Password" type="password" />
+            <input name="password" placeholder="Password" type="password" onChange={this.onChange} />
           </Form.Field>
         </Form>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps, actions)(LoginForm);
+
+// export default class LoginForm extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       username: '',
+//       password: ''
+//     };
+//   }
+
+//   render() {
+//     return (
+//       <div className="LoginForm">
+//         <Form>
+//            <Form.Field required>
+//             <label>Username</label>
+//             <input name="username" placeholder="Username" />
+//           </Form.Field>
+//           <Form.Field required>
+//             <label>Password</label>
+//             <input name="password" placeholder="Password" type="password" />
+//           </Form.Field>
+//         </Form>
+//       </div>
+//     );
+//   }
+// }
 
 // class Login extends React.Component {
 //   handleFormSubmit(fields) {

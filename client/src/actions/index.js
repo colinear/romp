@@ -8,12 +8,12 @@ import {
   TRIGGER_AUTH
 } from './types';
 
-const ROOT_URL = 'http://localhost:3090';
+const ROOT_URL = 'http://localhost:3001'; // Server URL
 
-export function signinUser({ email, password }) {
+export function loginUser({ username, password }) {
   return function(dispatch) {
-    // Submit email/password to the server
-    axios.post(`${ROOT_URL}/signin`, { email, password })
+    // Submit username/password to the server
+    axios.post(`${ROOT_URL}/login`, { username, password })
       .then(response => {
         // If request is good...
         // - Update state to indicate user is authenticated
@@ -31,9 +31,9 @@ export function signinUser({ email, password }) {
   }
 }
 
-export function signupUser({ email, password }) {
+export function signupUser({ username, password }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/signup`, { email, password })
+    axios.post(`${ROOT_URL}/signup`, { username, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);

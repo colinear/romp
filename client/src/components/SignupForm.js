@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Checkbox, Form, Segment, Label, Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-export default class SignupForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,27 +17,27 @@ export default class SignupForm extends React.Component {
     };
   }
 
-  onSubmitHandler = () => {
-    if (this.state.password1 === this.state.password2 && this.state.terms === true) {
-      this.setState({ passwordError: false });
-      // Submit to server
-    } else {
-      // Give error
-      this.setState({ passwordError: true });
-    }
-  };
+  handleFormSubmit({ email, password }) {
+    // Need to do something to log user in
+    this.props.loginUser({ email, password });
+  }
+
+  // onSubmitHandler = () => {
+  //   if (this.state.password1 === this.state.password2 && this.state.terms === true) {
+  //     this.setState({ passwordError: false });
+  //     // Submit to server
+  //   } else {
+  //     // Give error
+  //     this.setState({ passwordError: true });
+  //   }
+  // };
 
   onChange = e => {
     let name = e.target.name;
     let value = e.target.value;
     console.log(name, value);
     if (name === 'username') {
-      if (this.isAlphanumeric(value) && this.usernameError === false) {
-        console.log('is alphanumeric');
-        this.setState({ username: value });
-      } else if (!this.isAlphanumeric(value)) {
-        this.setState({ username: this.state.username });
-      }
+      this.setState({ username: value });
     } else if (name === 'password1') {
       this.setState({ password1: value });
     } else if (name === 'password2') {
@@ -43,17 +45,21 @@ export default class SignupForm extends React.Component {
     } else if (name === 'terms') {
       this.setState({ terms: value });
     }
+
+    // Set component's payload.
+    const { username, password1, password2, email, terms } = this.state;
+    this.props.setPayload({ username, password1, password2, email, terms });
   };
 
   // TODO: Fix alphanumeric function for username and set message when terms is ok.
-  isAlphanumeric = (value) => {
+  isAlphanumeric = value => {
     var letterNumber = /^[0-9a-zA-Z]+$/;
     if (value.match(letterNumber)) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   render() {
     return (
@@ -81,16 +87,22 @@ export default class SignupForm extends React.Component {
           ) : null}
           <Form.Field>
             <Checkbox name="terms" label="I agree to the Terms and Conditions" onChange={this.onChange} />
-            {(this.state.termsError) ?
+            {this.state.termsError ? (
               <Message
                 error
                 header="Action Forbidden"
                 content="You can only sign up for an account once with a given e-mail address."
-              /> : null
-            }
+              />
+            ) : null}
           </Form.Field>
         </Form>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps, actions)(SignupForm);

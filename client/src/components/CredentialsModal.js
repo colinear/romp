@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import SignupForm from './SignupForm.js';
 import LoginForm from './LoginForm.js';
 
+import * as actions from '../actions';
+
 // import '../styles/CredentialsModal.css';
 
 class CredentialsModal extends Component {
@@ -12,7 +14,8 @@ class CredentialsModal extends Component {
     super(props);
     this.state = {
       modalOpen: false,
-      login: true // If login is true, then show login component. Otherwise, show signup component.
+      login: true, // If login is true, then show login component. Otherwise, show signup component.
+      payload: {}
     };
   }
 
@@ -29,12 +32,22 @@ class CredentialsModal extends Component {
     this.setState({ login });
   };
 
-  handleLogin() {
+  handleLogin = () => {
+    const { username, password } = this.state.payload;
+    this.props.loginUser({ username, password });
+  };
 
-  }
+  handleSignup = () => {
+    // If all good, then sign up user.
+    const { username, password1 } = this.state.payload;
+    this.props.signupUser({ username, password: password1 });
+  };
+
+  setPayload = fields => {
+    this.setState({ payload: { ...fields } });
+  };
 
   render() {
-
     // TODO:
     // If not logged in and no error, user may open and close modal at will.
     // If not logged in and error, prevent from leaving.
@@ -43,15 +56,17 @@ class CredentialsModal extends Component {
 
     // If login is true, render login component and appropriate text. Otherwise, render signup
     // component and the appropriate text.
-    let text, view, oppText;
+    let text, view, oppText, action;
     if (this.state.login) {
       text = 'Log In';
-      view = <LoginForm />;
+      view = <LoginForm setPayload={this.setPayload} />;
       oppText = 'Sign Up';
+      action = this.handleLogin;
     } else {
       text = 'Sign Up';
-      view = <SignupForm />;
+      view = <SignupForm setPayload={this.setPayload} />;
       oppText = 'Log In';
+      action = this.handleSignup;
     }
 
     return (
@@ -63,7 +78,7 @@ class CredentialsModal extends Component {
           <Button color="black" size="medium" onClick={this.handleClose}>
             Cancel
           </Button>
-          <Button color="blue" size="medium" onClick={this.handleClose}>
+          <Button color="blue" size="medium" onClick={action}>
             {text}
           </Button>
         </Modal.Actions>
@@ -76,4 +91,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(CredentialsModal);
+export default connect(mapStateToProps, actions)(CredentialsModal);
