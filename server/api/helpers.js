@@ -13,6 +13,7 @@ helpers.tokenForUser = (user) => {
 };
 
 helpers.loginUser = function(req, res, next) {
+  console.log("HELLO");
   // user already auth'd, just need to give token
   res.send({ token: helpers.tokenForUser(req.user) });
 };

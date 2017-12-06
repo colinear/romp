@@ -11,12 +11,13 @@ import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
 import Feature from './components/Feature';
 import RequireAuth from './components/auth/require_auth';
+import HomePage from './components/HomePage';
 import Welcome from './components/Welcome';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const store = createStoreWithMiddleware(reducers, undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const token = localStorage.getItem('token');
 // If we have a token, consider the user to be signed in
@@ -33,7 +34,7 @@ ReactDOM.render(
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />
         <Route path="signup" component={Signup} />
-        <Route path="feature" component={RequireAuth(Feature)} />
+        <Route path="homepage" component={RequireAuth(HomePage)} />
       </Route>
     </Router>
   </Provider>

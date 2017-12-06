@@ -1,5 +1,9 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { triggerAuth } from '../actions/index.js';
 
 import CredentialsModal from './CredentialsModal.js';
 
@@ -10,6 +14,12 @@ class TopNavBar extends React.Component {
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  handleLoginButtonClick = () => {
+    if (!this.props.auth.authenticated) {
+      this.props.triggerAuth(true);
+    }
+  }
 
   render() {
     const { activeItem } = this.state;
@@ -31,12 +41,10 @@ class TopNavBar extends React.Component {
         </Menu.Item>
 
         <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={this.handleItemClick}>
-          <CredentialsModal />
+          <div onClick={this.props.triggerAuth.bind(this, true)}>Log In</div>
         </Menu.Item>
-
-
-        {/* adding log out button, need to toggle and show only when user logged in */}  
         <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.handleItemClick}>
+          {/* adding log out button, need to toggle and show only when user logged in */}          
           Logout
         </Menu.Item>
       </Menu>
@@ -44,4 +52,12 @@ class TopNavBar extends React.Component {
   }
 }
 
-export default TopNavBar;
+function mapStateToProps(state) {
+  return state;
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({triggerAuth}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(TopNavBar);

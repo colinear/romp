@@ -2,8 +2,8 @@ import React from 'react';
 import { Component } from 'react';
 
 import BottomNavBar from './BottomNavBar';
+import CredentialsModal from './CredentialsModal';
 import TopNavBar from './TopNavBar';
-
 
 import 'semantic-ui-css/semantic.min.css';
 
@@ -13,6 +13,7 @@ export default class App extends Component {
       <div>
         <TopNavBar />
         <BottomNavBar />
+        <CredentialsModal />
         {this.props.children}
       </div>
     );
