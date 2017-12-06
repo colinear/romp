@@ -10,25 +10,17 @@ export default class LoginForm extends React.Component {
     };
   }
 
-  onSubmitHandler() {}
-
   render() {
     return (
       <div className="LoginForm">
         <Form>
-          <Form.Field>
+           <Form.Field required>
             <label>Username</label>
-            <input placeholder="Username" />
+            <input name="username" placeholder="Username" />
           </Form.Field>
-          <Form.Field>
+          <Form.Field required>
             <label>Password</label>
-            <input placeholder="Password" type="password" />
-          </Form.Field>
-          <Form.Field>
-            <input placeholder="Password" type="password" />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox label="I agree to the Terms and Conditions" />
+            <input name="password" placeholder="Password" type="password" />
           </Form.Field>
         </Form>
       </div>

@@ -1,72 +1,70 @@
-// Imports
 import axios from 'axios';
+import { browserHistory } from 'react-router';
+import {
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR,
+  FETCH_MESSAGE
+} from './types';
 
-const CLIENT_ID = require('../twitch.js');
+const ROOT_URL = 'http://localhost:3090';
 
-// Constants
-const ROOT_URL = 'https://api.twitch.tv/kraken/streams';
+export function signinUser({ email, password }) {
+  return function(dispatch) {
+    // Submit email/password to the server
+    axios.post(`${ROOT_URL}/signin`, { email, password })
+      .then(response => {
+        // If request is good...
+        // - Update state to indicate user is authenticated
+        dispatch({ type: AUTH_USER });
+        // - Save the JWT token
+        localStorage.setItem('token', response.data.token);
+        // - redirect to the route '/feature'
+        browserHistory.push('/feature');
+      })
+      .catch(() => {
+        // If request is bad...
+        // - Show an error to the user
+        dispatch(authError('Bad Login Info'));
+      });
+  }
+}
 
-// action.type constants
-export const FETCH_POSTS = 'FETCH_POSTS';
-export const CHANGE_VIEW = 'CHANGE_VIEW';
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const LOGIN = 'LOGIN';
-export const SIGNUP = 'SIGNUP';
-export const LOGOUT = 'LOGOUT';
+export function signupUser({ email, password }) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/signup`, { email, password })
+      .then(response => {
+        dispatch({ type: AUTH_USER });
+        localStorage.setItem('token', response.data.token);
+        browserHistory.push('/feature');
+      })
+      .catch(response => dispatch(authError(response.data.error)));
+  }
+}
 
-// Actions object
-// TODO: Should actions be assigned within object assignment?
-// NOTE: This export might look confusing, but it's not exporting
-//  the object before its methods are being added.
-export const actions = {};
-
-actions.fetchPosts = () => {
-  const request = axios({
-    method: 'GET',
-    url: ROOT_URL,
-    headers: { 'Client-ID': CLIENT_ID }
-  });
-
+export function authError(error) {
   return {
-    type: FETCH_POSTS,
-    payload: request
+    type: AUTH_ERROR,
+    payload: error
   };
-};
+}
 
-actions.changeView = view => {
-  return {
-    type: CHANGE_VIEW,
-    view
-  };
-};
+export function signoutUser() {
+  localStorage.removeItem('token');
 
-actions.increment = () => {
-  return {
-    type: INCREMENT
-  };
-};
+  return { type: UNAUTH_USER };
+}
 
-actions.decrement = () => {
-  return {
-    type: DECREMENT
-  };
-};
-
-actions.login = () => {
-  return {
-    type: LOGIN
-  };
-};
-
-actions.signup = () => {
-  return {
-    type: SIGNUP
-  };
-};
-
-actions.logout = () => {
-  return {
-    type: LOGOUT
-  };
-};
+export function fetchMessage() {
+  return function(dispatch) {
+    axios.get(ROOT_URL, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(response => {
+        dispatch({
+          type: FETCH_MESSAGE,
+          payload: response.data.message
+        });
+      });
+  }
+}
