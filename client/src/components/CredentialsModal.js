@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 import SignupForm from './SignupForm.js';
 import LoginForm from './LoginForm.js';
 
 // import '../styles/CredentialsModal.css';
 
-export default class CredentialsModal extends Component {
+class CredentialsModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,6 +43,10 @@ export default class CredentialsModal extends Component {
       oppText = 'Log In';
     }
 
+    if (this.props.needsAuth) {
+      this.setState({modalOpen: true});
+    }
+
     return (
       <Modal
         trigger={
@@ -57,7 +62,7 @@ export default class CredentialsModal extends Component {
         <Modal.Content>{view}</Modal.Content>
         <Modal.Actions>
           <Button className="CredentialsModal-toggle-mode-button" content={oppText} onClick={this.toggleMode} />
-          <Button color="black" size="medium"onClick={this.handleClose}>
+          <Button color="black" size="medium" onClick={this.handleClose}>
             Cancel
           </Button>
           <Button color="blue" size="medium" onClick={this.handleClose}>
@@ -68,3 +73,9 @@ export default class CredentialsModal extends Component {
     );
   }
 }
+
+function mapStateToProps({ needsAuth }) {
+  return { needsAuth };
+}
+
+export default connect(mapStateToProps)(CredentialsModal);

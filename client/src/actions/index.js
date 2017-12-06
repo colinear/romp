@@ -4,7 +4,8 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
-  FETCH_MESSAGE
+  FETCH_MESSAGE,
+  TRIGGER_AUTH
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
@@ -66,5 +67,12 @@ export function fetchMessage() {
           payload: response.data.message
         });
       });
+  }
+}
+
+export function triggerAuth(value) {
+  return {
+    type: TRIGGER_AUTH,
+    value 
   }
 }

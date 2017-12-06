@@ -9,7 +9,7 @@ export default class SignupForm extends React.Component {
       password1: '',
       password2: '',
       terms: false,
-      passwordError: true,
+      passwordError: false,
       usernameError: false,
       termsError: false
     };
@@ -75,7 +75,7 @@ export default class SignupForm extends React.Component {
             <input name="password2" placeholder="Password" type="password" onChange={this.onChange} />
           </Form.Field>
           {this.state.passwordError ? (
-            <Label basic color="red" pointing="below">
+            <Label basic color="red" pointing="above">
               Passwords do not match.
             </Label>
           ) : null}

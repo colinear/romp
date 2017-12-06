@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 
 import BottomNavBar from './BottomNavBar';
+import CredentialsModal from './CredentialsModal';
 import TopNavBar from './TopNavBar';
 
 
