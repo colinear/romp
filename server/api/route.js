@@ -5,21 +5,21 @@ const passport = require('passport');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
-const requireTwitchLogin = passport.authenticate('twitch', { failureRedirect: '/' })
+// const requireTwitchLogin = passport.authenticate('twitch', { failureRedirect: '/' })
 
 
 router.post('/signup', helpers.createUser);
 
 router.post('/login', requireLogin, helpers.loginUser);
 
-router.get('/auth/twitch', passport.authenticate('twitch'));
-router.get('/auth/twitch/callback', requireTwitchLogin, function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-});
-router.get('/', (req, res) => {
-  res.render('index');
-})
+// router.get('/auth/twitch', passport.authenticate('twitch'));
+// router.get('/auth/twitch/callback', requireTwitchLogin, function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.end();
+// });
+// router.get('/', (req, res) => {
+//   res.render('index');
+// })
 
 router.get('/logout', (req, res) => {
   console.log('req: ', req)

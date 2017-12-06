@@ -35,23 +35,23 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   })
 })
 
-const twitchOptions = {
-  clientID: config.TWITCH_CLIENT_ID,
-  clientSecret: config.TWITCH_CLIENT_SECRET,
-  callbackURL: "http://127.0.0.1:3000/auth/twitch/callback",
-  scope: "user_read"
-}
+// const twitchOptions = {
+//   clientID: config.TWITCH_CLIENT_ID,
+//   clientSecret: config.TWITCH_CLIENT_SECRET,
+//   callbackURL: "http://127.0.0.1:3000/auth/twitch/callback",
+//   scope: "user_read"
+// }
 
-const twitchLogin = new TwitchStrategy(twitchOptions, (accessToken, refreshToken, profile, done) => {
-    User.findOrCreate({ twitchId: profile.id }, (err, user) => {
-      return done(err, user);
-    });
-  }
-)
+// const twitchLogin = new TwitchStrategy(twitchOptions, (accessToken, refreshToken, profile, done) => {
+//     User.findOrCreate({ twitchId: profile.id }, (err, user) => {
+//       return done(err, user);
+//     });
+//   }
+// )
 
-passport.serializeUser(function(user, done) { done(null, user) });
-passport.deserializeUser(function(user, done) { done(null, user) });
+// passport.serializeUser(function(user, done) { done(null, user) });
+// passport.deserializeUser(function(user, done) { done(null, user) });
 
 passport.use(jwtLogin);
 passport.use(localLogin);
-passport.use(twitchLogin);
+// passport.use(twitchLogin);
