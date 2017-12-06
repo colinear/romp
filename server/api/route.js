@@ -12,8 +12,8 @@ router.post('/signup', helpers.createUser);
 router.post('/login', requireLogin, helpers.loginUser);
 
 router.get('/logout', (req, res) => {
-  delete req.session.user_id;
-  res.send('success');
+  console.log('req: ', req)
+  res.end()
 });
 
 router.get('/users', (req, res) => {
