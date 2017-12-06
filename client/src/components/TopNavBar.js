@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { triggerAuth } from '../actions/index.js';
+import { triggerAuth, signoutUser } from '../actions/index.js';
 
 import CredentialsModal from './CredentialsModal.js';
 
@@ -45,7 +45,7 @@ class TopNavBar extends React.Component {
         </Menu.Item>
         <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.handleItemClick}>
           {/* adding log out button, need to toggle and show only when user logged in */}          
-          Logout
+          <div onClick={this.props.signoutUser}>Logout</div>
         </Menu.Item>
       </Menu>
     );
@@ -57,7 +57,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({triggerAuth}, dispatch);
+  return bindActionCreators({triggerAuth, signoutUser}, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(TopNavBar);

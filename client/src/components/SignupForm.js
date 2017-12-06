@@ -13,7 +13,8 @@ class SignupForm extends React.Component {
       terms: false,
       passwordError: false,
       usernameError: false,
-      termsError: false
+      termsError: false,
+      email: ''
     };
   }
 
@@ -23,6 +24,8 @@ class SignupForm extends React.Component {
   }
 
   onChange = e => {
+
+
     let name = e.target.name;
     let value = e.target.value;
     if (name === 'username') {
@@ -33,8 +36,10 @@ class SignupForm extends React.Component {
       this.setState({ password2: value });
     } else if (name === 'terms') {
       this.setState({ terms: value });
+    } else if (name === 'email') {
+      this.setState({ email: value });
     }
-
+    // TODO: Fix this business
     // Set component's payload.
     const { username, password1, password2, email, terms } = this.state;
     this.props.setPayload({ username, password1, password2, email, terms });
@@ -56,7 +61,7 @@ class SignupForm extends React.Component {
         <Form>
           <Form.Field required>
             <label>Email</label>
-            <input placeholder="Email" />
+            <input name="email" placeholder="Email" onChange={this.onChange} />
           </Form.Field>
           <Form.Field required>
             <label>Username</label>
@@ -67,7 +72,7 @@ class SignupForm extends React.Component {
             <input name="password1" placeholder="Password" type="password" onChange={this.onChange} />
           </Form.Field>
           <Form.Field required>
-            <input name="password2" placeholder="Password" type="password" onChange={this.onChange} />
+            <input name="password2" placeholder="Confirm Password" type="password" onChange={this.onChange} />
           </Form.Field>
           {this.state.passwordError ? (
             <Label basic color="red" pointing="above">

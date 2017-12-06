@@ -40,12 +40,15 @@ class CredentialsModal extends Component {
 
   handleSignup = () => {
     // If all good, then sign up user.
-    const { username, password1 } = this.state.payload;
-    this.props.signupUser({ username, password: password1 });
+    const { username, password1, email } = this.state.payload;
+    let obj = { username, password: password1, email };
+    console.log(obj);
+    this.props.signupUser({ username, password: password1, email });
   };
 
   setPayload = fields => {
-    this.setState({ payload: { ...fields } });
+    console.log(fields);
+    this.setState({ payload: { ...this.state.payload, ...fields } });
   };
 
   render() {
