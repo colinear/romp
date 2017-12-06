@@ -4,7 +4,7 @@ import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import SignupForm from './SignupForm.js';
 import LoginForm from './LoginForm.js';
 
-import '../styles/CredentialsModal.css';
+// import '../styles/CredentialsModal.css';
 
 export default class CredentialsModal extends Component {
   constructor(props) {
