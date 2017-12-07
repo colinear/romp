@@ -11,12 +11,10 @@ import {
 const ROOT_URL = 'http://localhost:3001'; // Server URL
 
 export function loginUser({ username, password }) {
-  console.log(username, password);
   return function(dispatch) {
     // Submit username/password to the server
     axios.post(`${ROOT_URL}/login`, { username, password })
       .then(response => {
-        console.log(response);
         // If request is good...
         // - Update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });

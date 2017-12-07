@@ -7,7 +7,6 @@ const config = require('../config');
 let helpers = {};
 
 helpers.tokenForUser = (user) => {
-  console.log('TOKEN USER: ', user);
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp }, config.secret)
 };
