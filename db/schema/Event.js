@@ -14,8 +14,8 @@ var eventSchema = new Schema({
   notes: String,
   chat: {myJsonProperty: Object},
   spectators: [{type: Schema.Types.ObjectId, ref: 'users'}],
-  liveStream: []
-
+  liveStream: [],
+  pictureURL: String,
 });
 
 

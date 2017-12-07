@@ -69,4 +69,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({openAuth, signoutUser}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(TopNavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(TopNavBar);
