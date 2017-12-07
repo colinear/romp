@@ -4,8 +4,16 @@ import faker from 'faker';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
 
-let integer = (length) => {
-  return Math.floor(Math.random() * length);
+let integer = (length, half) => {
+  let middle = Math.floor(length / 2);
+  if (half === "first") {
+    return Math.floor(Math.random() * middle);
+  } else if (half === "last") {
+    let addition = Math.floor(Math.random() * middle)
+    return middle + addition;
+  } else {
+    return Math.floor(Math.random() * length);
+  }
 }
 
 class RandomEventGenerator extends React.Component {
@@ -18,7 +26,7 @@ class RandomEventGenerator extends React.Component {
     let creator = users[integer(users.length)]._id;
     let winner = users[integer(users.length)]._id;
     let description = faker.lorem.sentences();
-    let spectators = users.slice(integer(users.length), integer(users.length));
+    let spectators = users.slice(integer(users.length, "first"), integer(users.length, "last"));
     let notes = faker.lorem.sentence();
     let pictureURL = faker.random.image();
 
