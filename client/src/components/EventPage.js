@@ -19,9 +19,10 @@ class EventPage extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Make call to the server for the particular event here using an action.
     this.props.getEvent(this.props.routeParams.eventid);
+    this.getUsers();
   }
 
   getUsers = async () => {
@@ -55,8 +56,8 @@ class EventPage extends React.Component {
           <Grid.Row>
             {
               users.map((user, index) => {
-                console.log(user);
-                return <div></div> 
+                let profilePic = (user.profilePicURL !== "" || !user.profilePicURL) ? user.profilePicURL : fillerImage;
+                return <img width="50" height="50" src={profilePic}/>
               })
             }
           </Grid.Row>
