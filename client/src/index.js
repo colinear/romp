@@ -14,6 +14,7 @@ import PhotoGrid from './components/PhotoGrid';
 import RequireAuth from './components/auth/require_auth';
 import HomePage from './components/HomePage';
 import Welcome from './components/Welcome';
+import Events from './components/Events';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
@@ -34,6 +35,7 @@ ReactDOM.render(
         <IndexRoute component={HomePage} />
         <Route path="homepage" component={RequireAuth(HomePage)} />
         <Route path="photos" component={PhotoGrid} />
+        <Route path="events" component={Events} />
       </Route>
     </Router>
   </Provider>
