@@ -33,19 +33,17 @@ class EventModal extends Component {
 
   render() {
     return (
-      <Modal trigger={<div style={{float: "right", paddingBottom: "101px"}}><Button onClick={this.handleOpen} className="create-event-button">Create Event</Button></div>} open={this.state.modalOpen}
+      <Modal size="small" trigger={<div style={{float: "right"}}><Button onClick={this.handleOpen} className="create-event-button">Create Event</Button></div>} open={this.state.modalOpen}
         onClose={this.handleClose}>
-        <Modal.Header>Profile Picture</Modal.Header>
         <Modal.Content image>
-          <Image wrapped size='medium' src='/assets/images/wireframe/image.png' />
           <Modal.Description>
-            <Header>Modal Header</Header>
-            <p>This is an example of expanded content that will cause the modal's dimmer to scroll</p>
+            <Header>Create New Event</Header>
+            {/* <p>text here maybe</p> */}
             <CreateEvent src='/assets/images/wireframe/paragraph.png' setPayload={this.setPayload} />
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
-          <Button primary onClick={this.handleEvent}>
+        <Modal.Actions style={{height: "3.5rem"}}>
+          <Button style={{marginTop: "-7.5px"}} primary onClick={this.handleEvent}>
             Proceed <Icon name='right chevron' />
           </Button>
         </Modal.Actions>
