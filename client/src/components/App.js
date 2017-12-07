@@ -6,10 +6,7 @@ import AuthModal from './AuthModal';
 import TopNavBar from './TopNavBar';
 import Footer from './Footer';
 import RandomUserGenerator from './RandomUserGenerator';
-import RandomEventGenerator from './RandomEventGenerator';
 import EventModal from './EventModal';
-import Footer from './Footer';
-import RandomUserGenerator from './RandomUserGenerator';
 import RandomEventGenerator from './RandomEventGenerator';
 
 
@@ -25,8 +22,6 @@ export default class App extends Component {
         <RandomUserGenerator />
         <RandomEventGenerator />
         <EventModal />
-        <RandomUserGenerator />
-        <RandomEventGenerator />
         {this.props.children}
       </div>
     );
