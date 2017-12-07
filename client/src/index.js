@@ -10,6 +10,7 @@ import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
 import Feature from './components/Feature';
+import PhotoGrid from './components/PhotoGrid';
 import RequireAuth from './components/auth/require_auth';
 import HomePage from './components/HomePage';
 import Welcome from './components/Welcome';
@@ -30,11 +31,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Welcome} />
-        <Route path="signin" component={Signin} />
-        <Route path="signout" component={Signout} />
-        <Route path="signup" component={Signup} />
+        <IndexRoute component={HomePage} />
         <Route path="homepage" component={RequireAuth(HomePage)} />
+        <Route path="photos" component={PhotoGrid} />
       </Route>
     </Router>
   </Provider>

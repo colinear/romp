@@ -7,7 +7,9 @@ import LoginForm from './LoginForm.js';
 
 import * as actions from '../actions';
 
-// import '../styles/AuthModal.css';
+// The AuthModal's purpose is to hold the login and signup form and detect when a user switches
+// between login and signup mode. It also has the job of holding onto the data that a user enters 
+// when they log in and sign up.
 
 class AuthModal extends Component {
   constructor(props) {
@@ -34,7 +36,6 @@ class AuthModal extends Component {
 
   handleLogin = () => {
     const { username, password } = this.state.payload;
-    console.log(this.state.payload);
     this.props.loginUser({ username, password });
   };
 
@@ -42,24 +43,16 @@ class AuthModal extends Component {
     // If all good, then sign up user.
     const { username, password1, email } = this.state.payload;
     let obj = { username, password: password1, email };
-    console.log(obj);
     this.props.signupUser(obj);
   };
 
   setPayload = fields => {
-    console.log(fields);
     this.setState({ payload: {...fields } });
   };
 
   render() {
-    console.log(this.props);
-    // TODO:
-    // If not logged in and no error, user may open and close modal at will.
-    // If not logged in and error, prevent from leaving.
-    // If logged in, show different message.
     let open = this.props.authOpened;
-    // If login is true, render login component and appropriate text. Otherwise, render signup
-    // component and the appropriate text.
+
     let text, view, oppText, action;
     if (this.state.login) {
       text = 'Log In';

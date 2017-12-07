@@ -28,10 +28,15 @@ class SignupForm extends React.Component {
     let name = e.target.name;
     let value = e.target.value;
     this.setState((prevState, props) => {
-      let { username, password1, password2, email, terms } = prevState;
-
+      let { username, password1, password2, email, terms, usernameError, passwordError, termsError } = prevState;
+      // Check if username is alphanumeric.
       if (name === 'username') {
-        username = value;
+        if (this.isAlphanumeric(value) || value === '') {
+          username = value;
+          usernameError = false;
+        } else {
+          usernameError = true;
+        }
       } else if (name === 'password1') {
         password1 = value;
       } else if (name === 'password2') {
@@ -41,8 +46,12 @@ class SignupForm extends React.Component {
       } else if (name === 'email') {
         email = value;
       }
-      this.props.setPayload({ username, password1, password2, email, terms });
-      return { username, password1, password2, email, terms };
+
+      // If there are no errors, send data to the modal.
+      if (!passwordError && !usernameError && !termsError) {
+        this.props.setPayload({ username, password1, password2, email, terms });
+      }
+      return { username, password1, password2, email, terms, passwordError, termsError, usernameError };
     });
   };
   
@@ -56,7 +65,20 @@ class SignupForm extends React.Component {
     }
   };
 
+  handlePasswordMatch = () => {
+    console.log('Hi, I\'m being called')
+    if (!(this.state.password1 === this.state.password2)) {
+      this.setState({passwordError: true})
+    } else {
+      this.setState({passwordError: false})
+    }
+  }
+
   render() {
+    console.log('Signup form state and props: ', this.state, this.props);
+    let usernameError = this.state.usernameError ? <Label basic color="red" pointing="above">Username must contain only letters and numbers.</Label> : null;
+    let passwordError = this.state.passwordError ? (<Label basic color="red" pointing="above">Passwords do not match.</Label>) : null;
+    let termsError = this.state.termsError ? <Message error header="Action Forbidden" content="You can only sign up for an account once with a given e-mail address."/> : null;
     return (
       <div className="SignupForm">
         <Form>
@@ -64,31 +86,22 @@ class SignupForm extends React.Component {
             <label>Email</label>
             <input name="email" placeholder="Email" onChange={this.onChange} />
           </Form.Field>
-          <Form.Field required>
+          <Form.Field required error={this.state.usernameError}>
             <label>Username</label>
             <input name="username" placeholder="Username" onChange={this.onChange} />
+            {usernameError}
           </Form.Field>
-          <Form.Field required>
+          <Form.Field required error={this.state.passwordError}>
             <label>Password</label>
             <input name="password1" placeholder="Password" type="password" onChange={this.onChange} />
           </Form.Field>
-          <Form.Field required>
-            <input name="password2" placeholder="Confirm Password" type="password" onChange={this.onChange} />
-          </Form.Field>
-          {this.state.passwordError ? (
-            <Label basic color="red" pointing="above">
-              Passwords do not match.
-            </Label>
-          ) : null}
+          <Form.Field required error={this.state.passwordError} >
+            <input name="password2" placeholder="Confirm Password" type="password" onChange={this.onChange} onBlur={this.handlePasswordMatch}/>
+            {passwordError}
+          </Form.Field> 
           <Form.Field>
             <Checkbox name="terms" label="I agree to the Terms and Conditions" onChange={this.onChange} />
-            {this.state.termsError ? (
-              <Message
-                error
-                header="Action Forbidden"
-                content="You can only sign up for an account once with a given e-mail address."
-              />
-            ) : null}
+            {termsError}
           </Form.Field>
         </Form>
       </div>
