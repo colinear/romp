@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var eventSchema = new Schema({
   game: {type: Schema.Types.ObjectId, ref: 'games'},
   teams: [{type: Schema.Types.ObjectId, ref: 'teams'}],
+  image: String,
   location: {type: String, required: true},
   creator: {type: Schema.Types.ObjectId, ref: 'users'},
   winner: {type: Schema.Types.ObjectId, ref: 'teams'},

@@ -8,12 +8,24 @@ const ROOT_URL = 'http://localhost:3001'; // Server URL
 
 const fillerImage = 'http://www.fillmurray.com/300/200';
 
+
 class EventPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       users: []
-    };
+    }
+  }
+
+  componentWillMount() {
+    // Make call to the server for the particular event here using an action.
+    this.props.getEvent(this.props.routeParams.eventid);
+  }
+
+  getUsers = async () => {
+    let data = await axios.get(`${ROOT_URL}/users`);
+    let users = data.data;
+    this.setState({users});
   }
 
   componentDidMount() {
@@ -48,6 +60,7 @@ class EventPage extends React.Component {
       // Pull properties off event.
       let { name, description, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event.data;
       let { users } = this.state;
+
       // If image is undefined, make it a filler image.
 
       return (
@@ -56,6 +69,7 @@ class EventPage extends React.Component {
             <Grid.Row>
               <Grid.Column width={5}>
                 <Image src={pictureURL} />
+
               </Grid.Column>
               <Grid.Column width={11}>
                 <h1>{name}</h1>
