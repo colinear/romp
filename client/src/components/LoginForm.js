@@ -21,13 +21,18 @@ class LoginForm extends React.Component {
   onChange = e => {
     let name = e.target.name;
     let value = e.target.value;
-    if (name === 'username') {
-      this.setState({ username: value });
-    } else if (name === 'password') {
-      this.setState({ password: value });
-    }
-    const { username, password } = this.state;
-    this.props.setPayload({ username, password });
+    this.setState((prevState, props) => {
+      let { username, password } = prevState;
+
+      if (name === 'username') {
+        username = value;
+      } else if (name === 'password') {
+        password = value;
+      } 
+
+      this.props.setPayload({ username, password });
+      return { username, password };
+    });
   };
 
   render() {

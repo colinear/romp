@@ -41,8 +41,11 @@ class TopNavBar extends React.Component {
           Testimonials
         </Menu.Item>
 
-        <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={this.handleItemClick}>
-          <div onClick={this.props.openAuth.bind(this, true)}>Log In</div>
+        <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={(e, {name}) => {
+          this.props.openAuth(true)
+          this.handleItemClick(e, {name})
+          }}>
+          Log In
         </Menu.Item>
         <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.handleItemClick}>
           {/* adding log out button, need to toggle and show only when user logged in */}          
