@@ -12,7 +12,7 @@ var userSchema = new Schema({
   event: [{ type: Schema.Types.ObjectId, ref: 'events' }],
   team: [{ type: Schema.Types.ObjectId, ref: 'teams' }],
   favorites: [{ type: Schema.Types.ObjectId, ref: 'games' }],
-  profilePicURL: String,
+  profilePicURL: String
 });
 
 userSchema.pre('save', function(next) {
