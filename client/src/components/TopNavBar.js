@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router'
 
 import { openAuth, signoutUser } from '../actions/index.js';
 
@@ -26,11 +27,15 @@ class TopNavBar extends React.Component {
     console.log(this.props);
     return (
       <Menu attached="top" inverted>
-        <Menu.Item>
+        <Menu.Item as={Link} to="/homepage">
           <img
             src="https://images.vexels.com/media/users/3/145135/isolated/preview/76608161d143a7d27f20cdcc336bc09c-sun-sharp-rays-big-and-small-icon-by-vexels.png"
             alt="ROMP"
           />
+        </Menu.Item>
+
+        <Menu.Item name="events" active={activeItem === 'events'} onClick={this.handleItemClick} as={Link} to="/events" >      
+          Events
         </Menu.Item>
 
         <Menu.Item name="features" active={activeItem === 'features'} onClick={this.handleItemClick}>
