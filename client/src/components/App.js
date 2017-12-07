@@ -6,6 +6,7 @@ import AuthModal from './AuthModal';
 import TopNavBar from './TopNavBar';
 import Footer from './Footer';
 import RandomUserGenerator from './RandomUserGenerator';
+import RandomEventGenerator from './RandomEventGenerator';
 
 
 import 'semantic-ui-css/semantic.min.css';
@@ -18,6 +19,7 @@ export default class App extends Component {
         <BottomNavBar />
         <AuthModal />
         <RandomUserGenerator />
+        <RandomEventGenerator />
         {this.props.children}
       </div>
     );
