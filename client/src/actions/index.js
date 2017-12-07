@@ -11,10 +11,10 @@ import {
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
 
-export function loginUser({ username, password }) {
+export function loginUser(userData) {
   return function(dispatch) {
     // Submit username/password to the server
-    axios.post(`${ROOT_URL}/login`, { username, password })
+    axios.post(`${ROOT_URL}/login`, userData)
       .then(response => {
         // If request is good...
         // - Update state to indicate user is authenticated
@@ -33,9 +33,9 @@ export function loginUser({ username, password }) {
   }
 }
 
-export function signupUser({ username, password, email }) {
+export function signupUser(userData) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/signup`, { username, password, email })
+    axios.post(`${ROOT_URL}/signup`, userData)
       .then(response => {
         dispatch({ type: AUTH_USER });
         dispatch({ type: OPEN_AUTH, value: false });

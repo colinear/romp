@@ -22,10 +22,12 @@ helpers.createUser = function(req, res, next) {
   const password = req.body.password;
 
   if (!username || !password) {
+    
     return res.status(422).send({ error: 'You must provide username and password' })
   }
 
   User.findOne({ username: username }, function(err, existingUser) {
+    
     if (err) { return next(err) }
     if (existingUser) {
       return res.status(422).send({ error: 'username is in use' });
@@ -33,6 +35,7 @@ helpers.createUser = function(req, res, next) {
 
     const user = new User(req.body);
     user.save(function(err) {
+      
       if (err) { return next(err) }
       console.log(req.body)
     
