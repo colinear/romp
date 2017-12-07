@@ -8,7 +8,6 @@ import '../styles/Carousel.css';
 
 const Carousel = (props) => {
   return (
-    <div style={styles.paddingAdjust}>
       <Segment style={styles.slider}>
         <CarouselProvider naturalSlideWidth={2} naturalSlideHeight={1} totalSlides={3} touchEnabled>
           <Slider>
@@ -48,7 +47,6 @@ const Carousel = (props) => {
           </div>
         </CarouselProvider>
       </Segment>
-    </div>
   );
 }
 
