@@ -52,7 +52,7 @@ router.get('/users/:username', (req, res) => {
 router.post('/createEvent', (req, res) => {
   helpers.createEvent(req.body, (err, message) => {
     if (err) res.status(400).send({ err });
-    res.end(message);
+    res.send(message);
   });
 });
 

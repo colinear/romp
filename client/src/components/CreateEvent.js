@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Icon } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-class CreateEvent extends React.Component {
+class CreateEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +32,7 @@ class CreateEvent extends React.Component {
         description = value;
       }
 
+      this.props.setPayload({ event, game, location, description });
       return { event, game, location, description };
     });
   };

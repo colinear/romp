@@ -46,6 +46,17 @@ export function signupUser(userData) {
   }
 }
 
+export function createEvent({ event, game, location, description }) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description })
+      .then(response => {
+        dispatch({ type: AUTH_USER });
+        browserHistory.push('/homepage');
+      })
+      .catch(response => dispatch(authError(response.data.error)));
+  }
+}
+
 export function authError(error) {
   return {
     type: AUTH_ERROR,
@@ -75,7 +86,7 @@ export function fetchMessage() {
 export function openAuth(value) {
   return {
     type: OPEN_AUTH,
-    value 
+    value
   }
 }
 
