@@ -22,10 +22,12 @@ helpers.createUser = function(req, res, next) {
   const password = req.body.password;
 
   if (!username || !password) {
+    
     return res.status(422).send({ error: 'You must provide username and password' })
   }
 
   User.findOne({ username: username }, function(err, existingUser) {
+    
     if (err) { return next(err) }
     if (existingUser) {
       return res.status(422).send({ error: 'username is in use' });
@@ -33,6 +35,7 @@ helpers.createUser = function(req, res, next) {
 
     const user = new User(req.body);
     user.save(function(err) {
+      
       if (err) { return next(err) }
       console.log(req.body)
     
@@ -60,8 +63,12 @@ helpers.getAllEvents = () => {
   });
 };
 
-helpers.searchEvents = async (name, game, callback) => {
-  if (name) {
+helpers.searchEvents = async (name, game, id, callback) => {
+  console.log('Searching through events...');
+  if (id) {
+    var err, event = await Event.findById(id);
+    callback(err, event);
+  } if (name) {
     var err, events = await Event.find({name: {"$regex": name, "$options": "i"}});
     callback(err, events);
   } else if (game) {
@@ -72,7 +79,7 @@ helpers.searchEvents = async (name, game, callback) => {
   } else if (!name && !game) {
     var err, events = await Event.find({});
     callback(err, events);
-  }
+  } 
 };
 
 helpers.joinEvent = async (username, event, callback) => {

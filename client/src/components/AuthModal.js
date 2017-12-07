@@ -7,6 +7,8 @@ import LoginForm from './LoginForm.js';
 
 import * as actions from '../actions';
 
+import '../styles/AuthModal.css'
+
 // The AuthModal's purpose is to hold the login and signup form and detect when a user switches
 // between login and signup mode. It also has the job of holding onto the data that a user enters 
 // when they log in and sign up.
@@ -53,31 +55,34 @@ class AuthModal extends Component {
   render() {
     let open = this.props.authOpened;
 
-    let text, view, oppText, action;
+    let text, view, oppText, action, message;
     if (this.state.login) {
       text = 'Log In';
       view = <LoginForm setPayload={this.setPayload} />;
       oppText = 'Sign Up';
       action = this.handleLogin;
+      message = "Don't have an account yet?"
     } else {
       text = 'Sign Up';
       view = <SignupForm setPayload={this.setPayload} />;
       oppText = 'Log In';
       action = this.handleSignup;
+      message = "Have an account?"
     }
 
     return (
       <Modal trigger={<div />} open={open} onClose={this.props.openAuth.bind(this, false)} size="tiny">
         <Header icon="id card" content={text} />
         <Modal.Content>{view}</Modal.Content>
-        <Modal.Actions>
-          <Button className="AuthModal-toggle-mode-button" content={oppText} onClick={this.toggleMode} />
-          <Button color="black" size="medium" onClick={this.props.openAuth.bind(this, false)}>
+        <Modal.Actions style={{paddingTop: '2px'}}>
+            <p style={{margin: '2px'}}>{message}</p>
+          <Button style={{float: 'left'}} color="black" size="medium" onClick={this.props.openAuth.bind(this, false)}>
             Cancel
           </Button>
-          <Button color="blue" size="medium" onClick={action}>
+          <Button style={{float: 'left'}} color="blue" size="medium" onClick={action}>
             {text}
           </Button>
+          <Button content={oppText} onClick={this.toggleMode} />
         </Modal.Actions>
       </Modal>
     );
