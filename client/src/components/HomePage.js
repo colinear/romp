@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 import Carousel from './Carousel.js';
+import GameGrid from './GameGrid';
 
 class HomePage extends React.Component {
 
@@ -28,7 +29,7 @@ class HomePage extends React.Component {
           "spectators": [
             "5a22e5eee083650dd34c1450"
           ],
-          "pictureURL": "https://i.ebayimg.com/thumbs/images/g/LxUAAOSwLpdW-M-y/s-l225.jpg"
+          "pictureURL": "https://i.imgur.com/O0BvsKO.jpg"
         },
         {
           "_id": { "$oid": "5a22e842734d1d5aaf0e29sr" },
@@ -46,7 +47,7 @@ class HomePage extends React.Component {
           "spectators": [
             "5a22e5eee083650dd34c1450"
           ],
-          "pictureURL": "https://i.ebayimg.com/thumbs/images/g/LxUAAOSwLpdW-M-y/s-l225.jpg"
+          "pictureURL": "https://i.imgur.com/O0BvsKO.jpg"
         },
         {
           "_id": { "$oid": "5a22e842734d1d5aaf0e29pq" },
@@ -64,9 +65,33 @@ class HomePage extends React.Component {
           "spectators": [
             "5a22e5eee083650dd34c1450"
           ],
-          "pictureURL": "https://i.ebayimg.com/thumbs/images/g/LxUAAOSwLpdW-M-y/s-l225.jpg"
+          "pictureURL": "https://i.imgur.com/O0BvsKO.jpg"
         },
-      ]
+      ],
+      games: [
+        {
+          "channels": 953,
+          "viewers": 171708,
+          "game": {
+            "_id": 32399,
+            "box": {
+               "large": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-272x380.jpg",
+               "medium": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-136x190.jpg",
+               "small": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-52x72.jpg",
+               "template": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-{width}x{height}.jpg"
+            },
+            "giantbomb_id": 36113,
+            "logo": {
+               "large": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-240x144.jpg",
+               "medium": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-120x72.jpg",
+               "small": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-60x36.jpg",
+               "template": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-{width}x{height}.jpg"
+            },
+            "name": "Counter-Strike: Global Offensive",
+            "popularity": 170487
+          }
+        },
+      ],
     };
   }
 
@@ -85,6 +110,8 @@ class HomePage extends React.Component {
           events={this.state.events}
           // handleEventSlideClick={handleEventSlideClick}
         />
+        <br/>
+        <GameGrid />
       </Segment>
     );
   }
