@@ -16,6 +16,7 @@ import HomePage from './components/HomePage';
 import Welcome from './components/Welcome';
 import Events from './components/Events';
 import reducers from './reducers';
+import EventPage from'./components/EventPage';
 import { AUTH_USER } from './actions/types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -35,7 +36,7 @@ ReactDOM.render(
         <IndexRoute component={HomePage} />
         <Route path="homepage" component={RequireAuth(HomePage)} />
         <Route path="photos" component={PhotoGrid} />
-        <Route path="events" component={Events} />
+        <Route exact path="event/:eventid" component={EventPage} />
       </Route>
     </Router>
   </Provider>
