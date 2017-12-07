@@ -73,4 +73,14 @@ router.post('/joinEvent', (req, res) => {
   });
 });
 
+router.get('/event/:eventid', (req, res) => {
+  let eventID = req.params.eventid;
+  console.log(eventID)
+  helpers.searchEvents(null, null, eventID, (err, event) => {
+    if (err) res.status(400).send({err});
+    res.end(JSON.stringify(event));
+  });
+})
+// Create a route that gets the event.
+
 module.exports = router;

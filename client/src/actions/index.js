@@ -5,7 +5,8 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE,
-  OPEN_AUTH
+  OPEN_AUTH,
+  GET_EVENT
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -75,5 +76,15 @@ export function openAuth(value) {
   return {
     type: OPEN_AUTH,
     value 
+  }
+}
+
+export function getEvent(eventID) {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/event/${eventID}`)
+    .then((event) => {
+      dispatch ({type: GET_EVENT, event})
+    })
+    .catch(err => console.log('Error while retrieving event.'));
   }
 }
