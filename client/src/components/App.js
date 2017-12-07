@@ -8,6 +8,10 @@ import Footer from './Footer';
 import RandomUserGenerator from './RandomUserGenerator';
 import RandomEventGenerator from './RandomEventGenerator';
 import EventModal from './EventModal';
+import Footer from './Footer';
+import RandomUserGenerator from './RandomUserGenerator';
+import RandomEventGenerator from './RandomEventGenerator';
+
 
 import 'semantic-ui-css/semantic.min.css';
 
@@ -21,6 +25,8 @@ export default class App extends Component {
         <RandomUserGenerator />
         <RandomEventGenerator />
         <EventModal />
+        <RandomUserGenerator />
+        <RandomEventGenerator />
         {this.props.children}
       </div>
     );
