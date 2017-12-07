@@ -35,7 +35,8 @@ helpers.createUser = function(req, res, next) {
     const user = new User(req.body);
     user.save(function(err) {
       if (err) { return next(err) }
-
+      console.log(req.body)
+    
       // send back identifying token
       res.json({ token: helpers.tokenForUser(user) });
     });
