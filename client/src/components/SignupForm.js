@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Checkbox, Form, Segment, Label, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { userInfo } from 'os';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -24,27 +25,27 @@ class SignupForm extends React.Component {
   }
 
   onChange = e => {
-
-
     let name = e.target.name;
     let value = e.target.value;
-    if (name === 'username') {
-      this.setState({ username: value });
-    } else if (name === 'password1') {
-      this.setState({ password1: value });
-    } else if (name === 'password2') {
-      this.setState({ password2: value });
-    } else if (name === 'terms') {
-      this.setState({ terms: value });
-    } else if (name === 'email') {
-      this.setState({ email: value });
-    }
-    // TODO: Fix this business
-    // Set component's payload.
-    const { username, password1, password2, email, terms } = this.state;
-    this.props.setPayload({ username, password1, password2, email, terms });
-  };
+    this.setState((prevState, props) => {
+      let { username, password1, password2, email, terms } = prevState;
 
+      if (name === 'username') {
+        username = value;
+      } else if (name === 'password1') {
+        password1 = value;
+      } else if (name === 'password2') {
+        password2 = value;
+      } else if (name === 'terms') {
+        terms = value;
+      } else if (name === 'email') {
+        email = value;
+      }
+      this.props.setPayload({ username, password1, password2, email, terms });
+      return { username, password1, password2, email, terms };
+    });
+  };
+  
   // TODO: Fix alphanumeric function for username and set message when terms is ok.
   isAlphanumeric = value => {
     var letterNumber = /^[0-9a-zA-Z]+$/;

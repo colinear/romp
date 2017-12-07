@@ -7,9 +7,9 @@ import LoginForm from './LoginForm.js';
 
 import * as actions from '../actions';
 
-// import '../styles/CredentialsModal.css';
+// import '../styles/AuthModal.css';
 
-class CredentialsModal extends Component {
+class AuthModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,21 +43,21 @@ class CredentialsModal extends Component {
     const { username, password1, email } = this.state.payload;
     let obj = { username, password: password1, email };
     console.log(obj);
-    this.props.signupUser({ username, password: password1, email });
+    this.props.signupUser(obj);
   };
 
   setPayload = fields => {
     console.log(fields);
-    this.setState({ payload: { ...this.state.payload, ...fields } });
+    this.setState({ payload: {...fields } });
   };
 
   render() {
+    console.log(this.props);
     // TODO:
     // If not logged in and no error, user may open and close modal at will.
     // If not logged in and error, prevent from leaving.
     // If logged in, show different message.
-    let open = this.props.needsAuth;
-
+    let open = this.props.authOpened;
     // If login is true, render login component and appropriate text. Otherwise, render signup
     // component and the appropriate text.
     let text, view, oppText, action;
@@ -74,12 +74,12 @@ class CredentialsModal extends Component {
     }
 
     return (
-      <Modal trigger={<div />} open={open} onClose={this.handleClose} size="tiny">
+      <Modal trigger={<div />} open={open} onClose={this.props.openAuth.bind(this, false)} size="tiny">
         <Header icon="id card" content={text} />
         <Modal.Content>{view}</Modal.Content>
         <Modal.Actions>
-          <Button className="CredentialsModal-toggle-mode-button" content={oppText} onClick={this.toggleMode} />
-          <Button color="black" size="medium" onClick={this.handleClose}>
+          <Button className="AuthModal-toggle-mode-button" content={oppText} onClick={this.toggleMode} />
+          <Button color="black" size="medium" onClick={this.props.openAuth.bind(this, false)}>
             Cancel
           </Button>
           <Button color="blue" size="medium" onClick={action}>
@@ -95,4 +95,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps, actions)(CredentialsModal);
+export default connect(mapStateToProps, actions)(AuthModal);

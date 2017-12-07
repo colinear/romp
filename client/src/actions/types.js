@@ -1,5 +1,5 @@
-export const AUTH_USER = 'auth_user';
-export const UNAUTH_USER = 'unauth_user';
-export const AUTH_ERROR = 'auth_error';
-export const FETCH_MESSAGE = 'fetch_message';
-export const TRIGGER_AUTH = 'TRIGGER_AUTH';
+export const AUTH_USER = 'AUTH_USER';
+export const UNAUTH_USER = 'UNAUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const FETCH_MESSAGE = 'FETCH_MESSAGE';
+export const OPEN_AUTH = 'OPEN_AUTH';

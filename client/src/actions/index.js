@@ -5,7 +5,7 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE,
-  TRIGGER_AUTH
+  OPEN_AUTH
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -20,7 +20,7 @@ export function loginUser({ username, password }) {
         // If request is good...
         // - Update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });
-        dispatch({ type: TRIGGER_AUTH, value: false });
+        dispatch({ type: OPEN_AUTH, value: false });
         // - Save the JWT token
         localStorage.setItem('token', response.data.token);
         // - redirect to the route '/feature'
@@ -39,7 +39,7 @@ export function signupUser({ username, password, email }) {
     axios.post(`${ROOT_URL}/signup`, { username, password, email })
       .then(response => {
         dispatch({ type: AUTH_USER });
-        dispatch({ type: TRIGGER_AUTH, value: false });
+        dispatch({ type: OPEN_AUTH, value: false });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/homepage');
       })
@@ -73,9 +73,9 @@ export function fetchMessage() {
   }
 }
 
-export function triggerAuth(value) {
+export function openAuth(value) {
   return {
-    type: TRIGGER_AUTH,
+    type: OPEN_AUTH,
     value 
   }
 }
