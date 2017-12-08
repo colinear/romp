@@ -7,48 +7,14 @@ const axios = require('axios');
 
 const igdb = require('igdb-api-node').default;
 const client = igdb(config.IGDB_KEY);
-// const IGDB_API = 'https://api-2445582011268.apicast.io';
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
 // const requireTwitchLogin = passport.authenticate('twitch', { failureRedirect: '/' })
 
-let desiredFields = [
-  'id', 'name', 'slug', 'url', 'summary', 'storyline',
-  'popularity', 'total_rating', 'aggregated_rating', 'developers', 
-  'category', 'keywords', 'genres', 'first_release_date', 
-  'screenshots', 'videos', 'cover', 'esrb', 'websites',
-  'tags', 'rating', 
-];
-
-router.get('/games', (req, res) => {
-  client.games({
-    // fields : '*',
-    limit: 15,
-  }, desiredFields)
-    .then(games => {
-      console.log('games: ', games)
-      res.json(games)
-    })
-    .catch(err => {
-      console.log(err)
-      res.status(401).send({ err });
-    })
-})
-
-
 router.post('/signup', helpers.createUser);
 
 router.post('/login', requireLogin, helpers.loginUser);
-
-// router.get('/auth/twitch', passport.authenticate('twitch'));
-// router.get('/auth/twitch/callback', requireTwitchLogin, function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.end();
-// });
-// router.get('/', (req, res) => {
-//   res.render('index');
-// })
 
 router.get('/logout', (req, res) => {
   res.end()
@@ -82,6 +48,15 @@ router.get('/users/:username', (req, res) => {
       res.status(401).send({ err });
     });
 });
+
+// router.get('/auth/twitch', passport.authenticate('twitch'));
+// router.get('/auth/twitch/callback', requireTwitchLogin, function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.end();
+// });
+// router.get('/', (req, res) => {
+//   res.render('index');
+// })
 
 router.get('/team/players/:teamid', (req, res) => {
   let teamID = req.params.teamid;
@@ -136,12 +111,35 @@ router.post('/team', (req, res) => {
   });
 });
 
+let desiredFields = [
+  'id', 'name', 'slug', 'url', 'summary', 'storyline',
+  'popularity', 'total_rating', 'aggregated_rating', 'developers', 
+  'category', 'keywords', 'genres', 'first_release_date', 
+  'screenshots', 'videos', 'cover', 'esrb', 'websites',
+  'tags', 'rating', 
+];
+
 router.get('/games', (req, res) => {
-  helpers.getGames((err, games) => {
-    if (err) res.status(400).send({err});
-    else res.end(JSON.stringify(games));
-  });
-});
+  client.games({
+    // fields : '*',
+    limit: 15,
+  }, desiredFields)
+    .then(games => {
+      console.log('games: ', games)
+      res.json(games)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(401).send({ err });
+    })
+})
+
+// router.get('/games', (req, res) => {
+//   helpers.getGames((err, games) => {
+//     if (err) res.status(400).send({err});
+//     else res.end(JSON.stringify(games));
+//   });
+// });
 
 router.get('/teams', (req, res) => {
   helpers.getTeams((err, teams) => {

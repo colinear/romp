@@ -11,7 +11,6 @@ const GameGrid = props => {
           key={game.id}
           index={index}
           game={game}
-          // style={styles.slide(event.pictureURL)}
           // onClick={() => handleEventSlideClick(event)}
         />
       })}
