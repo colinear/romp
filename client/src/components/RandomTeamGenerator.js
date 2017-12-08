@@ -27,16 +27,40 @@ class RandomTeamGenerator extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
+    // this.getData();
+    this.getUsers();
+    this.getGames();
+    this.getEvents();
+    
+
   }
 
 
-  getData = async () => {
-    // Get lists of users, games, and events.
-    let users = (await axios.get(`${ROOT_URL}/users`)).data;    
+  // getData = async () => {
+  //   // Get lists of users, games, and events.
+ 
+  //   console.log('Users: ', users);
+
+  //   let events = (await axios.post(`${ROOT_URL}/events`)).data;
+  //   console.log(users, games, events);
+  //   this.setState({games, events, users});
+
+  // }
+
+  getUsers = async () => {
+    let users = (await axios.get(`${ROOT_URL}/users`)).data;
+    this.setState({users});
+  }
+
+  getGames = async () => {
     let games = (await axios.get(`${ROOT_URL}/games`)).data;
-    let events = (await axios.post(`${ROOT_URL}/events`)).data;
-    this.setState({games, events, users});
+    this.setState({games});
+  }
+
+  getEvents = async () => {
+    let events = await axios.post(`${ROOT_URL}/events`, {});
+    console.log('Events: ', events);
+    this.setState({events});
   }
 
   randomizeTeam = async () => {
@@ -59,6 +83,7 @@ class RandomTeamGenerator extends React.Component {
 
   render() {
     let {events, games, users} = this.state;
+    console.log(events, games, users);
     if (events && games && users) {
       return <button onClick={this.randomizeTeam}>Randomize Team</button>
     } else {

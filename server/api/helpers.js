@@ -66,7 +66,11 @@ helpers.getAllEvents = () => {
 
 helpers.searchEvents = async (name, game, id, callback) => {
   console.log('Searching through events...');
-  if (id) {
+  if (name == undefined && game == undefined && id == undefined) {
+    console.log('test!!');
+    var err, events = await Event.find({});
+    callback(err, events);
+  } else if (id) {
     var err, event = await Event.findById(id);
     callback(err, event);
   } if (name) {
@@ -78,8 +82,7 @@ helpers.searchEvents = async (name, game, id, callback) => {
     var err, events = await Event.find({game});
     callback(err, events);
   } else if (!name && !game) {
-    var err, events = await Event.find({});
-    callback(err, events);
+
   } 
 };
 
@@ -145,7 +148,7 @@ helpers.getGames = (callback) => {
   Game.find({}).exec((err, games) => {
     console.log(games);
     if (err) callback(err);
-    else callback(games);
+    else callback(null, games);
   });
 }
 

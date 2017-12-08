@@ -63,11 +63,12 @@ router.post('/createEvent', (req, res) => {
 });
 
 router.post('/events', (req, res) => {
-  helpers.searchEvents(req.body.name, req.body.game, (err, events) => {
+  helpers.searchEvents(req.body.name, req.body.game, req.body.id, (err, events) => {
+    console.log('EVENTS: ', events);    
     if (err) {
       res.status(400).send({ err });
     }
-    res.end(String(events));
+    else res.end(JSON.stringify(events));
   });
 });
 
@@ -101,10 +102,9 @@ router.post('/team', (req, res) => {
 });
 
 router.get('/games', (req, res) => {
-  console.log('Here!');
   helpers.getGames((err, games) => {
     if (err) res.status(400).send({err});
-    res.end(JSON.stringify(games));
+    else res.end(JSON.stringify(games));
   });
 });
 // Create a route that gets the event.
