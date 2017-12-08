@@ -79,7 +79,7 @@ class HomePage extends React.Component {
       games: [], };
   }
   
-  getGames = async () => {
+  // getGames = async () => {
     // TODO: need to add identifying info to end of get request ..DONE? need count (as ${ variable })
     // TODO: need to add headers
     // let data = await axios.get(`${IGDB_API}/games/?fields=name,popularity&order=popularity:desc`, {
@@ -92,14 +92,15 @@ class HomePage extends React.Component {
     // );
     // let games = data.data;
     // this.setState({ games });
-  };
+  // };
 
   // Make action call to the server api for games
   componentWillMount() {
-    // this.props.getGames(this.props.routeParams.gameid);
+    this.props.getGames(this.props.routeParams.gameid);
   }
   componentDidMount() {
-    this.props.getGames(this.props.routeParams.gameid);
+
+    // this.props.getGames(this.props.routeParams.gameid);
   }
 
   // TODO: handleEventCardClick
@@ -107,13 +108,13 @@ class HomePage extends React.Component {
   render() {
     if (this.props.games) {
       // Pull properties off games.
-      let { 
-        id, name, slug, url, summary,
-        popularity, total_rating, developers, 
-        category, keywords, genres, first_release_date, 
-        screenshots, videos, cover, esrb, websites,
-        tags, 
-      } = this.props.games.data;
+      // let { 
+      //   id, name, slug, url, summary,
+      //   popularity, total_rating, developers, 
+      //   category, keywords, genres, first_release_date, 
+      //   screenshots, videos, cover, esrb, websites,
+      //   tags, 
+      // } = this.props.games.data;
 
       return (
         <div>
@@ -123,7 +124,7 @@ class HomePage extends React.Component {
           />
           <br/>
           <GameGrid 
-            games={this.state.games}
+            games={this.props.games}
           />
         </div>
       );

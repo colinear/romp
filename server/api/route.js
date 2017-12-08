@@ -3,13 +3,11 @@ const helpers = require('./helpers.js');
 const passportService = require('../services/passport');
 const passport = require('passport');
 const config = require('../config');
-console.log('config : ', config)
 const axios = require('axios');
 
 const igdb = require('igdb-api-node').default;
 const client = igdb(config.IGDB_KEY);
-
-const IGDB_API = 'https://api-2445582011268.apicast.io';
+// const IGDB_API = 'https://api-2445582011268.apicast.io';
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
@@ -24,17 +22,10 @@ let desiredFields = [
 ];
 
 router.get('/games', (req, res) => {
-  console.log('params in routes at /games: ', req.query, config.IGDB_KEY)
-  // axios.get(`${IGDB_API}/games`, {
-  //   headers: {
-  //     'user-key': config.IGDB_KEY,
-  //     'Accept': 'application/json'
-  //   }
-  // })
   client.games({
-    fields : '*',
-    limit: 12,
-  })
+    // fields : '*',
+    limit: 15,
+  }, desiredFields)
     .then(games => {
       console.log('games: ', games)
       res.json(games)
