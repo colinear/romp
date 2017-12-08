@@ -10,6 +10,7 @@ import RandomUserGenerator from './RandomUserGenerator';
 import EventModal from './EventModal';
 import RandomEventGenerator from './RandomEventGenerator';
 import RandomTeamGenerator from './RandomTeamGenerator';
+import GamePage from './GamePage'
 
 import 'semantic-ui-css/semantic.min.css';
 
