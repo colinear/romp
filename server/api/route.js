@@ -14,11 +14,11 @@ const requireLogin = passport.authenticate('local', { session: false });
 // const requireTwitchLogin = passport.authenticate('twitch', { failureRedirect: '/' })
 
 let desiredFields = [
-  'id', 'name', 'slug', 'url', 'summary',
-  'popularity', 'total_rating', 'developers', 
+  'id', 'name', 'slug', 'url', 'summary', 'storyline',
+  'popularity', 'total_rating', 'aggregated_rating', 'developers', 
   'category', 'keywords', 'genres', 'first_release_date', 
   'screenshots', 'videos', 'cover', 'esrb', 'websites',
-  'tags', 
+  'tags', 'rating', 
 ];
 
 router.get('/games', (req, res) => {
