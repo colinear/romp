@@ -6,10 +6,12 @@ import {
   AUTH_ERROR,
   FETCH_MESSAGE,
   OPEN_AUTH,
-  GET_EVENT
+  GET_EVENT,
+  GET_GAMES,
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
+const IGDB_API = 'https://api-2445582011268.apicast.io';
 
 export function loginUser(userData) {
   return function(dispatch) {
@@ -96,7 +98,23 @@ export function getEvent(eventID, callback) {
     .then((event) => {
       dispatch ({type: GET_EVENT, event})
       callback();
+
     })
     .catch(err => console.log('Error while retrieving event.'));
   }
 }
+
+export function getGames(numOfGames = 12, callback) {
+  return function(dispatch) {
+    axios.get(`${IGDB_API}/games/?fields=name,popularity&order=popularity:desc`)
+    .then((games) => {
+      dispatch ({ type: GET_GAMES, games });
+      callback();
+    })
+    .catch(err => console.log('Error while retrieving games.'));
+  }
+}
+
+
+
+

@@ -6,10 +6,16 @@ import GameCard from './GameCard.js';
 const GameGrid = props => {
   return (
     <div className="ui link cards">
-      <GameCard />
-      <GameCard />
-      <GameCard />
-      <GameCard />
+      {props.games.map((game, index) => {
+        // console.log('game in GameGrid', game)
+        return <GameCard 
+          key={game.game._id}
+          index={index}
+          game={game}
+          // style={styles.slide(event.pictureURL)}
+          // onClick={() => handleEventSlideClick(event)}
+        />
+      })}
     </div>
   );
 };

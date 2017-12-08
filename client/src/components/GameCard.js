@@ -1,19 +1,21 @@
 import React from 'react';
 
+// TODO: update card with new api data
 
 const GameCard = props => {
+  // console.log('props in gamecard', props.game)
   return (
     <div className="card">
       <div className="image">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Magic_the_gathering-card_back.jpg/200px-Magic_the_gathering-card_back.jpg" />
+        <img src={props.game.game.box.large} />
       </div>
       <div className="content">
-        <div className="header">Magic: The Gathering</div>
+        <div className="header">{props.game.game.name}</div>
         <div className="meta">
-          <a>Card Game</a>
+          <a>{/* game type */}</a>
         </div>
         <div className="description">
-          First published in 1993 by Wizards of the Coast, Magic was the first trading card game produced and it continues to thrive, with approximately twenty million players as of 2015.
+          {/* game description? */}
         </div>
       </div>
       <div className="extra content">
@@ -22,7 +24,7 @@ const GameCard = props => {
         </span>
         <span>
           <i className="user icon"></i>
-          718648 Players
+          {props.game.game.popularity} Players
         </span>
       </div>
     </div>
@@ -30,3 +32,5 @@ const GameCard = props => {
 };
 
 export default GameCard;
+
+// igdb api
