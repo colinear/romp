@@ -53,6 +53,7 @@ helpers.createEvent = (eventData, callback) => {
   console.log('SERVER: NEW EVENT:', newEvent)
   //save event to db
   newEvent.save((err) => {
+    console.log(err);
     callback(err, 'SERVER: Event added.')
   });
 };
@@ -140,15 +141,39 @@ helpers.getAllUsers = () => {
   });
 };
 
-helpers.getTeamForUser = () => {
+helpers.getTeamsForUser = () => {
   console.log('GetTeamForUser');
+}
+
+helpers.getUsersForTeam = (teamID, callback) => {
+  User.find({teams: teamID}).exec((err, users) => {
+    callback(err, users);
+  });
+}
+
+helpers.getTeamsForEvent = (event, callback) => {
+  Team.find({events: event}).exec((err, teams) => {
+    callback(err, teams);
+  });
+}
+
+helpers.getEventsForTeam = (team, callback) => {
+  Event.find({team: team}).exec((err, events) => {
+    callback(err, events);
+  });
 }
 
 helpers.getGames = (callback) => {
   Game.find({}).exec((err, games) => {
-    console.log(games);
     if (err) callback(err);
     else callback(null, games);
+  });
+}
+
+helpers.getTeams = (callback) => {
+  Team.find({}).exec((err, teams) => {
+    if (err) callback(err);
+    else callback(null, teams);
   });
 }
 

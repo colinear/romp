@@ -58,8 +58,7 @@ class RandomTeamGenerator extends React.Component {
   }
 
   getEvents = async () => {
-    let events = await axios.post(`${ROOT_URL}/events`, {});
-    console.log('Events: ', events);
+    let events = (await axios.post(`${ROOT_URL}/events`, {})).data;
     this.setState({events});
   }
 
@@ -78,12 +77,10 @@ class RandomTeamGenerator extends React.Component {
 
     // Finally, set the team.
     let response = await axios.post(`${ROOT_URL}/team`, {name, games, players, events});
-    console.log(response);
   }
 
   render() {
     let {events, games, users} = this.state;
-    console.log(events, games, users);
     if (events && games && users) {
       return <button onClick={this.randomizeTeam}>Randomize Team</button>
     } else {

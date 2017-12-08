@@ -24,7 +24,6 @@ class TopNavBar extends React.Component {
 
   render() {
     const { activeItem } = this.state;
-    console.log(this.props);
     return (
       <Menu attached="top" inverted>
         <Menu.Item as={Link} to="/homepage">

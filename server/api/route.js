@@ -47,7 +47,6 @@ router.get('/users/:username', (req, res) => {
   helpers
     .getUser(username, userID)
     .then(user => {
-      console.log('USER IN ROUTE', user);
       res.end(JSON.stringify(user));
     })
     .catch(err => {
@@ -55,16 +54,23 @@ router.get('/users/:username', (req, res) => {
     });
 });
 
+router.get('/team/players/:teamid', (req, res) => {
+  let teamID = req.params.teamid;
+  helpers.getUsersForTeam(teamID, (err, users) => {
+    if (err) res.status(400).send({err});
+    else res.send(users);
+  });
+});
+
 router.post('/createEvent', (req, res) => {
   helpers.createEvent(req.body, (err, message) => {
     if (err) res.status(400).send({ err });
-    res.send(message);
+    else res.send(message);
   });
 });
 
 router.post('/events', (req, res) => {
   helpers.searchEvents(req.body.name, req.body.game, req.body.id, (err, events) => {
-    console.log('EVENTS: ', events);    
     if (err) {
       res.status(400).send({ err });
     }
@@ -106,6 +112,30 @@ router.get('/games', (req, res) => {
     if (err) res.status(400).send({err});
     else res.end(JSON.stringify(games));
   });
+});
+
+router.get('/teams', (req, res) => {
+  helpers.getTeams((err, teams) => {
+    if (err) res.status(400).send({err});
+    else res.end(JSON.stringify(teams));
+  })
+})
+
+router.get('/teams_events/:type/:id', (req, res) => {
+  console.log('Type: ', req.params.type, 'ID: ', req.params.id);
+  if (req.params.type === 'getTeamsForEvent') {
+    helpers.getTeamsForEvent(req.params.id, (err, teams) => {
+      if (err) res.status(400).send({err});
+      else res.send(JSON.stringify(teams))
+    });
+  } else if (req.params.type === 'getEventsForTeam') {
+    helpers.getEventsForTeam(req.params.id, (err, events) => {
+      if (err) res.status(400).send({err});
+      else res.send(JSON.stringify(events))
+    });
+  } else {
+    res.end();
+  }
 });
 // Create a route that gets the event.
 
