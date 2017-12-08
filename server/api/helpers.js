@@ -1,6 +1,7 @@
 const Event = require('../../db/schema/Event.js');
 const Game = require('../../db/schema/Game.js');
 const User = require('../../db/schema/User');
+const Team = require('../../db/schema/Team');
 const jwt = require('jwt-simple');
 const config = require('../config');
 
@@ -52,6 +53,7 @@ helpers.createEvent = (eventData, callback) => {
   console.log('SERVER: NEW EVENT:', newEvent)
   //save event to db
   newEvent.save((err) => {
+    console.log(err);
     callback(err, 'SERVER: Event added.')
   });
 };
@@ -65,7 +67,11 @@ helpers.getAllEvents = () => {
 
 helpers.searchEvents = async (name, game, id, callback) => {
   console.log('Searching through events...');
-  if (id) {
+  if (name == undefined && game == undefined && id == undefined) {
+    console.log('test!!');
+    var err, events = await Event.find({});
+    callback(err, events);
+  } else if (id) {
     var err, event = await Event.findById(id);
     callback(err, event);
   } if (name) {
@@ -77,8 +83,7 @@ helpers.searchEvents = async (name, game, id, callback) => {
     var err, events = await Event.find({game});
     callback(err, events);
   } else if (!name && !game) {
-    var err, events = await Event.find({});
-    callback(err, events);
+
   } 
 };
 
@@ -120,11 +125,56 @@ helpers.getUser = (username, userID) => {
 
 };
 
+helpers.setTeam = (team, callback) => {
+  team = new Team(team);
+  team.save((err) => {
+    console.log(err);
+    if (err) callback(err);
+    else callback(null, `SERVER: Team successfully made!`);
+  });
+}
+
 helpers.getAllUsers = () => {
   return User.find({}).exec((err, users) => {
     if (err) {throw err}
     return users;
   });
 };
+
+helpers.getTeamsForUser = () => {
+  console.log('GetTeamForUser');
+}
+
+helpers.getUsersForTeam = (teamID, callback) => {
+  User.find({teams: teamID}).exec((err, users) => {
+    callback(err, users);
+  });
+}
+
+helpers.getTeamsForEvent = (event, callback) => {
+  Team.find({events: event}).exec((err, teams) => {
+    callback(err, teams);
+  });
+}
+
+helpers.getEventsForTeam = (team, callback) => {
+  Event.find({team: team}).exec((err, events) => {
+    callback(err, events);
+  });
+}
+
+helpers.getGames = (callback) => {
+  Game.find({}).exec((err, games) => {
+    if (err) callback(err);
+    else callback(null, games);
+  });
+}
+
+helpers.getTeams = (callback) => {
+  Team.find({}).exec((err, teams) => {
+    if (err) callback(err);
+    else callback(null, teams);
+  });
+}
 
 module.exports = helpers;

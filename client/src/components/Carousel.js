@@ -14,7 +14,6 @@ const Carousel = props => {
     <CarouselProvider naturalSlideWidth={2} naturalSlideHeight={1} totalSlides={3} touchEnabled>
       <Slider>
         {props.events.map((event, index) => {
-          // console.log('event in Carousel', event)
           return (
             <Slide
               key={event._id.$oid}

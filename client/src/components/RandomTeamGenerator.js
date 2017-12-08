@@ -4,31 +4,89 @@ import faker from 'faker';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
 
-let integer = (length) => {
-  return Math.floor(Math.random() * length);
+let integer = (length, half) => {
+  let middle = Math.floor(length / 2);
+  if (half === "first") {
+    return Math.floor(Math.random() * middle);
+  } else if (half === "last") {
+    let addition = Math.floor(Math.random() * middle)
+    return middle + addition;
+  } else {
+    return Math.floor(Math.random() * length);
+  }
 }
 
-class RandomEventGenerator extends React.Component {
-
-  randomizeEvent = async () => {
-    let data = await axios.get(`${ROOT_URL}/users`);
-    let users = data.data;
-    console.log(users);
-    let spectators = users.slice(integer(users.length), integer(users.length));
-
-    let eventData = { name, location, creator, winner, description, spectators, notes, image }
-    this.sendEvent(eventData);
+class RandomTeamGenerator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: null,
+      games: null,
+      events: null
+    }
   }
 
-  sendEvent = async (eventData) => {
-    // Add create team
-    let response = await axios.post(`${ROOT_URL}/createEvent`, eventData);
-    console.log(response);
+  componentDidMount() {
+    // this.getData();
+    this.getUsers();
+    this.getGames();
+    this.getEvents();
+    
+
+  }
+
+
+  // getData = async () => {
+  //   // Get lists of users, games, and events.
+ 
+  //   console.log('Users: ', users);
+
+  //   let events = (await axios.post(`${ROOT_URL}/events`)).data;
+  //   console.log(users, games, events);
+  //   this.setState({games, events, users});
+
+  // }
+
+  getUsers = async () => {
+    let users = (await axios.get(`${ROOT_URL}/users`)).data;
+    this.setState({users});
+  }
+
+  getGames = async () => {
+    let games = (await axios.get(`${ROOT_URL}/games`)).data;
+    this.setState({games});
+  }
+
+  getEvents = async () => {
+    let events = (await axios.post(`${ROOT_URL}/events`, {})).data;
+    this.setState({events});
+  }
+
+  randomizeTeam = async () => {
+    // Pick a slice of games.
+    let games = this.state.games.slice(integer(this.state.games.length, 'first'), integer(this.state.games.length, 'last'));
+
+    // Pick a slice of users.
+    let players = this.state.users.slice(integer(this.state.users.length, 'first'), integer(this.state.users.length, 'last'));    
+
+    // Pick a slice of events.
+    let events = this.state.events.slice(integer(this.state.events.length, 'first'), integer(this.state.events.length, 'last'));
+
+    // Get a name.
+    let name = faker.lorem.sentence();
+
+    // Finally, set the team.
+    let response = await axios.post(`${ROOT_URL}/team`, {name, games, players, events});
   }
 
   render() {
-    return <button onClick={this.randomizeEvent}>Randomize Event</button>
+    let {events, games, users} = this.state;
+    if (events && games && users) {
+      return <button onClick={this.randomizeTeam}>Randomize Team</button>
+    } else {
+      return <div>Loading...</div>
+    }
   }
 }
 
-export default RandomEventGenerator;
+export default RandomTeamGenerator;

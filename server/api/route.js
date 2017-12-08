@@ -76,7 +76,6 @@ router.get('/users/:username', (req, res) => {
   helpers
     .getUser(username, userID)
     .then(user => {
-      console.log('USER IN ROUTE', user);
       res.end(JSON.stringify(user));
     })
     .catch(err => {
@@ -84,19 +83,27 @@ router.get('/users/:username', (req, res) => {
     });
 });
 
+router.get('/team/players/:teamid', (req, res) => {
+  let teamID = req.params.teamid;
+  helpers.getUsersForTeam(teamID, (err, users) => {
+    if (err) res.status(400).send({err});
+    else res.send(users);
+  });
+});
+
 router.post('/createEvent', (req, res) => {
   helpers.createEvent(req.body, (err, message) => {
     if (err) res.status(400).send({ err });
-    res.send(message);
+    else res.send(message);
   });
 });
 
 router.post('/events', (req, res) => {
-  helpers.searchEvents(req.body.name, req.body.game, (err, events) => {
+  helpers.searchEvents(req.body.name, req.body.game, req.body.id, (err, events) => {
     if (err) {
       res.status(400).send({ err });
     }
-    res.end(String(events));
+    else res.end(JSON.stringify(events));
   });
 });
 
@@ -114,5 +121,51 @@ router.get('/event/:eventid', (req, res) => {
     res.end(JSON.stringify(event));
   });
 })
+
+router.get('/team/:team', (req, res) => {
+  let team = req.params.teamid;
+  res.end(teamid);
+})
+
+router.post('/team', (req, res) => {
+  helpers.setTeam(req.body, (err, message) => {
+    if (err) res.status(400).send({err});
+    else {
+      res.end(message);
+    }
+  });
+});
+
+router.get('/games', (req, res) => {
+  helpers.getGames((err, games) => {
+    if (err) res.status(400).send({err});
+    else res.end(JSON.stringify(games));
+  });
+});
+
+router.get('/teams', (req, res) => {
+  helpers.getTeams((err, teams) => {
+    if (err) res.status(400).send({err});
+    else res.end(JSON.stringify(teams));
+  })
+})
+
+router.get('/teams_events/:type/:id', (req, res) => {
+  console.log('Type: ', req.params.type, 'ID: ', req.params.id);
+  if (req.params.type === 'getTeamsForEvent') {
+    helpers.getTeamsForEvent(req.params.id, (err, teams) => {
+      if (err) res.status(400).send({err});
+      else res.send(JSON.stringify(teams))
+    });
+  } else if (req.params.type === 'getEventsForTeam') {
+    helpers.getEventsForTeam(req.params.id, (err, events) => {
+      if (err) res.status(400).send({err});
+      else res.send(JSON.stringify(events))
+    });
+  } else {
+    res.end();
+  }
+});
+
 
 module.exports = router;

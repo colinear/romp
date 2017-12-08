@@ -14,7 +14,9 @@ class EventPage extends React.Component {
     super(props);
     this.state = {
       users: [],
-      creator: null
+      creator: null,
+      teams: null,
+      players: []
     };
   }
 
@@ -28,6 +30,7 @@ class EventPage extends React.Component {
     this.props.getEvent(this.props.routeParams.eventid, () => {
       this.getUsers();
       this.getCreatorUsername();
+      this.getTeams();
     });
   }
 
@@ -48,7 +51,6 @@ class EventPage extends React.Component {
         }
       })
       .map((user, index) => {
-        console.log(user);
         let profilePic = user.profilePicURL;
         return (
           <span style={{ margin: '2px' }}>
@@ -60,9 +62,70 @@ class EventPage extends React.Component {
 
   getCreatorUsername = async () => {
     let creator = await axios.get(`${ROOT_URL}/users/${this.props.event.data.creator}`);
-    console.log('Event creator: ', creator);
     this.setState({ creator });
   };
+
+  getTeams = async () => {
+    let teams = (await axios.get(`${ROOT_URL}/teams_events/getTeamsForEvent/${this.props.event.data._id}`)).data;
+    this.getUsersPerTeam(teams);
+    console.log('Teams: ', teams);
+    
+    
+  }
+
+  // TODO: Change all instance of players into members, except watch out for this function!!!
+  getUsersPerTeam = (teams) => {
+
+    let getPlayers = async (memberID, team, player) => {
+      // Grab user.
+      let user = (await axios.get(`${ROOT_URL}/users/${memberID}`)).data;
+      // Set the state.
+      this.setState((prevState, props) => {
+        // Grab previous players array.
+        let players = prevState.players.slice();
+        // Push user onto the array by team.
+        if (players[team] === undefined) {
+          players[team] = []
+        }
+        players[team].push(user);
+        console.log('PLAYERS: ', players);
+        // Set the state of players.
+        return { players };
+      });
+    }
+
+    // Iterate through teams.
+    for (var team = 0; team < teams.length; team++) {
+      // Iterate through players on each team.
+      for (var player = 0; player < teams[team].players.length; player++) {
+        // Get the users associated with each player.
+        getPlayers(teams[team].players[player], team, player);
+      }
+    }
+  }
+
+  getPlayers = () => {
+    console.log(this.state.players);
+
+    // for (var team = 0; team < this.state.players.length; team++) {
+    //   for (var player = 0; player < this.state.players[team].length; player++) {
+
+    //   }
+    // }
+    return <div>{this.state.players.forEach((team, index) => {
+      let fullTeam = team.forEach((player, index) => {
+        console.log(player.profilePicURL);
+        return <img src={player.profilePicURL} />
+      });
+      
+      // Determine whether to attach 'VS.' on the end.
+      if (index === this.state.players.length - 1) {
+        return <div>{fullTeam}</div>
+      } else {
+        return <div>{fullTeam} VS. </div>
+      }
+    })}</div>;
+  }
 
   render() {
     if (this.props.event) {
@@ -79,7 +142,6 @@ class EventPage extends React.Component {
         game
       } = this.props.event.data;
       let { users, creator } = this.state;
-
       return (
         <Segment>
           <Grid>
@@ -106,6 +168,10 @@ class EventPage extends React.Component {
               <h2>Spectators</h2>
               {this.getSpectators(users)}
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <h2>Teams</h2>
+            {this.getPlayers()}
           </Grid.Row>
         </Segment>
       );

@@ -17,20 +17,31 @@ let integer = (length, half) => {
 }
 
 class RandomEventGenerator extends React.Component {
-
   randomizeEvent = async () => {
-    let data = await axios.get(`${ROOT_URL}/users`);
-    let users = data.data;
-    let name = faker.lorem.sentence();
+    let users = (await axios.get(`${ROOT_URL}/users`)).data;
+    let teams = (await axios.get(`${ROOT_URL}/teams`)).data;
+    let event = faker.lorem.sentence();
     let location = `${faker.address.city()}, ${faker.address.state()}`;
     let creator = users[integer(users.length)]._id;
     let winner = users[integer(users.length)]._id;
     let description = faker.lorem.sentences();
     let spectators = users.slice(integer(users.length, "first"), integer(users.length, "last"));
+    
+    // Get random team IDs.
+    let teamIDs = [];
+    let teamMin = integer(teams.length, "first");
+    let teamMax = integer(teams.length, "last");
+    console.log(teamMin, teamMax, teams);
+    for (var team = teamMin; team < teamMax; team++) {
+      teamIDs.push(teams[team]._id);
+    }
+
+    console.log('Team IDs: ', teamIDs);
+
     let notes = faker.lorem.sentence();
     let pictureURL = faker.random.image();
 
-    let eventData = { name, location, creator, winner, description, spectators, notes, pictureURL }
+    let eventData = { event, location, creator, winner, description, spectators, notes, pictureURL, teams: teamIDs }
     this.sendEvent(eventData);
   }
 

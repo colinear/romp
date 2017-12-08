@@ -66,7 +66,6 @@ class SignupForm extends React.Component {
   };
 
   handlePasswordMatch = () => {
-    console.log('Hi, I\'m being called')
     if (!(this.state.password1 === this.state.password2)) {
       this.setState({passwordError: true})
     } else {
@@ -75,7 +74,6 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    console.log('Signup form state and props: ', this.state, this.props);
     let usernameError = this.state.usernameError ? <Label basic color="red" pointing="above">Username must contain only letters and numbers.</Label> : null;
     let passwordError = this.state.passwordError ? (<Label basic color="red" pointing="above">Passwords do not match.</Label>) : null;
     let termsError = this.state.termsError ? <Message error header="Action Forbidden" content="You can only sign up for an account once with a given e-mail address."/> : null;

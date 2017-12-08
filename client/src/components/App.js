@@ -9,7 +9,7 @@ import RandomUserGenerator from './RandomUserGenerator';
 // import RandomTeamGenerator from './RandomTeamGenerator';
 import EventModal from './EventModal';
 import RandomEventGenerator from './RandomEventGenerator';
-
+import RandomTeamGenerator from './RandomTeamGenerator';
 
 import 'semantic-ui-css/semantic.min.css';
 
@@ -20,10 +20,12 @@ export default class App extends Component {
         <TopNavBar />
         <BottomNavBar />
         <AuthModal />
-
-        {this.props.children}
         <RandomUserGenerator />
         <RandomEventGenerator />
+        <RandomTeamGenerator />
+
+        {this.props.children}
+
         <EventModal />
       </div>
     );
