@@ -105,7 +105,6 @@ class EventPage extends React.Component {
   }
 
   getPlayers = () => {
-    console.log(this.state.players);
 
     // for (var team = 0; team < this.state.players.length; team++) {
     //   for (var player = 0; player < this.state.players[team].length; player++) {
@@ -114,7 +113,6 @@ class EventPage extends React.Component {
     // }
     return <div>{this.state.players.forEach((team, index) => {
       let fullTeam = team.forEach((player, index) => {
-        console.log(player.profilePicURL);
         return <img src={player.profilePicURL} />
       });
       
