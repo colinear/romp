@@ -1,6 +1,7 @@
 const Event = require('../../db/schema/Event.js');
 const Game = require('../../db/schema/Game.js');
 const User = require('../../db/schema/User');
+const Team = require('../../db/schema/Team');
 const jwt = require('jwt-simple');
 const config = require('../config');
 
@@ -120,11 +121,32 @@ helpers.getUser = (username, userID) => {
 
 };
 
+helpers.setTeam = (team, callback) => {
+  team = new Team(team);
+  team.save((err) => {
+    console.log(err);
+    if (err) callback(err);
+    else callback(null, `SERVER: Team successfully made!`);
+  });
+}
+
 helpers.getAllUsers = () => {
   return User.find({}).exec((err, users) => {
     if (err) {throw err}
     return users;
   });
 };
+
+helpers.getTeamForUser = () => {
+  console.log('GetTeamForUser');
+}
+
+helpers.getGames = (callback) => {
+  Game.find({}).exec((err, games) => {
+    console.log(games);
+    if (err) callback(err);
+    else callback(games);
+  });
+}
 
 module.exports = helpers;

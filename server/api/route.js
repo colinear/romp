@@ -85,6 +85,28 @@ router.get('/event/:eventid', (req, res) => {
     res.end(JSON.stringify(event));
   });
 })
+
+router.get('/team/:team', (req, res) => {
+  let team = req.params.teamid;
+  res.end(teamid);
+})
+
+router.post('/team', (req, res) => {
+  helpers.setTeam(req.body, (err, message) => {
+    if (err) res.status(400).send({err});
+    else {
+      res.end(message);
+    }
+  });
+});
+
+router.get('/games', (req, res) => {
+  console.log('Here!');
+  helpers.getGames((err, games) => {
+    if (err) res.status(400).send({err});
+    res.end(JSON.stringify(games));
+  });
+});
 // Create a route that gets the event.
 
 module.exports = router;
