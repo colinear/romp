@@ -7,9 +7,7 @@ const GameGrid = props => {
   return (
     <div className="ui link cards">
       {props.games.map((game, index) => {
-        
-        console.log('game in GameGrid', game)
-        
+        // console.log('game in GameGrid', game)
         return <GameCard 
           key={game.game._id}
           index={index}

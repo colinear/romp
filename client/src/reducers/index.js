@@ -3,12 +3,15 @@ import { reducer as form } from 'redux-form';
 import openAuthReducer from './reducer_openAuth';
 import authReducer from './reducer_auth';
 import getEventReducer from './reducer_getEvent';
+import getGamesReducer from './reducer_getGames';
+
 
 const rootReducer = combineReducers({
   form,
   auth: authReducer,
   authOpened: openAuthReducer,
-  event: getEventReducer
+  event: getEventReducer,
+  games: getGamesReducer,
 });
 
 export default rootReducer;

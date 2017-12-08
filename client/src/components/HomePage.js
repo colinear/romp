@@ -2,15 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
+import { getGames } from '../actions/index.js';
 
 import Carousel from './Carousel.js';
 import GameGrid from './GameGrid';
 
-class HomePage extends React.Component {
+import axios from 'axios';
+const IGDB_API = 'https://api-2445582011268.apicast.io'; // Server URL
 
+const fillerImage = 'http://www.fillmurray.com/300/200';
+
+class HomePage extends React.Component {
   constructor(props) {
     super(props);
+
+    // TODO: use getEvents function to populate events
     this.state = {
       events: [
         {
@@ -68,59 +75,60 @@ class HomePage extends React.Component {
           "pictureURL": "https://i.imgur.com/O0BvsKO.jpg"
         },
       ],
-      games: [
-        {
-          "channels": 953,
-          "viewers": 171708,
-          "game": {
-            "_id": 32399,
-            "box": {
-               "large": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-272x380.jpg",
-               "medium": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-136x190.jpg",
-               "small": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-52x72.jpg",
-               "template": "https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-{width}x{height}.jpg"
-            },
-            "giantbomb_id": 36113,
-            "logo": {
-               "large": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-240x144.jpg",
-               "medium": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-120x72.jpg",
-               "small": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-60x36.jpg",
-               "template": "https://static-cdn.jtvnw.net/ttv-logoart/Counter-Strike:%20Global%20Offensive-{width}x{height}.jpg"
-            },
-            "name": "Counter-Strike: Global Offensive",
-            "popularity": 170487
-          }
-        },
-      ],
-    };
+      games: [], };
+  }
+  
+  getGames = async () => {
+    // TODO: need to add identifying info to end of get request ..DONE? need count (as ${ variable })
+    // TODO: need to add headers
+    let data = await axios.get(`${IGDB_API}/games/?fields=name,popularity&order=popularity:desc`);
+    let games = data.data;
+    this.setState({ games });
+  };
+
+  // Make action call to the server api for games
+  componentWillMount() {
+    this.props.getGames(this.props.routeParams.gameid);
+  }
+  componentDidMount() {
+    this.props.getGames(this.props.routeParams.gameid);
   }
 
-  handleEventSlideClick = (event) => {
-    // send to event page
-  }
-
-  // getEvents() {
-  //   // get events from db
-  // }
+  // TODO: handleEventCardClick
 
   render() {
-    return (
-      <Segment>
-        <Carousel 
-          events={this.state.events}
-          // handleEventSlideClick={handleEventSlideClick}
-        />
-        <br/>
-        <GameGrid 
-          games={this.state.games}
-        />
-      </Segment>
-    );
+    if (this.props.games) {
+      // Pull properties off games.
+      let { 
+        id, name, slug, url, summary,
+        popularity, total_rating, developers, 
+        category, keywords, genres, first_release_date, 
+        screenshots, videos, cover, esrb, websites,
+        tags, 
+      } = this.props.games.data;
+
+      return (
+        <div>
+          <Carousel 
+            events={this.state.events}
+            // handleEventSlideClick={handleEventSlideClick}
+          />
+          <br/>
+          <GameGrid 
+            games={this.state.games}
+          />
+        </div>
+      );
+
+    } else {
+      return <div>Loading...</div>;
+    }
   }
 }
 
-function mapStateToProps(state) {
-  return state;
+function mapStateToProps({ games }) {
+  return { games };
 }
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps, { getGames })(HomePage);
+

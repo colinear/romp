@@ -1,8 +1,9 @@
 import React from 'react';
 
+// TODO: update card with new api data
 
 const GameCard = props => {
-  console.log('props in gamecard', props.game)
+  // console.log('props in gamecard', props.game)
   return (
     <div className="card">
       <div className="image">
