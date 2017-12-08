@@ -51,7 +51,7 @@ class EventPage extends React.Component {
       .map((user, index) => {
         console.log(user);
         let profilePic = user.profilePicURL;
-        return <img width="100" height="100" src={profilePic} />;
+        return <span style={{margin: '2px'}}><img width="100" height="100" src={profilePic} /></span>;
       });
   };
 
@@ -86,7 +86,7 @@ class EventPage extends React.Component {
               </Grid.Column>
               <Grid.Column width={11}>
                 <h1>{name}</h1>
-                <p>{(creator) ? creator.data.username : null}</p>
+                {(creator) ? <div><img height="100" width="100" src={creator.data.profilePicURL} /><h5 style={{marginTop: 2}}>{creator.data.username}</h5></div> : null}
                 <p>{location}</p>
                 <p>{description}</p>
                 <p>{notes}</p>
