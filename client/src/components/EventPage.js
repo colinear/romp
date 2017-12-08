@@ -54,7 +54,9 @@ class EventPage extends React.Component {
         let profilePic = user.profilePicURL;
         return (
           <span style={{ margin: '2px' }}>
-            <Link to={`${ROOT_URL}/user/${user._id}`}><img width="100" height="100" src={profilePic} /></Link>
+            <Link to={`${ROOT_URL}/user/${user._id}`}>
+              <img width="100" height="100" src={profilePic} />
+            </Link>
           </span>
         );
       });
@@ -69,13 +71,10 @@ class EventPage extends React.Component {
     let teams = (await axios.get(`${ROOT_URL}/teams_events/getTeamsForEvent/${this.props.event.data._id}`)).data;
     this.getUsersPerTeam(teams);
     console.log('Teams: ', teams);
-    
-    
-  }
+  };
 
   // TODO: Change all instance of players into members, except watch out for this function!!!
-  getUsersPerTeam = (teams) => {
-
+  getUsersPerTeam = teams => {
     let getPlayers = async (memberID, team, player) => {
       // Grab user.
       let user = (await axios.get(`${ROOT_URL}/users/${memberID}`)).data;
@@ -85,14 +84,13 @@ class EventPage extends React.Component {
         let players = prevState.players.slice();
         // Push user onto the array by team.
         if (players[team] === undefined) {
-          players[team] = []
+          players[team] = [];
         }
         players[team].push(user);
-        console.log('PLAYERS: ', players);
         // Set the state of players.
         return { players };
       });
-    }
+    };
 
     // Iterate through teams.
     for (var team = 0; team < teams.length; team++) {
@@ -102,30 +100,39 @@ class EventPage extends React.Component {
         getPlayers(teams[team].players[player], team, player);
       }
     }
-  }
+  };
 
   getPlayers = () => {
-    console.log(this.state.players);
-
-    // for (var team = 0; team < this.state.players.length; team++) {
-    //   for (var player = 0; player < this.state.players[team].length; player++) {
-
-    //   }
-    // }
-    return <div>{this.state.players.forEach((team, index) => {
-      let fullTeam = team.forEach((player, index) => {
-        console.log(player.profilePicURL);
-        return <img src={player.profilePicURL} />
-      });
-      
-      // Determine whether to attach 'VS.' on the end.
-      if (index === this.state.players.length - 1) {
-        return <div>{fullTeam}</div>
+    let arr = [];
+    return this.state.players.map((team, teamIndex) => {
+      if (teamIndex === this.state.players.length - 1) {
+        return (
+          <div>
+            {team.map((player, playerIndex) => {
+              return (
+                <Link to={`/user/${player._id}`}>
+                  <img width="50" height="50" src={player.profilePicURL} />
+                </Link>
+              );
+            })}
+          </div>
+        );
       } else {
-        return <div>{fullTeam} VS. </div>
+        return (
+          <div>
+            {team.map((player, playerIndex) => {
+              return (
+                <Link to={`/user/${player._id}`}>
+                  <img width="50" height="50" src={player.profilePicURL} />
+                </Link>
+              );
+            })}{' '}
+            <div>VS.</div>
+          </div>
+        );
       }
-    })}</div>;
-  }
+    });
+  };
 
   render() {
     if (this.props.event) {
@@ -170,8 +177,14 @@ class EventPage extends React.Component {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <h2>Teams</h2>
-            {this.getPlayers()}
+            <div style={{ display: 'block' }}>
+              <h2>Teams</h2>
+            </div>
+          </Grid.Row>
+          <Grid.Row>
+            <div style={{ display: 'block', textAlign: 'center' }}>
+              {this.state.players.length !== 0 ? this.getPlayers() : <div>Loading...</div>}
+            </div>
           </Grid.Row>
         </Segment>
       );
