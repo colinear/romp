@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 import { openAuth, signoutUser } from '../actions/index.js';
 
@@ -33,8 +33,12 @@ class TopNavBar extends React.Component {
           />
         </Menu.Item>
 
-        <Menu.Item name="events" active={activeItem === 'events'} onClick={this.handleItemClick} as={Link} to="/events" >      
+        <Menu.Item name="events" active={activeItem === 'events'} onClick={this.handleItemClick} as={Link} to="/events" >
           Events
+        </Menu.Item>
+
+        <Menu.Item name="games" active={activeItem === 'games'} onClick={this.handleItemClick} as={Link} to="/games" >
+          Games
         </Menu.Item>
 
         <Menu.Item name="features" active={activeItem === 'features'} onClick={this.handleItemClick}>
@@ -52,7 +56,7 @@ class TopNavBar extends React.Component {
           Log In
         </Menu.Item>
         <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.handleItemClick}>
-          {/* adding log out button, need to toggle and show only when user logged in */}          
+          {/* adding log out button, need to toggle and show only when user logged in */}
           <div onClick={this.props.signoutUser}>Logout</div>
         </Menu.Item>
       </Menu>
