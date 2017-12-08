@@ -12,7 +12,7 @@ const GameCard = props => {
       <div className="content">
         <div className="header">{props.game.name}</div>
         <div className="meta">
-          <a>{/* game type */}</a>
+          <a>{}</a>
         </div>
         <div className="description">
           {/* game description? */}
