@@ -9,21 +9,17 @@ let integer = (length) => {
 }
 
 class RandomEventGenerator extends React.Component {
-
-  randomizeEvent = async () => {
-    let data = await axios.get(`${ROOT_URL}/users`);
-    let users = data.data;
-    console.log(users);
-    let spectators = users.slice(integer(users.length), integer(users.length));
-
-    let eventData = { name, location, creator, winner, description, spectators, notes, image }
-    this.sendEvent(eventData);
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: null
+    }
   }
 
-  sendEvent = async (eventData) => {
-    // Add create team
-    let response = await axios.post(`${ROOT_URL}/createEvent`, eventData);
-    console.log(response);
+  randomizeEvent = async () => {
+    let users = (await axios.get(`${ROOT_URL}/users`)).data;
+    
+    this.setState({users});
   }
 
   render() {
