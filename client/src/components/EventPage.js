@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getEvent } from '../actions/index.js';
 import { Grid, Image, Segment } from 'semantic-ui-react';
+import { Link } from 'react-router';
 
 import axios from 'axios';
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -29,8 +30,6 @@ class EventPage extends React.Component {
       this.getCreatorUsername();
     });
   }
-  
-  
 
   getUsers = async () => {
     let data = await axios.get(`${ROOT_URL}/users`);
@@ -51,14 +50,18 @@ class EventPage extends React.Component {
       .map((user, index) => {
         console.log(user);
         let profilePic = user.profilePicURL;
-        return <span style={{margin: '2px'}}><img width="100" height="100" src={profilePic} /></span>;
+        return (
+          <span style={{ margin: '2px' }}>
+            <Link to={`${ROOT_URL}/user/${user._id}`}><img width="100" height="100" src={profilePic} /></Link>
+          </span>
+        );
       });
   };
 
   getCreatorUsername = async () => {
     let creator = await axios.get(`${ROOT_URL}/users/${this.props.event.data.creator}`);
     console.log('Event creator: ', creator);
-    this.setState({creator});
+    this.setState({ creator });
   };
 
   render() {
@@ -86,8 +89,13 @@ class EventPage extends React.Component {
               </Grid.Column>
               <Grid.Column width={11}>
                 <h1>{name}</h1>
-                {(creator) ? <div><img height="100" width="100" src={creator.data.profilePicURL} /><h5 style={{marginTop: 2}}>{creator.data.username}</h5></div> : null}
                 <p>{location}</p>
+                {creator ? (
+                  <div>
+                    <img height="100" width="100" src={creator.data.profilePicURL} />
+                    <h5 style={{ marginTop: 2 }}>{creator.data.username}</h5>
+                  </div>
+                ) : null}
                 <p>{description}</p>
                 <p>{notes}</p>
               </Grid.Column>
