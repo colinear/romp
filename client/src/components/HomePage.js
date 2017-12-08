@@ -105,14 +105,14 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <Segment>
+      <div>
         <Carousel 
           events={this.state.events}
           // handleEventSlideClick={handleEventSlideClick}
         />
         <br/>
         <GameGrid />
-      </Segment>
+        </div>
     );
   }
 }
