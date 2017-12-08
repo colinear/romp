@@ -18,6 +18,7 @@ import Events from './components/Events';
 import reducers from './reducers';
 import EventPage from'./components/EventPage';
 import { AUTH_USER } from './actions/types';
+import UserPage from './components/UserPage';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers, undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -37,6 +38,7 @@ ReactDOM.render(
         <Route path="homepage" component={RequireAuth(HomePage)} />
         <Route path="photos" component={PhotoGrid} />
         <Route exact path="event/:eventid" component={EventPage} />
+        <Route exact path="user/:username" component={UserPage} />
       </Route>
     </Router>
   </Provider>

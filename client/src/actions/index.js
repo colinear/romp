@@ -97,7 +97,8 @@ export function getEvent(eventID, callback) {
     axios.get(`${ROOT_URL}/event/${eventID}`)
     .then((event) => {
       dispatch ({type: GET_EVENT, event})
-      callback()
+      callback();
+
     })
     .catch(err => console.log('Error while retrieving event.'));
   }
