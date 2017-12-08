@@ -22,7 +22,6 @@ router.post('/login', requireLogin, helpers.loginUser);
 // })
 
 router.get('/logout', (req, res) => {
-  console.log('req: ', req)
   res.end()
 });
 
@@ -38,8 +37,15 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/users/:username', (req, res) => {
+  if (req.params.username.length === 24) {
+    var username = null;
+    var userID = req.params.username;
+  } else {
+    var username = req.params.username;
+    var userID = null;
+  }
   helpers
-    .getUser(req.params.username)
+    .getUser(username, userID)
     .then(user => {
       console.log('USER IN ROUTE', user);
       res.end(JSON.stringify(user));
@@ -68,14 +74,12 @@ router.post('/events', (req, res) => {
 router.post('/joinEvent', (req, res) => {
   helpers.joinEvent(req.body.username, req.body.event, (err, message) => {
     if (err) res.status(400).send({ err });
-    console.log(message);
     res.end(message);
   });
 });
 
 router.get('/event/:eventid', (req, res) => {
   let eventID = req.params.eventid;
-  console.log(eventID)
   helpers.searchEvents(null, null, eventID, (err, event) => {
     if (err) res.status(400).send({err});
     res.end(JSON.stringify(event));

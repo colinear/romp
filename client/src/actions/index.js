@@ -90,11 +90,12 @@ export function openAuth(value) {
   }
 }
 
-export function getEvent(eventID) {
+export function getEvent(eventID, callback) {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/event/${eventID}`)
     .then((event) => {
       dispatch ({type: GET_EVENT, event})
+      callback();
     })
     .catch(err => console.log('Error while retrieving event.'));
   }

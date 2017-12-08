@@ -15,19 +15,19 @@
 }
 
 .Carousel-button-left {
-  top: 45%;
+  top: 25vw;
   left: 5%;
   position: absolute;
-  width: 10vw;
-  height: 10vw;
+  width: auto;
+  height: auto;
 }
 
 .Carousel-button-right {
-  top: 45%;
+  top: 25vw;
   right: 5%;
   position: absolute;
-  width: 10vw;
-  height: 10vw;
+  width: auto;
+  height: auto;
 }
 
 .Carousel-Slide-bottom-text {

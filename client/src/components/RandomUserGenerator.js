@@ -12,7 +12,7 @@ class RandomUserGenerator extends React.Component {
     let password = 'qwertyuiop';
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
-    let profilePicURL = faker.random.imageUrl();
+    let profilePicURL = faker.random.image();
     let userData = { username, email, password, firstName, lastName, profilePicURL }
     console.log(userData);
     this.props.signupUser(userData);

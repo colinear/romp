@@ -10,6 +10,7 @@ import '../styles/Carousel.css';
 
 const Carousel = props => {
   return (
+    <div>
     <CarouselProvider naturalSlideWidth={2} naturalSlideHeight={1} totalSlides={3} touchEnabled>
       <Slider>
         {props.events.map((event, index) => {
@@ -47,6 +48,7 @@ const Carousel = props => {
         </ButtonNext>
       </div>
     </CarouselProvider>
+    </div>
   );
 };
 
@@ -63,7 +65,7 @@ const styles = {
   },
   paddingAdjust: {
     padding: '0 80px 0 80px',
-    maxHeight: '100vh'
+    maxHeight: '100%'
   }
 };
 

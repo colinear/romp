@@ -92,16 +92,32 @@ helpers.joinEvent = async (username, event, callback) => {
   callback(null, `SERVER: User ${username} successfully added to event ${event.name}!`)
 }
 
-helpers.getUser = username => {
-  return User.findOne({ username: username }).exec((err, user) => {
-    if (err) {
-      throw err;
-    }
-    if (!user) {
-      console.log('USER DOES NOT EXIST');
-    }
-    return user;
-  });
+helpers.getUser = (username, userID) => {
+  
+  if (username !== null) {
+    return User.findOne({ username: username }).exec((err, user) => {
+      if (err) {
+        throw err;
+      }
+      if (!user) {
+        console.log('USER DOES NOT EXIST');
+      }
+      return user;
+    });
+  } else if (userID !== null) {   
+     
+    return User.findById(userID).exec((err, user) => {
+      if (err) {
+        throw err;
+      } 
+      if (!user) {
+        console.log('USER DOES NOT EXIST BY THAT ID');
+      }
+      return user;
+    });
+  } else {
+  }
+
 };
 
 helpers.getAllUsers = () => {
