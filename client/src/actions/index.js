@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IGDB_KEY } from '../config'
 import { browserHistory } from 'react-router';
 import {
   AUTH_USER,
@@ -11,7 +12,6 @@ import {
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
-const IGDB_API = 'https://api-2445582011268.apicast.io';
 
 export function loginUser(userData) {
   return function(dispatch) {
@@ -104,12 +104,12 @@ export function getEvent(eventID, callback) {
   }
 }
 
-export function getGames(numOfGames = 12, callback) {
+export function getGames() {
   return function(dispatch) {
-    axios.get(`${IGDB_API}/games/?fields=name,popularity&order=popularity:desc`)
+    axios.get(`${ROOT_URL}/games/?fields=name,total_rating&order=total_rating:desc`)
     .then((games) => {
-      dispatch ({ type: GET_GAMES, games });
-      callback();
+      dispatch ({ type: GET_GAMES, games: games.data.body });
+      console.log('games in actions AFTER dispatch: ', games.data.body)
     })
     .catch(err => console.log('Error while retrieving games.'));
   }

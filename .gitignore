@@ -27,3 +27,4 @@ server/twitch.js
 client/src/twitch.js
 
 server/config.js
+client/config.js

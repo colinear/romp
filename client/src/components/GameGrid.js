@@ -8,7 +8,7 @@ const GameGrid = props => {
     <div className="ui link cards">
       {props.games.map((game, index) => {
         return <GameCard 
-          key={game.game._id}
+          key={game.id}
           index={index}
           game={game}
           // style={styles.slide(event.pictureURL)}

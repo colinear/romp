@@ -7,10 +7,10 @@ const GameCard = props => {
   return (
     <div className="card">
       <div className="image">
-        <img src={props.game.game.box.large} />
+        <img src={props.game.cover.url} />
       </div>
       <div className="content">
-        <div className="header">{props.game.game.name}</div>
+        <div className="header">{props.game.name}</div>
         <div className="meta">
           <a>{/* game type */}</a>
         </div>
@@ -24,7 +24,7 @@ const GameCard = props => {
         </span>
         <span>
           <i className="user icon"></i>
-          {props.game.game.popularity} Players
+          {} Players
         </span>
       </div>
     </div>
