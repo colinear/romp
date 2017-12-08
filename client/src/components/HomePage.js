@@ -9,11 +9,6 @@ import { IGDB_KEY } from '../config.js'
 import Carousel from './Carousel';
 import GameGrid from './GameGrid';
 
-import axios from 'axios';
-const IGDB_API = 'https://api-2445582011268.apicast.io'; // Server URL
-
-const fillerImage = 'http://www.fillmurray.com/300/200';
-
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -78,44 +73,17 @@ class HomePage extends React.Component {
       ],
       games: [], };
   }
-  
-  // getGames = async () => {
-    // TODO: need to add identifying info to end of get request ..DONE? need count (as ${ variable })
-    // TODO: need to add headers
-    // let data = await axios.get(`${IGDB_API}/games/?fields=name,popularity&order=popularity:desc`, {
-    //     auth: {
-    //       "user-key": IGDB_KEY,
-    //       "Accept": "application/json"
-    //     },
-    //     // limit: 12,
-    //   }
-    // );
-    // let games = data.data;
-    // this.setState({ games });
-  // };
 
   // Make action call to the server api for games
   componentWillMount() {
     this.props.getGames(this.props.routeParams.gameid);
   }
-  componentDidMount() {
-
-    // this.props.getGames(this.props.routeParams.gameid);
-  }
 
   // TODO: handleEventCardClick
 
   render() {
-    if (this.props.games) {
-      // Pull properties off games.
-      // let { 
-      //   id, name, slug, url, summary,
-      //   popularity, total_rating, developers, 
-      //   category, keywords, genres, first_release_date, 
-      //   screenshots, videos, cover, esrb, websites,
-      //   tags, 
-      // } = this.props.games.data;
 
+    if (this.props.games) {
       return (
         <div>
           <Carousel 
@@ -128,7 +96,6 @@ class HomePage extends React.Component {
           />
         </div>
       );
-
     } else {
       return <div>Loading...</div>;
     }
