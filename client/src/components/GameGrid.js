@@ -9,7 +9,7 @@ const GameGrid = props => {
       {props.games.map((game, index) => {
         // console.log('game in GameGrid', game)
         return <GameCard 
-          key={game.game._id}
+          key={game.id}
           index={index}
           game={game}
           // style={styles.slide(event.pictureURL)}
