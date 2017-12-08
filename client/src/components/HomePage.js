@@ -111,7 +111,9 @@ class HomePage extends React.Component {
           // handleEventSlideClick={handleEventSlideClick}
         />
         <br/>
-        <GameGrid />
+        <GameGrid 
+          games={this.state.games}
+        />
       </Segment>
     );
   }
