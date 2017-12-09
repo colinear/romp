@@ -86,12 +86,12 @@ class HomePage extends React.Component {
     if (this.props.games) {
       return (
         <div>
-          <Carousel 
+          <Carousel
             events={this.state.events}
             // handleEventSlideClick={handleEventSlideClick}
           />
           <br/>
-          <GameGrid 
+          <GameGrid
             games={this.props.games}
           />
         </div>
@@ -107,4 +107,3 @@ function mapStateToProps({ games }) {
 }
 
 export default connect(mapStateToProps, { getGames })(HomePage);
-

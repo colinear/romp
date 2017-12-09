@@ -19,30 +19,27 @@ class GamePage extends Component {
         <Grid centered="true">
           <Grid.Row columns={3}>
             <Grid.Column style={{paddingLeft: "12%"}}>
-              <Card raised image={"https://igdb.spacechop.com/igdb/image/upload/t_cover_big/ebyoyogasgtr71mhj5ce.jpg"} />
+              <img src={this.props.games[1].cover.url} style={{width: "100%", height: "100%"}} />
             </Grid.Column>
             <Grid.Column textAlign="center" style={{paddingRight: "15%"}}>
-              <h1>Dota 2</h1>
-              <h2>Release Date</h2>
-              <h3>Publisher</h3>
+              <h1>{this.props.games[1].name}</h1>
+              <h2>{this.props.games[1].first_release_date}</h2>
+              <h3>Developer</h3>
             </Grid.Column>
             <Grid.Column>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <Grid centered="true" style={{marginTop: "-13%", marginLeft: "4%"}}>
+        <Grid centered="true" style={{marginLeft: "4%"}}>
           <Grid.Row columns={3}>
             <Grid.Column />
             <Grid.Column textAlign="left">
               <p>Genre: genre</p>
               <p>Platforms: platforms</p>
-              <p>Game description <br></br>
-                more... <br></br>
-                more...<br /><br />
-              </p>
+              <p>{this.props.games[1].summary}</p>
             </Grid.Column>
             <Grid.Column textAlign="center">
-            <p>Rating</p>
+            <p>{this.props.games[1].aggregated_rating ? this.props.games[1].aggregated_rating : 'N/A'}</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -51,5 +48,8 @@ class GamePage extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return state;
+}
 
-export default GamePage
+export default connect(mapStateToProps)(GamePage);
