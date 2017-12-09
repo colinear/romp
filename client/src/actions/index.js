@@ -107,7 +107,7 @@ export function getEvent(eventID, callback) {
 
 export function getGames() {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/games/?fields=name,total_rating&order=total_rating:desc`)
+    axios.get(`${ROOT_URL}/games`) //?fields=name,popularity&order=popularity:desc`)
     .then((games) => {
       dispatch ({ type: GET_GAMES, games: games.data.body });
       console.log('games in actions AFTER dispatch: ', games.data.body)

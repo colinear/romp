@@ -41,8 +41,8 @@ ReactDOM.render(
         <Route path="photos" component={PhotoGrid} />
         <Route exact path="event/:eventid" component={EventPage} />
         <Route exact path="user/:username" component={UserPage} />
-        <Route path="games" component={GamePage} />
         <Route path="search" component={SearchPage} />
+        <Route exact path="games/:gameid" component={GamePage} />
       </Route>
     </Router>
   </Provider>
