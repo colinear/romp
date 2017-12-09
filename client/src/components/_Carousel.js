@@ -104,7 +104,7 @@ class CarouselIndicator extends Component {
 export class CarouselSlide extends Component {
   render() {
     return (
-      <div style={{ position: 'relative', top: '70%', width: '100%', height: '100%' }}>
+      <div style={{ position: 'relative', top: '5vh', width: '100%', height: '100%' }}>
         <li
           className={
             this.props.index == this.props.activeIndex ? 'carousel__slide carousel__slide--active' : 'carousel__slide'
