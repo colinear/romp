@@ -9,6 +9,7 @@ import {
   OPEN_AUTH,
   GET_EVENT,
   GET_GAMES,
+  SEARCH
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -116,5 +117,12 @@ export function getGames() {
 }
 
 
-
-
+export function search(query) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/search`, {query})
+    .then((results) => {
+      dispatch({type: SEARCH, results: results})
+    })
+    .catch(err => console.log('Error while searching.'))
+  }
+}

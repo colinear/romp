@@ -4,6 +4,7 @@ import { getEvent } from '../actions/index.js';
 import { Grid, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
+
 import axios from 'axios';
 const ROOT_URL = 'http://localhost:3001'; // Server URL
 
@@ -28,6 +29,7 @@ class EventPage extends React.Component {
   componentDidMount() {
     // Make call to the server for the particular event here using an action.
     this.props.getEvent(this.props.routeParams.eventid, () => {
+      console.log(this.props.event);
       this.getUsers();
       this.getCreatorUsername();
       this.getTeams();
@@ -35,13 +37,13 @@ class EventPage extends React.Component {
   }
 
   getUsers = async () => {
-    let data = await axios.get(`${ROOT_URL}/users`);
-    let users = data.data;
+    let users = (await axios.get(`${ROOT_URL}/users`)).data;
     this.setState({ users });
   };
 
   getSpectators = users => {
-    let spectators = this.props.event.data.spectators;
+    console.log('Event: ', this.props.event);
+    let spectators = this.props.event.spectators;
     return users
       .filter(user => {
         for (var n = 0; n < spectators.length; n++) {
@@ -63,12 +65,12 @@ class EventPage extends React.Component {
   };
 
   getCreatorUsername = async () => {
-    let creator = await axios.get(`${ROOT_URL}/users/${this.props.event.data.creator}`);
+    let creator = await axios.get(`${ROOT_URL}/users/${this.props.event.creator}`);
     this.setState({ creator });
   };
 
   getTeams = async () => {
-    let teams = (await axios.get(`${ROOT_URL}/teams_events/getTeamsForEvent/${this.props.event.data._id}`)).data;
+    let teams = (await axios.get(`${ROOT_URL}/teams_events/getTeamsForEvent/${this.props.event._id}`)).data;
     this.getUsersPerTeam(teams);
     console.log('Teams: ', teams);
   };
@@ -135,7 +137,7 @@ class EventPage extends React.Component {
   };
 
   render() {
-    if (this.props.event) {
+    if (this.props && this.props.event) {
       // Pull properties off event.
       let {
         name,
@@ -147,7 +149,7 @@ class EventPage extends React.Component {
         teams,
         pictureURL,
         game
-      } = this.props.event.data;
+      } = this.props.event;
       let { users, creator } = this.state;
       return (
         <Segment>
@@ -161,8 +163,8 @@ class EventPage extends React.Component {
                 <p>{location}</p>
                 {creator ? (
                   <div>
-                    <img height="100" width="100" src={creator.data.profilePicURL} />
-                    <h5 style={{ marginTop: 2 }}>{creator.data.username}</h5>
+                    <img height="100" width="100" src={creator.profilePicURL} />
+                    <h5 style={{ marginTop: 2 }}>{creator.username}</h5>
                   </div>
                 ) : null}
                 <p>{description}</p>

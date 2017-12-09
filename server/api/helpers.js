@@ -177,4 +177,30 @@ helpers.getTeams = (callback) => {
   });
 }
 
+helpers.searchDatabase = (query, callback) => {
+  var results = {};
+  User.find().or([{ 'firstName': { $regex: query }}, { 'lastName': { $regex: query }}, { 'username': {$regex: query}}]).exec(function(usersError, usersResults) {
+    if (usersError) callback(usersError);
+    else {
+      let users = {users: usersResults};      
+      Event.find().or([{ 'event': { $regex: query }}, { 'description': { $regex: query }}, { 'game.name': {$regex: query}}]).exec(function(eventsError, eventsResults) {
+        if (eventsError) callback(eventsError);
+        else {
+        let events = {events: eventsResults};
+          Game.find().or([{'name': {$regex: query}}]).exec(function(gamesError, gamesResults) {
+            if (gamesError) callback(gamesError);
+            else {
+              let games = {games: gamesResults};
+              console.log(games, users, events);
+              results = Object.assign({}, events, users, games);
+              console.log('BIG RESULTS: ', results);
+              callback(null, results);
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
 module.exports = helpers;
