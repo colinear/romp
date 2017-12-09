@@ -4,6 +4,7 @@ import { getEvent } from '../actions/index.js';
 import { Grid, Image, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
+
 import axios from 'axios';
 const ROOT_URL = 'http://localhost:3001'; // Server URL
 
