@@ -10,7 +10,9 @@
     "server": "nodemon server/index.js",
     "build": "cd client && react-scripts build",
     "test": "cd client && react-scripts test --env=jsdom",
-    "eject": "cd client && react-scripts eject"
+    "eject": "cd client && react-scripts eject",
+    "build-css": "node-sass-chokidar ./client/src/styles/ -o ./client/src/styles/",
+    "watch-css": "npm run build-css && node-sass-chokidar ./client/src/styles/ -o ./client/src/styles/ --watch --recursive"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -23,6 +25,7 @@
     "jwt-simple": "^0.5.1",
     "lodash": "^4.17.4",
     "mongoose": "^4.13.5",
+    "node-sass-chokidar": "0.0.3",
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
@@ -46,6 +49,7 @@
     "redux-promise": "^0.5.3",
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.0.1",
+    "sass": "^1.0.0-beta.4",
     "semantic-ui": "^2.2.13",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.0",
