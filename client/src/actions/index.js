@@ -121,7 +121,7 @@ export function search(query) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/search`, {query})
     .then((results) => {
-      dispatch({type: SEARCH, results})
+      dispatch({type: SEARCH, results: results})
     })
     .catch(err => console.log('Error while searching.'))
   }

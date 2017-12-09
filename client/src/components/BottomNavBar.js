@@ -2,6 +2,7 @@ import React from 'react';
 import { Dropdown, Icon, Menu, Sticky } from 'semantic-ui-react';
 import { search } from '../actions/index.js';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 
 class BottomNavBar extends React.Component {
@@ -20,6 +21,7 @@ class BottomNavBar extends React.Component {
   handleEnter = (event) => {
     if (event.key === 'Enter') {
       this.props.search(this.state.query);
+      browserHistory.push('/search');
     }
   }
 

@@ -171,7 +171,7 @@ router.post('/search', (req, res) => {
   let { query } = req.body;
   helpers.searchDatabase(query, (err, results) => {
     if (err) res.status(200).send({err});
-    else res.end(results);
+    else res.end(JSON.stringify(results));
   });
 });
 

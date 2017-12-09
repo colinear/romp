@@ -194,7 +194,7 @@ helpers.searchDatabase = (query, callback) => {
               console.log(games, users, events);
               results = Object.assign({}, events, users, games);
               console.log('BIG RESULTS: ', results);
-              return results;
+              callback(null, results);
             }
           });
         }
