@@ -1,10 +1,26 @@
 import React from 'react';
 import { Dropdown, Icon, Menu, Sticky } from 'semantic-ui-react';
+import { search } from '../actions/index.js';
+import { connect } from 'react-redux';
+
 
 class BottomNavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      query: ''
+    }
+  }
+
+  onChange = (event) => {
+    let query = event.target.value;
+    this.setState({query});
+  }
+
+  handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      this.props.search(this.state.query);
+    }
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -37,7 +53,7 @@ class BottomNavBar extends React.Component {
             <Menu.Menu position="right">
               <div className="ui right aligned category search item">
                 <div className="ui transparent icon input">
-                  <input className="prompt" type="text" placeholder="Search animals..." />
+                  <input className="prompt" type="text" placeholder="Search animals..." onChange={this.onChange} onKeyPress={this.handleEnter}/>
                   <i className="search link icon" />
                 </div>
                 <div className="results" />
@@ -50,4 +66,4 @@ class BottomNavBar extends React.Component {
   }
 }
 
-export default BottomNavBar;
+export default connect(null, { search })(BottomNavBar);

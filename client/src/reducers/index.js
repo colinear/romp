@@ -4,6 +4,7 @@ import openAuthReducer from './reducer_openAuth';
 import authReducer from './reducer_auth';
 import getEventReducer from './reducer_getEvent';
 import getGamesReducer from './reducer_getGames';
+import searchReducer from './reducer_search';
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   authOpened: openAuthReducer,
   event: getEventReducer,
   games: getGamesReducer,
+  results: searchReducer
 });
 
 export default rootReducer;

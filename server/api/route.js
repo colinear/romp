@@ -167,5 +167,13 @@ router.get('/teams_events/:type/:id', (req, res) => {
   }
 });
 
+router.post('/search', (req, res) => {
+  let { query } = req.body;
+  helpers.searchDatabase(query, (err, results) => {
+    if (err) res.status(200).send({err});
+    else res.end(results);
+  });
+});
+
 
 module.exports = router;

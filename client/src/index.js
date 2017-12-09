@@ -20,6 +20,7 @@ import EventPage from'./components/EventPage';
 import { AUTH_USER } from './actions/types';
 import UserPage from './components/UserPage';
 import GamePage from './components/GamePage';
+import SearchPage from './components/SearchPage';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers, undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -41,6 +42,7 @@ ReactDOM.render(
         <Route exact path="event/:eventid" component={EventPage} />
         <Route exact path="user/:username" component={UserPage} />
         <Route path="games" component={GamePage} />
+        <Route path="search" component={SearchPage} />
       </Route>
     </Router>
   </Provider>
