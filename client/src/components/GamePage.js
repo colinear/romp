@@ -10,20 +10,24 @@ class GamePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      game: null,
+      game: props.games.find((game => {
+        return game.id === Number(props.params.gameid)
+      }))
     }
   }
+
   render() {
+    let date = new Date(this.state.game.first_release_date).toString()
     return (
       <Segment>
         <Grid centered="true">
           <Grid.Row columns={3}>
             <Grid.Column style={{paddingLeft: "12%"}}>
-              <img src={this.props.games[1].cover.url} style={{width: "100%", height: "100%"}} />
+              <img src={this.state.game.cover.url} style={{width: "100%", height: "100%"}} />
             </Grid.Column>
             <Grid.Column textAlign="center" style={{paddingRight: "15%"}}>
-              <h1>{this.props.games[1].name}</h1>
-              <h2>{this.props.games[1].first_release_date}</h2>
+              <h1>{this.state.game.name}</h1>
+              <h2>{date}</h2>
               <h3>Developer</h3>
             </Grid.Column>
             <Grid.Column>
@@ -36,10 +40,10 @@ class GamePage extends Component {
             <Grid.Column textAlign="left">
               <p>Genre: genre</p>
               <p>Platforms: platforms</p>
-              <p>{this.props.games[1].summary}</p>
+              <p>{this.state.game.summary}</p>
             </Grid.Column>
             <Grid.Column textAlign="center">
-            <p>{this.props.games[1].aggregated_rating ? this.props.games[1].aggregated_rating : 'N/A'}</p>
+            <p>{this.state.game.aggregated_rating ? this.state.game.aggregated_rating : 'N/A'}</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -48,8 +52,8 @@ class GamePage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return state;
+function mapStateToProps({ games }) {
+  return { games };
 }
 
 export default connect(mapStateToProps)(GamePage);
