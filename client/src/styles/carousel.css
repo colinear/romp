@@ -13,7 +13,8 @@ ul {
   position: relative;
   min-height: 80vh;
   max-height: 80vh;
-  transition: background-image 2s ease-in-out; }
+  transition: background-image 2s ease-in-out;
+  z-index: -500; }
 
 .carousel__slide {
   margin-right: auto;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Icon, Menu, Sticky } from 'semantic-ui-react';
+import { Dropdown, Icon, Menu } from 'semantic-ui-react';
 import { search } from '../actions/index.js';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -29,8 +29,7 @@ class BottomNavBar extends React.Component {
 
   render() {
     return (
-      <Sticky>
-        <div>
+        <div style={{position: 'sticky', top: '-1px', zIndex: 500}}>
           <Menu attached="top" className="NavBar-bottom-menu">
             <Dropdown item icon="wrench" simple>
               <Dropdown.Menu>
@@ -63,7 +62,6 @@ class BottomNavBar extends React.Component {
             </Menu.Menu>
           </Menu>
         </div>
-      </Sticky>
     );
   }
 }

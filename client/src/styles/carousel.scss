@@ -21,6 +21,7 @@ ul {
   min-height: 80vh;
   max-height: 80vh;
   transition: background-image 2s ease-in-out;
+  z-index: -500;
 }
 
 // Carousel slides
