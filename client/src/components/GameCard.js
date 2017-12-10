@@ -3,6 +3,8 @@ import { Link, browserHistory } from 'react-router';
 import StarRatingComponent from 'react-star-rating-component';
 import { Segment } from 'semantic-ui-react';
 
+import '../styles/GameCard.css';
+
 const GameCard = props => {
   let rating;
   if (props.game.total_rating) {
@@ -41,8 +43,7 @@ const GameCard = props => {
         browserHistory.push(`/games/${props.game.id}`);
       }}
     >
-      <div className="image">
-        <img src={cover} />
+      <div className="GameCard-image" style={{backgroundImage: `url("${cover}")`}}>
       </div>
       <div className="content">
         <div className="header">{props.game.name}</div>

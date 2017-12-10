@@ -1,0 +1,11 @@
+.GameCard-image {
+  height: 300px;
+  max-width: 400px;
+  background-size: cover;
+  overflow: hidden;
+  background-position: center; }
+
+.GameCard-image:hover {
+  background-size: auto;
+  transition: background-size 2s ease-in-out;
+  background-repeat: no-repeat; }
