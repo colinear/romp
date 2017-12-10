@@ -33,6 +33,7 @@ class TopNavBar extends React.Component {
       showLogin = true;
     }
 
+
     return (
       <Menu attached="top" inverted>
         <Menu.Item as={Link} to="/homepage">
@@ -49,6 +50,9 @@ class TopNavBar extends React.Component {
         <Menu.Item name="games" active={activeItem === 'games'} onClick={this.handleItemClick} as={Link} to="/games">
           Games
         </Menu.Item>
+
+
+        {/* Show login button if not signed in. */}
         {showLogin ? (
           <Menu.Item
             name="sign-in"
@@ -61,12 +65,23 @@ class TopNavBar extends React.Component {
           >
             Log In
           </Menu.Item>
-        ) : (
-          <Menu.Item name="logout" active={activeItem === 'logout'} position="right" onClick={this.handleItemClick}>
-            {/* adding log out button, need to toggle and show only when user logged in */}
-            <div onClick={this.props.signoutUser}>Logout</div>
+        ) : null}
+
+        {/* Show user's button at top if logged in. */}
+        {!showLogin ? (
+          <Menu.Item as={Link} active={activeItem === 'user'} position="right" to={`/user/${user._id}`}>
+            <img src={user.profilePicURL} style={{borderRadius: '30px', width: '30px', height: '30px', margin: '3px'}}/>
+            <span>  {user.username}</span>
           </Menu.Item>
-        )}
+        ) : null} 
+
+        {/* Show logout button if not signed in. */}
+        {!showLogin ? (
+          <Menu.Item name="logout" active={activeItem === 'logout'} active={activeItem === 'logout'} onClick={this.handleItemClick}>
+            {/* adding log out button, need to toggle and show only when user logged in */}
+            <span onClick={this.props.signoutUser}>Logout</span>
+          </Menu.Item>
+        ) : null}
       </Menu>
     );
   }
