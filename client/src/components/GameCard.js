@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import StarRatingComponent from 'react-star-rating-component';
+import { Segment } from 'semantic-ui-react';
 
 const GameCard = props => {
   let rating;
@@ -31,6 +32,8 @@ const GameCard = props => {
 
   let starRating = Math.floor(rating / 20);
 
+  let cover = props.game.cover.url.substring(0, 35) + props.game.cover.url.substring(43);
+
   return (
     <div
       className="card"
@@ -39,7 +42,7 @@ const GameCard = props => {
       }}
     >
       <div className="image">
-        <img src={props.game.cover.url} />
+        <img src={cover} />
       </div>
       <div className="content">
         <div className="header">{props.game.name}</div>

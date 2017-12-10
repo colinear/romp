@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 
 const GameGrid = props => {
   return (
-    <div className="ui link cards">
+    <div className="ui link cards" style={{justifyContent: 'center'}}>
       {props.games.map((game, index) => {
         return (
           <GameCard
