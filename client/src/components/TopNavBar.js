@@ -71,7 +71,7 @@ class TopNavBar extends React.Component {
 
         {/* Show user's button at top if logged in. */}
         {!showLogin ? (
-          <Menu.Item as={Link} active={activeItem === 'user'} position="right" to={`/user/${user._id}`}>
+          <Menu.Item as={Link} active={activeItem === 'user'} to={`/user/${user._id}`}>
             <img src={user.profilePicURL} style={{borderRadius: '30px', width: '30px', height: '30px', margin: '3px'}}/>
             <span>  {user.username}</span>
           </Menu.Item>
