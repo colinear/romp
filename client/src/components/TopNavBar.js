@@ -47,11 +47,6 @@ class TopNavBar extends React.Component {
           Events
         </Menu.Item>
 
-        <Menu.Item name="games" active={activeItem === 'games'} onClick={this.handleItemClick} as={Link} to="/games">
-          Games
-        </Menu.Item>
-
-
         {/* Show login button if not signed in. */}
         {showLogin ? (
           <Menu.Item
