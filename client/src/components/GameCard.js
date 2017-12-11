@@ -36,9 +36,9 @@ const GameCard = props => {
         <div className="meta">
           <a>{}</a>
         </div>
-        <div className="description">
+        {/* <div className="description">
           {description}
-        </div>
+        </div> */}
       </div>
       <div className="extra content">
         <span className="right floated">

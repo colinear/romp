@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Grid, Image, Card, Segment } from 'semantic-ui-react';
-import axios from 'axios';
-
-const ROOT_URL = 'http://localhost:3001';
+import dateFormat from 'dateformat';
 
 class GamePage extends Component {
   constructor(props) {
@@ -27,7 +25,7 @@ class GamePage extends Component {
             </Grid.Column>
             <Grid.Column textAlign="center" style={{paddingRight: "15%"}}>
               <h1>{this.state.game.name}</h1>
-              <h2>{date}</h2>
+              <h2>{dateFormat(date, "dddd, mmmm dS, yyyy")}</h2>
               <h3>Developer</h3>
             </Grid.Column>
             <Grid.Column>

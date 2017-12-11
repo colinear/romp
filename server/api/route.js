@@ -113,17 +113,23 @@ router.post('/team', (req, res) => {
 
 let desiredFields = [
   'id', 'name', 'slug', 'url', 'summary', 'storyline',
-  'popularity', 'total_rating', 'aggregated_rating', 'developers', 
-  'category', 'keywords', 'genres', 'first_release_date', 
+  'popularity', 'total_rating', 'aggregated_rating', 'developers',
+  'category', 'keywords', 'genres', 'first_release_date', 'release_dates',
   'screenshots', 'videos', 'cover', 'esrb', 'websites',
-  'tags', 'rating', 
+  'tags', 'rating',
 ];
 
 router.get('/games', (req, res) => {
   client.games({
-    // fields : '*',
+    filters: {
+      // 'genres.any': [15, 26, 32]
+      'release_dates.date-gt': '2017-01-01',
+      'release_dates.date-lt': '2017-12-31',
+    },
     limit: 15,
-  }, desiredFields)
+    offset: 0,
+    order: 'rating:desc',
+}, desiredFields)
     .then(games => {
       console.log('games: ', games)
       res.json(games)
