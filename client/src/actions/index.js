@@ -12,7 +12,8 @@ import {
   SEARCH,
   SET_USER,
   GET_EVENTS,
-  UNSET_USER
+  UNSET_USER,
+  JOIN_EVENT
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -142,6 +143,17 @@ export function getEvents(callback) {
       callback(events.data);
     })
     .catch(err => console.log('There has been an error.'));
+  }
+}
+
+export function joinEvent({ userID, eventID }) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/joinEvent`, { userID, eventID })
+      .then(() => {
+        dispatch({ type: JOIN_EVENT });
+        browserHistory.push(`${ROOT_URL}/event/${eventID}`);
+      })
+      .catch(response => dispatch(authError(response.data.error)));
   }
 }
 

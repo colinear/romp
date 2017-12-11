@@ -9,3 +9,4 @@ export const SEARCH = 'SEARCH';
 export const SET_USER = 'SET_USER';
 export const UNSET_USER = 'UNSET_USER';
 export const GET_EVENTS = 'GET_EVENTS';
+export const JOIN_EVENT = 'JOIN_EVENT';

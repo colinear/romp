@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import { getEvent } from '../actions/index.js';
 import { Grid, Image, Segment, Button } from 'semantic-ui-react';
+=======
+import { getEvent, joinEvent } from '../actions/index.js';
+import { Grid, Image, Segment } from 'semantic-ui-react';
+>>>>>>> Begin join event functionality
 import { Link } from 'react-router';
 
 import axios from 'axios';
@@ -16,14 +21,20 @@ class EventPage extends React.Component {
       users: [],
       creator: null,
       teams: null,
-      players: []
+      players: [],
+      participants: [] // these are all the users for MVP
     };
   }
 
-  getUsers = async () => {
-    let users = (await axios.get(`${ROOT_URL}/users`)).data;
-    this.setState({ users });
-  };
+  // getUsers = async () => {
+  //   let users = (await axios.get(`${ROOT_URL}/users`)).data;
+  //   this.setState({ users });
+  // };
+
+  joinEvent = () => {
+    let userID;// get userID from header
+    let eventID = this.props.event._id;
+  }
 
   componentDidMount() {
     // Make call to the server for the particular event here using an action.
@@ -42,6 +53,7 @@ class EventPage extends React.Component {
 
   getSpectators = users => {
     console.log('Event: ', this.props.event);
+    console.log('logged in user: ', this.props)
     let spectators = this.props.event.spectators;
     return users
       .filter(user => {
@@ -136,6 +148,9 @@ class EventPage extends React.Component {
   };
 
   render() {
+    console.log('users in EventPage: ', this.state.users)
+    console.log('players in EventPage: ', this.state.players)
+    
     if (this.props && this.props.event) {
       // Pull properties off event.
       let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event;
