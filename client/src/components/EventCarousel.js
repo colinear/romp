@@ -1,62 +1,63 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
-import '../styles/carousel.css';
+import axios from 'axios';
+import { Link, browserHistory } from 'react-router';
 
-// Data for carousel
+import { getEvents } from '../actions/index';
+
+import '../styles/Carousel.css';
+
+const ROOT_URL = 'http://localhost:3001';
+
+//Data for carousel
 const carouselSlidesData = [
   {
     content:
       'Tomorrow, you will be released. If you are bored of brawling with thieves and want to achieve something there is a rare blue flower that grows on the eastern slopes. Pick one of these flowers. If you can carry it to the top of the mountain, you may find what you were looking for in the first place.',
     author: 'Bane',
     source: 'facebook',
-    background:
-      'https://na.leagueoflegends.com/sites/default/files/upload/art/akali_vs_baron_3.jpg'
+    background: 'https://na.leagueoflegends.com/sites/default/files/upload/art/akali_vs_baron_3.jpg'
   },
   {
     content: 'You have learn to bury your guilt with anger. I will teach you to confront it and to face the truth.',
     author: "Ra's Al Ghul",
     source: 'Snapchat',
-    background:
-      'https://images4.alphacoders.com/600/thumb-1920-600528.png'
+    background: 'https://images4.alphacoders.com/600/thumb-1920-600528.png'
   },
   {
     content:
       "Introduce a little anarchy, upset the established order and everything becomes chaos. I'm an agent of chaos. Oh, and you know the thing about chaos? It's fair.",
     author: 'Joker',
     source: 'facebook',
-    background:
-      'https://i.imgur.com/O0BvsKO.jpg'
+    background: 'https://i.imgur.com/O0BvsKO.jpg'
   },
   {
     content:
       "I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.",
     author: 'Bruce Wayne',
     source: 'facebook',
-    background:
-      'https://images2.alphacoders.com/474/thumb-1920-474206.jpg'
+    background: 'https://images2.alphacoders.com/474/thumb-1920-474206.jpg'
   },
   {
     content: "But it's not who you are underneath... it's what you do that defines you.",
     author: 'Rachel Dawes',
     source: 'twitter',
-    background:
-      'http://nxcache.nexon.net/spotlight/196/00Htc-0374509c-8da4-4f85-8fd3-f5b6e664ac47.jpg'
+    background: 'http://nxcache.nexon.net/spotlight/196/00Htc-0374509c-8da4-4f85-8fd3-f5b6e664ac47.jpg'
   },
   {
     content:
       "When their enemies were at the gates the Romans would suspend democracy and appoint one man to protect the city. It wasn't considered an honor, it was a public service.",
     author: 'John Blake',
     source: 'Google+',
-    background:
-      'https://wallpapercave.com/wp/BWd0wj5.jpg'
+    background: 'https://wallpapercave.com/wp/BWd0wj5.jpg'
   },
   {
     content: "Master Wayne, you've been gone a long time. You look very fashionable. Apart from the mud.",
     author: 'Alfred Pennyworth',
     source: 'twitter',
-    background:
-      'http://media.blizzard.com/wow/media/wallpapers/other/legion/legion-2560x1440-wide.jpg'
+    background: 'http://media.blizzard.com/wow/media/wallpapers/other/legion/legion-2560x1440-wide.jpg'
   }
 ];
 
@@ -103,6 +104,7 @@ class CarouselIndicator extends Component {
 // Component for slide
 export class CarouselSlide extends Component {
   render() {
+    console.log('Slide id: ', this.props.slide.id)
     return (
       <div style={{ position: 'relative', top: '5vh', width: '100%', height: '100%' }}>
         <li
@@ -203,42 +205,118 @@ export class Carousel extends Component {
 
   render() {
     return (
-      <div
-        className="carousel parallax"
-        style={{ backgroundImage: `url("${carouselSlidesData[this.state.activeIndex].background}")` }}
-      >
-        <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
-        <div>
-          <ul className="carousel__slides" style={{ width: '100%', height: '100%' }}>
-            {this.props.slides.map((slide, index) => (
+      <div>
+        <CarouselLeftArrow onClick={e => {this.goToPrevSlide(e)}} style={{zIndex: '10000'}}/>
+        
+        <Link to={`/event/${this.props.slides[this.state.activeIndex].id}`}>
+        <div
+            className="carousel parallax"
+            style={{ backgroundImage: `url("${this.props.slides[this.state.activeIndex].background}")` }}
+            onClick={() => {browserHistory.push(`/event/${this.event[this.state.activeIndex]._id}`)}}
+          >
+            
+            <div>
+              <ul className="carousel__slides" style={{ width: '100%', height: '100%' }}>
+                {this.props.slides.map((slide, index) => (
               <CarouselSlide key={index} index={index} activeIndex={this.state.activeIndex} slide={slide} />
-            ))}
-          </ul>
-        </div>
+                ))}
+              </ul>
+            </div>
 
-        <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
-        <div style={{ position: 'absolute', bottom: '15%', width: '100%' }}>
-          <ul className="carousel__indicators" style={{ height: '20px', position: 'relative', top: '45px' }}>
-            {this.props.slides.map((slide, index) => (
-              <CarouselIndicator
-                key={index}
-                index={index}
-                activeIndex={this.state.activeIndex}
-                onClick={e => this.goToSlide(index)}
-              />
-            ))}
-          </ul>
+            
+
+            <div style={{ position: 'absolute', bottom: '15%', width: '100%' }}>
+              <ul className="carousel__indicators" style={{ height: '20px', position: 'relative', top: '45px' }}>
+                {this.props.slides.map((slide, index) => (
+                  <CarouselIndicator
+                    key={index}
+                    index={index}
+                    activeIndex={this.state.activeIndex}
+                    onClick={e => this.goToSlide(index)}
+                    style={{zIndex: '10000'}}
+                  />
+                ))}
+              </ul>
+            </div>
+          </div>
+                    </Link>
+            <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
+                    
         </div>
-      </div>
     );
   }
 }
 
+
+
 // Render Carousel component
 // render(<Carousel slides={carouselSlidesData} />, carouselContainer);
 
-export default class _Carousel extends React.Component {
+class EventCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      // usernames: []
+    };
+  }
+  componentDidMount(events) {
+    this.props.getEvents(eventData => {
+
+      let getData = async (userID, index) => {
+        console.log(userID, index);
+        // Grab username with the event data at a specific index's creator.
+        let username = (await axios.get(`${ROOT_URL}/users/${userID}`)).data.username;
+        console.log(username);
+        // Set the state based on the previous state.
+        this.setState((prevState, props) => {
+
+          // Get event at that specific index.
+          let event = eventData[index];
+
+          // Grab data from the state.
+          let data = prevState.data.slice();
+
+          // Push data onto the array.
+          data.push({
+            content: event.description,
+            author: username,
+            source: event.location,
+            background: event.pictureURL,
+            id: event._id
+          });
+
+          return { /* usernames */ data };
+        });
+      };
+
+      // Iterate and get data for the first five events.
+      for (var n = 0; n < 5; n++) {
+        getData(eventData[n].creator, n);
+      }
+
+    });
+  }
+
   render() {
-    return <Carousel slides={carouselSlidesData} />;
+    /*
+      content: description
+      author: creator
+      source: location
+      background: pictureURL
+      TODO: NEED TO ADD TITLE.
+    */
+
+    if (this.props.events && this.state.data.length > 0) {
+      return <Carousel slides={this.state.data} />;
+    } else {
+      return <div>Loading...</div>;
+    }
   }
 }
+
+function mapStateToProps({ events }) {
+  return { events };
+}
+
+export default connect(mapStateToProps, { getEvents })(EventCarousel);

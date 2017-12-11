@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { getGames } from '../actions/index';
 import { IGDB_KEY } from '../config.js'
 
-import _Carousel from './_Carousel';
+import EventCarousel from './EventCarousel';
 import GameGrid from './GameGrid';
 
 class HomePage extends React.Component {
@@ -87,7 +87,7 @@ class HomePage extends React.Component {
       return (
         <div>
 
-          <_Carousel
+          <EventCarousel
             // events={this.state.events}
             // handleEventSlideClick={handleEventSlideClick}
           />

@@ -21,7 +21,7 @@ import { AUTH_USER } from './actions/types';
 import UserPage from './components/UserPage';
 import GamePage from './components/GamePage';
 import SearchPage from './components/SearchPage';
-import _Carousel from './components/_Carousel';
+import EventCarousel from './components/EventCarousel';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers, undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -44,7 +44,7 @@ ReactDOM.render(
         <Route exact path="user/:username" component={UserPage} />
         <Route path="search" component={SearchPage} />
         <Route exact path="games/:gameid" component={GamePage} />
-        <Route path="carousel" component={_Carousel} /> {/* Carousel for testing purposes. Feel free to remove. */}
+        <Route path="carousel" component={EventCarousel} /> {/* Carousel for testing purposes. Feel free to remove. */}
       </Route>
     </Router>
   </Provider>
