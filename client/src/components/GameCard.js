@@ -35,6 +35,8 @@ const GameCard = props => {
   let starRating = Math.floor(rating / 20);
 
   let cover = props.game.cover.url.substring(0, 35) + props.game.cover.url.substring(43);
+  let url = props.game.cover.url;
+  cover = url.replace(/t_thumb/, 't_1080p');
 
   return (
     <div
