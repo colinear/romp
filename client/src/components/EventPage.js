@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getEvent } from '../actions/index.js';
-import { Grid, Image, Segment } from 'semantic-ui-react';
+import { Grid, Image, Segment, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
-
 
 import axios from 'axios';
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -139,21 +138,17 @@ class EventPage extends React.Component {
   render() {
     if (this.props && this.props.event) {
       // Pull properties off event.
-      let {
-        name,
-        description,
-        location,
-        liveStream,
-        spectators,
-        notes,
-        teams,
-        pictureURL,
-        game
-      } = this.props.event;
+      let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event;
       let { users, creator } = this.state;
       return (
         <Segment>
           <Grid>
+            <Grid.Row>
+              <Grid.Column width={15} />
+              <Grid.Column width={1}>
+                <Button onClick={() => console.log('Join event clicked.')}>Join Event</Button>
+              </Grid.Column>
+            </Grid.Row>
             <Grid.Row>
               <Grid.Column width={5}>
                 <Image src={pictureURL} />
@@ -174,20 +169,20 @@ class EventPage extends React.Component {
           </Grid>
           <Grid.Row>
             <Grid.Column width={16}>
-              <h2>Spectators</h2>
+              <h2>Players</h2>
               {this.getSpectators(users)}
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
+          {/* <Grid.Row>
             <div style={{ display: 'block' }}>
               <h2>Teams</h2>
             </div>
-          </Grid.Row>
-          <Grid.Row>
+          </Grid.Row> */}
+          {/* <Grid.Row>
             <div style={{ display: 'block', textAlign: 'center' }}>
               {this.state.players.length !== 0 ? this.getPlayers() : <div>Loading...</div>}
             </div>
-          </Grid.Row>
+          </Grid.Row> */}
         </Segment>
       );
     } else {
