@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var teamSchema = new Schema({
   events: [{type: Schema.Types.ObjectId, ref: 'events'}],
   games: [{type: Schema.Types.ObjectId, ref: 'games'}],
-  name: {type: String, required: true},
+  name: {type: String, required: true, lowercase: true},
   players: [{type: Schema.Types.ObjectId, ref: 'users'}],
 });
 
