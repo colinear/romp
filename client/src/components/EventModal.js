@@ -33,7 +33,7 @@ class EventModal extends Component {
 
   render() {
     return (
-      <Modal size="small" trigger={<div style={{float: "right"}}><Button onClick={this.handleOpen} className="create-event-button">Create Event</Button></div>} open={this.state.modalOpen}
+      <Modal size="small" trigger={<Button size="tiny" onClick={this.handleOpen} className="create-event-button">Create Event</Button>} open={this.state.modalOpen}
         onClose={this.handleClose}>
         <Modal.Content image>
           <Modal.Description>
