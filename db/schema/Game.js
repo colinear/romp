@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var gameSchema = new Schema({
-  name: {type: String, required: true}
+  name: {type: String, required: true, lowercase: true}
 });
 
 var Game = mongoose.model('games', gameSchema);

@@ -14,7 +14,7 @@ class BottomNavBar extends React.Component {
   }
 
   onChange = (event) => {
-    let query = event.target.value;
+    let query = (event.target.value).toLowerCase();
     this.setState({query});
   }
 
