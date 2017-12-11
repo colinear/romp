@@ -1,7 +1,11 @@
 import React from 'react';
+import { Link, browserHistory } from 'react-router';
+import StarRatingComponent from 'react-star-rating-component';
+import { Segment } from 'semantic-ui-react';
+
+import '../styles/GameCard.css';
 
 const GameCard = props => {
-
   let rating;
   if (props.game.total_rating) {
     rating = props.game.total_rating;
@@ -26,26 +30,38 @@ const GameCard = props => {
     description = description.slice(0, 240) + '...';
   }
 
+  console.log('GAME: ', props.game);
+
+  let starRating = Math.floor(rating / 20);
+
+  let cover = props.game.cover.url.substring(0, 35) + props.game.cover.url.substring(43);
+
   return (
-    <div className="card">
-      <div className="image">
-        <img src={props.game.cover.url} />
+    <div
+      className="card"
+      onClick={() => {
+        browserHistory.push(`/games/${props.game.id}`);
+      }}
+    >
+      <div className="GameCard-image" style={{backgroundImage: `url("${cover}")`}}>
       </div>
       <div className="content">
         <div className="header">{props.game.name}</div>
         <div className="meta">
           <a>{}</a>
         </div>
-        {/* <div className="description">
-          {description}
-        </div> */}
+        <div className="description">{description}</div>
       </div>
       <div className="extra content">
         <span className="right floated">
-          rating: {rating}
+          <StarRatingComponent
+            name="star-rating" /* name of the radio input, it is required */
+            value={starRating} /* number of selected icon (`0` - none, `1` - first) */
+            starCount={5} /* number of icons in rating, default `5` */
+          />
         </span>
         <span>
-          <i className="user icon"></i>
+          <i className="user icon" />
           {0 /* add payers who favorited */} Players
         </span>
       </div>

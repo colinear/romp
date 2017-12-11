@@ -20,10 +20,20 @@ class TopNavBar extends React.Component {
     if (!this.props.auth.authenticated) {
       this.props.openAuth(true);
     }
-  }
+  };
 
   render() {
     const { activeItem } = this.state;
+    const { user, auth } = this.props;
+
+    let showLogin = true;
+    if (auth.authenticated && user.hasOwnProperty('username')) {
+      showLogin = false;
+    } else {
+      showLogin = true;
+    }
+
+
     return (
       <Menu attached="top" inverted>
         <Menu.Item as={Link} to="/homepage">
@@ -33,32 +43,45 @@ class TopNavBar extends React.Component {
           />
         </Menu.Item>
 
-        <Menu.Item name="events" active={activeItem === 'events'} onClick={this.handleItemClick} as={Link} to="/events" >
+        <Menu.Item name="events" active={activeItem === 'events'} onClick={this.handleItemClick} as={Link} to="/events">
           Events
         </Menu.Item>
 
-        <Menu.Item name="games" active={activeItem === 'games'} onClick={this.handleItemClick} as={Link} to="/games" >
+        <Menu.Item name="games" active={activeItem === 'games'} onClick={this.handleItemClick} as={Link} to="/games">
           Games
         </Menu.Item>
 
-        <Menu.Item name="features" active={activeItem === 'features'} onClick={this.handleItemClick}>
-          Features
-        </Menu.Item>
 
-        <Menu.Item name="testimonials" active={activeItem === 'testimonials'} onClick={this.handleItemClick}>
-          Testimonials
-        </Menu.Item>
+        {/* Show login button if not signed in. */}
+        {showLogin ? (
+          <Menu.Item
+            name="sign-in"
+            active={activeItem === 'sign-in'}
+            position="right"
+            onClick={(e, { name }) => {
+              this.props.openAuth(true);
+              this.handleItemClick(e, { name });
+            }}
+          >
+            Log In
+          </Menu.Item>
+        ) : null}
 
-        <Menu.Item name="sign-in" active={activeItem === 'sign-in'} onClick={(e, {name}) => {
-          this.props.openAuth(true)
-          this.handleItemClick(e, {name})
-          }}>
-          Log In
-        </Menu.Item>
-        <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.handleItemClick}>
-          {/* adding log out button, need to toggle and show only when user logged in */}
-          <div onClick={this.props.signoutUser}>Logout</div>
-        </Menu.Item>
+        {/* Show user's button at top if logged in. */}
+        {!showLogin ? (
+          <Menu.Item as={Link} active={activeItem === 'user'} position="right" to={`/user/${user._id}`}>
+            <img src={user.profilePicURL} style={{borderRadius: '30px', width: '30px', height: '30px', margin: '3px'}}/>
+            <span>  {user.username}</span>
+          </Menu.Item>
+        ) : null} 
+
+        {/* Show logout button if not signed in. */}
+        {!showLogin ? (
+          <Menu.Item name="logout" active={activeItem === 'logout'} active={activeItem === 'logout'} onClick={this.handleItemClick}>
+            {/* adding log out button, need to toggle and show only when user logged in */}
+            <span onClick={this.props.signoutUser}>Logout</span>
+          </Menu.Item>
+        ) : null}
       </Menu>
     );
   }
@@ -69,7 +92,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({openAuth, signoutUser}, dispatch);
+  return bindActionCreators({ openAuth, signoutUser }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopNavBar);

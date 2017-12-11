@@ -9,7 +9,9 @@ import {
   OPEN_AUTH,
   GET_EVENT,
   GET_GAMES,
-  SEARCH
+  SEARCH,
+  SET_USER,
+  UNSET_USER
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -23,6 +25,7 @@ export function loginUser(userData) {
         // - Update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });
         dispatch({ type: OPEN_AUTH, value: false });
+        dispatch({ type: SET_USER, user: response.data.user});        
         // - Save the JWT token
         localStorage.setItem('token', response.data.token);
         // - redirect to the route '/feature'
@@ -69,7 +72,10 @@ export function authError(error) {
 
 export function signoutUser() {
   localStorage.removeItem('token');
-  return { type: UNAUTH_USER };
+  return function(dispatch) {
+    dispatch({ type: UNAUTH_USER });
+    dispatch({ type: UNSET_USER });
+  }
 }
 
 export function fetchMessage() {
@@ -107,7 +113,7 @@ export function getEvent(eventID, callback) {
 
 export function getGames() {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/games`) //?fields=name,popularity&order=popularity:desc`)
+    axios.get(`${ROOT_URL}/games/?fields=name,popularity&order=popularity:asc`) //?fields=name,popularity&order=popularity:desc`)
     .then((games) => {
       dispatch ({ type: GET_GAMES, games: games.data.body });
       console.log('games in actions AFTER dispatch: ', games.data.body)
@@ -115,7 +121,6 @@ export function getGames() {
     .catch(err => console.log('Error while retrieving games.'));
   }
 }
-
 
 export function search(query) {
   return function(dispatch) {
