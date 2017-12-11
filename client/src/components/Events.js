@@ -4,7 +4,6 @@ import { Segment } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
-import Carousel from './Carousel.js';
 import RandomUserGenerator from './RandomUserGenerator';
 
 class Events extends React.Component {
