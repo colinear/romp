@@ -6,6 +6,7 @@ import getEventReducer from './reducer_getEvent';
 import getGamesReducer from './reducer_getGames';
 import searchReducer from './reducer_search';
 import setUserReducer from './reducer_setUser';
+import getEventsReducer from './reducer_getEvents';
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   event: getEventReducer,
   games: getGamesReducer,
   results: searchReducer,
-  user: setUserReducer
+  user: setUserReducer,
+  events: getEventsReducer
 });
 
 export default rootReducer;

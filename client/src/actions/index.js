@@ -11,6 +11,7 @@ import {
   GET_GAMES,
   SEARCH,
   SET_USER,
+  GET_EVENTS,
   UNSET_USER
 } from './types';
 
@@ -131,3 +132,16 @@ export function search(query) {
     .catch(err => console.log('Error while searching.'))
   }
 }
+
+// Gets random events from the database.
+export function getEvents(callback) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/events`, {})
+    .then((events) => {
+      dispatch({type: GET_EVENTS, events: events.data});
+      callback(events.data);
+    })
+    .catch(err => console.log('There has been an error.'));
+  }
+}
+

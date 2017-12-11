@@ -32,6 +32,7 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/users/:username', (req, res) => {
+  console.log(req.params.username);
   if (req.params.username.length === 24) {
     var username = null;
     var userID = req.params.username;
@@ -131,7 +132,6 @@ router.get('/games', (req, res) => {
     order: 'rating:desc',
 }, desiredFields)
     .then(games => {
-      console.log('games: ', games)
       res.json(games)
     })
     .catch(err => {
@@ -155,7 +155,6 @@ router.get('/teams', (req, res) => {
 })
 
 router.get('/teams_events/:type/:id', (req, res) => {
-  console.log('Type: ', req.params.type, 'ID: ', req.params.id);
   if (req.params.type === 'getTeamsForEvent') {
     helpers.getTeamsForEvent(req.params.id, (err, teams) => {
       if (err) res.status(400).send({err});
