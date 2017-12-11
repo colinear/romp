@@ -16,12 +16,13 @@ class GamePage extends Component {
 
   render() {
     let date = new Date(this.state.game.first_release_date).toString()
+    let cover = this.state.game.cover.url.replace(/t_thumb/, 't_1080p');
     return (
       <Segment>
         <Grid centered="true">
           <Grid.Row columns={3}>
             <Grid.Column style={{paddingLeft: "12%"}}>
-              <img src={this.state.game.cover.url} style={{width: "100%", height: "100%"}} />
+              <img src={cover} style={{width: "100%", height: "100%"}} />
             </Grid.Column>
             <Grid.Column textAlign="center" style={{paddingRight: "15%"}}>
               <h1>{this.state.game.name}</h1>
