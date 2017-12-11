@@ -7,6 +7,7 @@ import { Link } from 'react-router';
 import { openAuth, signoutUser } from '../actions/index.js';
 
 import AuthModal from './AuthModal.js';
+import EventModal from './EventModal';
 
 class TopNavBar extends React.Component {
   constructor(props) {
@@ -32,7 +33,6 @@ class TopNavBar extends React.Component {
     } else {
       showLogin = true;
     }
-
 
     return (
       <Menu attached="top" inverted>
@@ -62,13 +62,20 @@ class TopNavBar extends React.Component {
           </Menu.Item>
         ) : null}
 
+        {/* Show create event button at top if logged in. */}
+        {!showLogin ? (
+          <Menu.Item as={Link} position="right">
+            <EventModal />
+          </Menu.Item>
+        ) : null}
+
         {/* Show user's button at top if logged in. */}
         {!showLogin ? (
-          <Menu.Item as={Link} active={activeItem === 'user'} position="right" to={`/user/${user._id}`}>
+          <Menu.Item as={Link} active={activeItem === 'user'} to={`/user/${user._id}`}>
             <img src={user.profilePicURL} style={{borderRadius: '30px', width: '30px', height: '30px', margin: '3px'}}/>
             <span>  {user.username}</span>
           </Menu.Item>
-        ) : null} 
+        ) : null}
 
         {/* Show logout button if not signed in. */}
         {!showLogin ? (
@@ -77,6 +84,7 @@ class TopNavBar extends React.Component {
             <span onClick={this.props.signoutUser}>Logout</span>
           </Menu.Item>
         ) : null}
+
       </Menu>
     );
   }
