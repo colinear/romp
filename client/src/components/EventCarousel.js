@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 import axios from 'axios';
+import { Link, browserHistory } from 'react-router';
 
 import { getEvents } from '../actions/index';
 
@@ -103,6 +104,7 @@ class CarouselIndicator extends Component {
 // Component for slide
 export class CarouselSlide extends Component {
   render() {
+    console.log('Slide id: ', this.props.slide.id)
     return (
       <div style={{ position: 'relative', top: '5vh', width: '100%', height: '100%' }}>
         <li
@@ -203,36 +205,49 @@ export class Carousel extends Component {
 
   render() {
     return (
-      <div
-        className="carousel parallax"
-        style={{ backgroundImage: `url("${this.props.slides[this.state.activeIndex].background}")` }}
-      >
-        <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
-        <div>
-          <ul className="carousel__slides" style={{ width: '100%', height: '100%' }}>
-            {this.props.slides.map((slide, index) => (
+      <div>
+        <CarouselLeftArrow onClick={e => {this.goToPrevSlide(e)}} style={{zIndex: '10000'}}/>
+        
+        <Link to={`/event/${this.props.slides[this.state.activeIndex].id}`}>
+        <div
+            className="carousel parallax"
+            style={{ backgroundImage: `url("${this.props.slides[this.state.activeIndex].background}")` }}
+            onClick={() => {browserHistory.push(`/event/${this.event[this.state.activeIndex]._id}`)}}
+          >
+            
+            <div>
+              <ul className="carousel__slides" style={{ width: '100%', height: '100%' }}>
+                {this.props.slides.map((slide, index) => (
               <CarouselSlide key={index} index={index} activeIndex={this.state.activeIndex} slide={slide} />
-            ))}
-          </ul>
-        </div>
+                ))}
+              </ul>
+            </div>
 
-        <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
-        <div style={{ position: 'absolute', bottom: '15%', width: '100%' }}>
-          <ul className="carousel__indicators" style={{ height: '20px', position: 'relative', top: '45px' }}>
-            {this.props.slides.map((slide, index) => (
-              <CarouselIndicator
-                key={index}
-                index={index}
-                activeIndex={this.state.activeIndex}
-                onClick={e => this.goToSlide(index)}
-              />
-            ))}
-          </ul>
+            
+
+            <div style={{ position: 'absolute', bottom: '15%', width: '100%' }}>
+              <ul className="carousel__indicators" style={{ height: '20px', position: 'relative', top: '45px' }}>
+                {this.props.slides.map((slide, index) => (
+                  <CarouselIndicator
+                    key={index}
+                    index={index}
+                    activeIndex={this.state.activeIndex}
+                    onClick={e => this.goToSlide(index)}
+                    style={{zIndex: '10000'}}
+                  />
+                ))}
+              </ul>
+            </div>
+          </div>
+                    </Link>
+            <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
+                    
         </div>
-      </div>
     );
   }
 }
+
+
 
 // Render Carousel component
 // render(<Carousel slides={carouselSlidesData} />, carouselContainer);
@@ -255,12 +270,7 @@ class EventCarousel extends React.Component {
         console.log(username);
         // Set the state based on the previous state.
         this.setState((prevState, props) => {
-          // Get usernames from the state.
-          // let usernames = prevState.usernames.slice();
 
-          // Push new username onto an array.
-          // usernames.push(username);
-          
           // Get event at that specific index.
           let event = eventData[index];
 
@@ -272,13 +282,12 @@ class EventCarousel extends React.Component {
             content: event.description,
             author: username,
             source: event.location,
-            background: event.pictureURL
+            background: event.pictureURL,
+            id: event._id
           });
 
           return { /* usernames */ data };
         });
-
-
       };
 
       // Iterate and get data for the first five events.
@@ -295,7 +304,7 @@ class EventCarousel extends React.Component {
       author: creator
       source: location
       background: pictureURL
-      NEED TO ADD TITLE.
+      TODO: NEED TO ADD TITLE.
     */
 
     if (this.props.events && this.state.data.length > 0) {
