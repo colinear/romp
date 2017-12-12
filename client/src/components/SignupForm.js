@@ -24,9 +24,10 @@ class SignupForm extends React.Component {
     this.props.loginUser({ email, password });
   }
 
-  onChange = e => {
+  onChange = (e, data)=> {
     let name = e.target.name;
     let value = e.target.value;
+    let object = data;
     this.setState((prevState, props) => {
       let { username, password1, password2, email, terms, usernameError, passwordError, termsError } = prevState;
       // Check if username is alphanumeric.
@@ -41,10 +42,15 @@ class SignupForm extends React.Component {
         password1 = value;
       } else if (name === 'password2') {
         password2 = value;
-      } else if (name === 'terms') {
-        terms = value;
       } else if (name === 'email') {
         email = value;
+      } else if (data.name === 'terms') {
+        terms = data.checked;
+        if (!terms) {
+          termsError = true;
+        } else {
+          termsError = false;
+        }
       }
 
       // If there are no errors, send data to the modal.
@@ -76,7 +82,7 @@ class SignupForm extends React.Component {
   render() {
     let usernameError = this.state.usernameError ? <Label basic color="red" pointing="above">Username must contain only letters and numbers.</Label> : null;
     let passwordError = this.state.passwordError ? (<Label basic color="red" pointing="above">Passwords do not match.</Label>) : null;
-    let termsError = this.state.termsError ? <Message error header="Action Forbidden" content="You can only sign up for an account once with a given e-mail address."/> : null;
+    let termsError = this.state.termsError ? <Label basic color='red' pointing='left'>You must accept the terms and conditions.</Label> : null;
     return (
       <div className="SignupForm">
         <Form>

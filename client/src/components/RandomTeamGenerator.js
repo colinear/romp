@@ -39,10 +39,8 @@ class RandomTeamGenerator extends React.Component {
   // getData = async () => {
   //   // Get lists of users, games, and events.
  
-  //   console.log('Users: ', users);
 
   //   let events = (await axios.post(`${ROOT_URL}/events`)).data;
-  //   console.log(users, games, events);
   //   this.setState({games, events, users});
 
   // }

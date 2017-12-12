@@ -14,7 +14,6 @@ class SearchPage extends React.Component {
 
   renderSearchEventCards = () => {
     const { events } = this.props.results;
-    console.log(events);
     let cards = events.map((event, index) => {
       return <SearchEventCard event={event} />;
     });

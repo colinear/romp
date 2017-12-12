@@ -118,7 +118,6 @@ export function getGames() {
     //?fields=name,popularity&order=popularity:asc`) //?fields=name,popularity&order=popularity:desc`)
     .then((games) => {
       dispatch ({ type: GET_GAMES, games: games.data.body });
-      // console.log('games in actions AFTER dispatch: ', games.data.body)
     })
     .catch(err => console.log('Error while retrieving games.'));
   }

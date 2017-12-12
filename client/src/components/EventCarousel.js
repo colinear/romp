@@ -211,7 +211,7 @@ export class Carousel extends Component {
         <Link to={`/event/${this.props.slides[this.state.activeIndex].id}`}>
         <div
             className="carousel parallax"
-            style={{ backgroundImage: `url("${this.props.slides[this.state.activeIndex].background}")` }}
+            style={{ backgroundImage: `url("${carouselSlidesData[this.state.activeIndex].background}")` }}
             onClick={() => {browserHistory.push(`/event/${this.event[this.state.activeIndex]._id}`)}}
           >
             

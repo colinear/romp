@@ -202,16 +202,16 @@ class EventPage extends React.Component {
               {this.displayParticipants()}
             </Grid.Column>
           </Grid.Row>
-          {/* <Grid.Row>
+          <Grid.Row>
             <div style={{ display: 'block' }}>
               <h2>Teams</h2>
             </div>
-          </Grid.Row> */}
-          {/* <Grid.Row>
+          </Grid.Row>
+          <Grid.Row>
             <div style={{ display: 'block', textAlign: 'center' }}>
               {this.state.players.length !== 0 ? this.getPlayers() : <div>Loading...</div>}
             </div>
-          </Grid.Row> */}
+          </Grid.Row>
         </Segment>
       );
     } else {
