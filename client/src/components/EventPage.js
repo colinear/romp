@@ -1,12 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { getEvent } from '../actions/index.js';
 import { Grid, Image, Segment, Button } from 'semantic-ui-react';
-=======
 import { getEvent, joinEvent } from '../actions/index.js';
-import { Grid, Image, Segment } from 'semantic-ui-react';
->>>>>>> Begin join event functionality
 import { Link } from 'react-router';
 
 import axios from 'axios';
