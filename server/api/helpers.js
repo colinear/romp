@@ -38,7 +38,7 @@ helpers.createUser = function(req, res, next) {
     user.save(function(err) {
       
       if (err) { return next(err) }
-      console.log(req.body)
+      // console.log(req.body)
     
       // send back identifying token
       res.json({ token: helpers.tokenForUser(user) });
@@ -88,6 +88,7 @@ helpers.searchEvents = async (name, game, id, callback) => {
 };
 
 helpers.joinEvent = async (username, event, callback) => {
+  console.log('username in helpers: ', username)
   if (!username || !event) {
     callback('SERVER: username or event not supplied');
   }

@@ -32,7 +32,7 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/users/:username', (req, res) => {
-  console.log(req.params.username);
+  // console.log(req.params.username);
   if (req.params.username.length === 24) {
     var username = null;
     var userID = req.params.username;

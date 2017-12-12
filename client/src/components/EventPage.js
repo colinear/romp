@@ -27,8 +27,12 @@ class EventPage extends React.Component {
   // };
 
   joinEvent = () => {
-    let userID;// get userID from header
+    let userID = this.props.user._id;
     let eventID = this.props.event._id;
+
+    // connect up join event button with back end services to 
+    // add event to user, and user to event
+    // ?? maybe add user to team and team to events
   }
 
   componentDidMount() {
@@ -47,8 +51,6 @@ class EventPage extends React.Component {
   };
 
   getSpectators = users => {
-    console.log('Event: ', this.props.event);
-    console.log('logged in user: ', this.props)
     let spectators = this.props.event.spectators;
     return users
       .filter(user => {
@@ -143,10 +145,14 @@ class EventPage extends React.Component {
   };
 
   render() {
-    console.log('users in EventPage: ', this.state.users)
-    console.log('players in EventPage: ', this.state.players)
-    
     if (this.props && this.props.event) {
+
+      console.log('Event: ', this.props.event);
+      console.log('logged in user (this.state): ', this.props.user)
+
+      // console.log('users in EventPage: ', this.state.users)
+      // console.log('players in EventPage: ', this.state.players)
+
       // Pull properties off event.
       let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event;
       let { users, creator } = this.state;
@@ -201,8 +207,8 @@ class EventPage extends React.Component {
   }
 }
 
-function mapStateToProps({ event }) {
-  return { event };
+function mapStateToProps({ event, user }) {
+  return { event, user };
 }
 
-export default connect(mapStateToProps, { getEvent })(EventPage);
+export default connect(mapStateToProps, { getEvent, joinEvent })(EventPage);
