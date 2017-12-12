@@ -26,9 +26,16 @@ class EventPage extends React.Component {
   //   this.setState({ users });
   // };
 
-  joinEvent = () => {
+  joinThisEvent = () => {
     let userID = this.props.user._id;
+      // this user is the logged in user and doesnt have a profilePicURL (or email, etc.)
     let eventID = this.props.event._id;
+
+    // this.joinEvent()
+
+    console.log('users BEFORE spread: ', this.state.users)
+    this.state.users = [...this.state.users, this.props.user]
+    console.log('users AFTER spread: ', this.state.users)
 
     // connect up join event button with back end services to 
     // add event to user, and user to event
@@ -149,6 +156,7 @@ class EventPage extends React.Component {
 
       console.log('Event: ', this.props.event);
       console.log('logged in user (this.state): ', this.props.user)
+      console.log('all users: ', this.state.users)
 
       // console.log('users in EventPage: ', this.state.users)
       // console.log('players in EventPage: ', this.state.players)
@@ -162,7 +170,7 @@ class EventPage extends React.Component {
             <Grid.Row>
               <Grid.Column width={15} />
               <Grid.Column width={1}>
-                <Button onClick={() => console.log('Join event clicked.')}>Join Event</Button>
+                <Button onClick={this.joinThisEvent}>Join Event</Button>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
