@@ -30,29 +30,38 @@ class SearchPage extends React.Component {
   };
 
   renderSearchGameCards = () => {
-    const { games } = this.props.results;
-    let cards = games.map((game, index) => {
+    const games = this.props.results;
+    let cards = games.body.map((game, index) => {
       return <SearchGameCard game={game} />;
     });
     return cards;
   };
 
   render() {
-    console.log(this.props.results);
-    if (this.props.results) {
+    let temp = this.props.results;
+    if (temp.events || temp.users) {
       return (
         <div className="SearchPage">
           <Segment>
             <Card.Group>
-              {this.renderSearchUserCards()}
-              {this.renderSearchGameCards()}
-              {this.renderSearchEventCards()}
+              {temp.users ? this.renderSearchUserCards() : null}
+              {temp.events ? this.renderSearchEventCards() : null}
+            </Card.Group>
+          </Segment>
+        </div>
+      );
+    } else if (temp.body) {
+      return (
+        <div className="SearchPage">
+          <Segment>
+            <Card.Group>
+              {temp.body.length > 1 ? this.renderSearchGameCards() : null}
             </Card.Group>
           </Segment>
         </div>
       );
     } else {
-      return <div>Loading...</div>;
+      return <div>loading...</div>;
     }
   }
 }

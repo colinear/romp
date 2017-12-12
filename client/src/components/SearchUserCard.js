@@ -3,6 +3,7 @@ import { Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
 const SearchUserCard = ({ user }) => {
+  console.log('user in card: ', user);
   return (
     <Link to={`/user/${user.username}`}>
       <Card>

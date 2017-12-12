@@ -27,7 +27,7 @@ export function loginUser(userData) {
         // - Update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });
         dispatch({ type: OPEN_AUTH, value: false });
-        dispatch({ type: SET_USER, user: response.data.user});        
+        dispatch({ type: SET_USER, user: response.data.user});
         // - Save the JWT token
         localStorage.setItem('token', response.data.token);
         // - redirect to the route '/feature'
@@ -115,7 +115,8 @@ export function getEvent(eventID, callback) {
 
 export function getGames() {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/games/?fields=name,popularity&order=popularity:asc`) //?fields=name,popularity&order=popularity:desc`)
+    axios.get(`${ROOT_URL}/games`)
+    //?fields=name,popularity&order=popularity:asc`) //?fields=name,popularity&order=popularity:desc`)
     .then((games) => {
       dispatch ({ type: GET_GAMES, games: games.data.body });
       // console.log('games in actions AFTER dispatch: ', games.data.body)
@@ -125,12 +126,21 @@ export function getGames() {
 }
 
 export function search(query) {
+  console.log('QUERY: ', query);
   return function(dispatch) {
     axios.post(`${ROOT_URL}/search`, {query})
     .then((results) => {
-      dispatch({type: SEARCH, results: results})
+      if(results.data.users.length === 0 && results.data.events.length === 0) {
+        axios.post(`${ROOT_URL}/gameSearch`, {query})
+        .then((results) => {
+          dispatch({type: SEARCH, results: results})
+        })
+      } else {
+        dispatch({type: SEARCH, results: results})
+      }
     })
     .catch(err => console.log('Error while searching.'))
+    // .catch(err => console.log('Error while searching.'))
   }
 }
 
@@ -156,4 +166,3 @@ export function joinEvent({ userID, eventID }) {
       .catch(response => dispatch(authError(response.data.error)));
   }
 }
-
