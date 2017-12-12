@@ -79,18 +79,12 @@ class HomePage extends React.Component {
     this.props.getGames(this.props.routeParams.gameid);
   }
 
-  // TODO: handleEventCardClick
-
   render() {
 
     if (this.props.games) {
       return (
         <div>
-
-          <EventCarousel
-            // events={this.state.events}
-            // handleEventSlideClick={handleEventSlideClick}
-          />
+          <EventCarousel />
           <br/>
           <GameGrid
             games={this.props.games}

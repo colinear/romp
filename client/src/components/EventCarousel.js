@@ -104,7 +104,7 @@ class CarouselIndicator extends Component {
 // Component for slide
 export class CarouselSlide extends Component {
   render() {
-    console.log('Slide id: ', this.props.slide.id)
+    // console.log('Slide id: ', this.props.slide.id)
     return (
       <div style={{ position: 'relative', top: '5vh', width: '100%', height: '100%' }}>
         <li
@@ -264,10 +264,10 @@ class EventCarousel extends React.Component {
     this.props.getEvents(eventData => {
 
       let getData = async (userID, index) => {
-        console.log(userID, index);
+        // console.log(userID, index);
         // Grab username with the event data at a specific index's creator.
         let username = (await axios.get(`${ROOT_URL}/users/${userID}`)).data.username;
-        console.log(username);
+        // console.log(username);
         // Set the state based on the previous state.
         this.setState((prevState, props) => {
 

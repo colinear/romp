@@ -32,7 +32,7 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/users/:username', (req, res) => {
-  console.log(req.params.username);
+  // console.log(req.params.username);
   if (req.params.username.length === 24) {
     var username = null;
     var userID = req.params.username;
@@ -83,8 +83,9 @@ router.post('/events', (req, res) => {
   });
 });
 
+// username or userID?
 router.post('/joinEvent', (req, res) => {
-  helpers.joinEvent(req.body.username, req.body.event, (err, message) => {
+  helpers.joinEvent(req.body.username, req.body.eventID, (err, message) => {
     if (err) res.status(400).send({ err });
     res.end(message);
   });

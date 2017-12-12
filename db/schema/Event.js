@@ -37,3 +37,12 @@ var eventSchema = new Schema({
 
 var Event = mongoose.model('events', eventSchema);
 module.exports = Event;
+
+
+// on JOIN EVENT click,
+  // add user to team
+  // add team to event
+  // add event to user
+
+  // add user to spectator,
+  // add event to user

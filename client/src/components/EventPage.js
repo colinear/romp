@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getEvent } from '../actions/index.js';
 import { Grid, Image, Segment, Button } from 'semantic-ui-react';
+import { getEvent, joinEvent } from '../actions/index.js';
 import { Link } from 'react-router';
 
 import axios from 'axios';
@@ -16,14 +16,24 @@ class EventPage extends React.Component {
       users: [],
       creator: null,
       teams: null,
-      players: []
+      players: [],
+      participants: [] // these are all the users for MVP
     };
   }
 
-  getUsers = async () => {
-    let users = (await axios.get(`${ROOT_URL}/users`)).data;
-    this.setState({ users });
-  };
+  // getUsers = async () => {
+  //   let users = (await axios.get(`${ROOT_URL}/users`)).data;
+  //   this.setState({ users });
+  // };
+
+  joinEvent = () => {
+    let userID = this.props.user._id;
+    let eventID = this.props.event._id;
+
+    // connect up join event button with back end services to 
+    // add event to user, and user to event
+    // ?? maybe add user to team and team to events
+  }
 
   componentDidMount() {
     // Make call to the server for the particular event here using an action.
@@ -41,7 +51,6 @@ class EventPage extends React.Component {
   };
 
   getSpectators = users => {
-    console.log('Event: ', this.props.event);
     let spectators = this.props.event.spectators;
     return users
       .filter(user => {
@@ -137,6 +146,13 @@ class EventPage extends React.Component {
 
   render() {
     if (this.props && this.props.event) {
+
+      console.log('Event: ', this.props.event);
+      console.log('logged in user (this.state): ', this.props.user)
+
+      // console.log('users in EventPage: ', this.state.users)
+      // console.log('players in EventPage: ', this.state.players)
+
       // Pull properties off event.
       let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event;
       let { users, creator } = this.state;
@@ -191,8 +207,8 @@ class EventPage extends React.Component {
   }
 }
 
-function mapStateToProps({ event }) {
-  return { event };
+function mapStateToProps({ event, user }) {
+  return { event, user };
 }
 
-export default connect(mapStateToProps, { getEvent })(EventPage);
+export default connect(mapStateToProps, { getEvent, joinEvent })(EventPage);

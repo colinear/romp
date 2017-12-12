@@ -30,7 +30,7 @@ const GameCard = props => {
     description = description.slice(0, 240) + '...';
   }
 
-  console.log('GAME: ', props.game);
+  // console.log('GAME: ', props.game);
 
   let starRating = Math.floor(rating / 20);
 
