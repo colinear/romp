@@ -174,10 +174,33 @@ router.get('/teams_events/:type/:id', (req, res) => {
 router.post('/search', (req, res) => {
   let { query } = req.body;
   helpers.searchDatabase(query, (err, results) => {
+    console.log('/search', query)
     if (err) res.status(200).send({err});
     else res.end(JSON.stringify(results));
   });
 });
 
+router.post('/gameSearch', (req, res) => {
+  let { query } = req.body;
+  console.log('BACKEND GAME SEARCH: ', req.body);
+  client.games({
+    // filters: {
+    //   'genres.any': [15, 26, 32]
+    //   'release_dates.date-gt': '2017-01-01',
+    //   'release_dates.date-lt': '2017-12-31',
+    // },
+    limit: 15,
+    offset: 0,
+    search: JSON.stringify(req.body),
+    order: 'rating:desc',
+}, desiredFields)
+    .then(games => {
+      res.json(games)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(401).send({ err });
+    })
+})
 
 module.exports = router;
