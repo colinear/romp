@@ -260,6 +260,7 @@ class EventCarousel extends React.Component {
       // usernames: []
     };
   }
+
   componentDidMount(events) {
     this.props.getEvents(eventData => {
 
@@ -292,6 +293,7 @@ class EventCarousel extends React.Component {
 
       // Iterate and get data for the first five events.
       for (var n = 0; n < 5; n++) {
+        console.log(eventData);
         getData(eventData[n].creator, n);
       }
 
