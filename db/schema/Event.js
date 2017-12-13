@@ -16,7 +16,7 @@ var eventSchema = new Schema({
   spectators: [{type: Schema.Types.ObjectId, ref: 'users'}],
   liveStream: [],
   pictureURL: String,
-  players: [], // using this temporarily (pre-team implementation)
+  participants: [], // using this temporarily (pre-team implementation)
 });
 
 // var eventSchema = new Schema({

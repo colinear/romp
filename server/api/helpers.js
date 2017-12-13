@@ -87,13 +87,14 @@ helpers.searchEvents = async (name, game, id, callback) => {
   } 
 };
 
-helpers.joinEvent = async (username, eventName, callback) => {
-  if (!username || !eventName) {
+helpers.joinEvent = async (userID, eventID, callback) => {
+  console.log('arguments in helpers.joinEvent: ', userID, eventID)
+  if (!userID || !eventID) {
     callback('SERVER: username or event not supplied');
   }
-  var err, user = await User.findOne({username}, '_id', 'username', 'email', 'profilePicURL');
+  var err, user = await User.findOne({_id: userID}, '_id', 'username', 'email', 'profilePicURL');
   if (err) callback(err);
-  var err, event = await Event.findOneAndUpdate({event: eventName}, { $push: {players: user}});
+  var err, event = await Event.findOneAndUpdate({_id: eventID}, { $push: {participants: user}});
   callback(null, `SERVER: User ${username} successfully added to event ${event.name}!`)
 }
 

@@ -159,10 +159,11 @@ export function getEvents(callback) {
 export function joinEvent({ userID, eventID }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/joinEvent`, { userID, eventID })
-      .then(() => {
+      .then(response => {
         dispatch({ type: JOIN_EVENT });
         browserHistory.push(`${ROOT_URL}/event/${eventID}`);
       })
-      .catch(response => dispatch(authError(response.data.error)));
+      .catch(err => console.log('error in index at line166: ', err));
   }
 }
+

@@ -17,7 +17,7 @@ class EventPage extends React.Component {
       creator: null,
       teams: null,
       players: [],
-      participants: [] // these are all the users for MVP
+      // participants: [] // these are all the users who joined event (for MVP)
     };
   }
 
@@ -31,11 +31,15 @@ class EventPage extends React.Component {
       // this user is the logged in user and doesnt have a profilePicURL (or email, etc.)
     let eventID = this.props.event._id;
 
-    // this.joinEvent()
+    this.props.joinEvent({ userID, eventID })
 
-    console.log('users BEFORE spread: ', this.state.users)
-    this.state.users = [...this.state.users, this.props.user]
-    console.log('users AFTER spread: ', this.state.users)
+    // TODO: add creator to participants automatically
+
+    // console.log('participants BEFORE spread: ', this.props.event.participants)
+    // if (!this.props.event.participants.includes(this.props.user)) {
+    //   this.props.event.participants = [...this.props.event.participants, this.props.user]
+    // }
+    // console.log('participants AFTER spread: ', this.props.event.participants)
 
     // connect up join event button with back end services to 
     // add event to user, and user to event
@@ -156,7 +160,7 @@ class EventPage extends React.Component {
 
       console.log('Event: ', this.props.event);
       console.log('logged in user (this.state): ', this.props.user)
-      console.log('all users: ', this.state.users)
+      // console.log('all users: ', this.state.users)
 
       // console.log('users in EventPage: ', this.state.users)
       // console.log('players in EventPage: ', this.state.players)
