@@ -13,33 +13,22 @@ class EventPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // these need to be event specific, not on state
+      // TODO: add to each event in db (similar to participants)
       users: [],
       creator: null,
       teams: null,
       players: [],
-      // participants: [] // these are all the users who joined event (for MVP)
     };
   }
 
-  // getUsers = async () => {
-  //   let users = (await axios.get(`${ROOT_URL}/users`)).data;
-  //   this.setState({ users });
-  // };
-
   joinThisEvent = () => {
     let userID = this.props.user._id;
-      // this user is the logged in user and doesnt have a profilePicURL (or email, etc.)
     let eventID = this.props.event._id;
 
     this.props.joinEvent({ userID, eventID })
 
     // TODO: add creator to participants automatically
-
-    // console.log('participants BEFORE spread: ', this.props.event.participants)
-    // if (!this.props.event.participants.includes(this.props.user)) {
-    //   this.props.event.participants = [...this.props.event.participants, this.props.user]
-    // }
-    // console.log('participants AFTER spread: ', this.props.event.participants)
 
     // connect up join event button with back end services to 
     // add event to user, and user to event
