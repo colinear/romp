@@ -133,6 +133,7 @@ export function search(query) {
       if(results.data.users.length === 0 && results.data.events.length === 0) {
         axios.post(`${ROOT_URL}/gameSearch`, {query})
         .then((results) => {
+          console.log('GAME SEARCH RESULTS: ', results);
           dispatch({type: SEARCH, results: results})
         })
       } else {
