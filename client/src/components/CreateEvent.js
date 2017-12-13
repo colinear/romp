@@ -18,7 +18,6 @@ class CreateEvent extends Component {
   }
 
   onChange = e => {
-    console.log('VALUE: ', e.target.value);
     let name = e.target.name;
     let value = e.target.value;
     this.setState((prevState, props) => {

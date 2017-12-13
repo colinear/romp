@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 

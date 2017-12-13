@@ -31,12 +31,10 @@ class RandomEventGenerator extends React.Component {
     let teamIDs = [];
     let teamMin = integer(teams.length, "first");
     let teamMax = integer(teams.length, "last");
-    console.log(teamMin, teamMax, teams);
     for (var team = teamMin; team < teamMax; team++) {
       teamIDs.push(teams[team]._id);
     }
 
-    console.log('Team IDs: ', teamIDs);
 
     let notes = faker.lorem.sentence();
     let pictureURL = faker.random.image();

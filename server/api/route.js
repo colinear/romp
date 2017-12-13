@@ -87,7 +87,7 @@ router.post('/events', (req, res) => {
 router.post('/joinEvent', (req, res) => {
   helpers.joinEvent(req.body.userID, req.body.eventID, (err, message) => {
     if (err) res.status(400).send({ err });
-    res.end(message);
+    else {res.end(message)}
   });
 });
 
@@ -156,6 +156,7 @@ router.get('/teams', (req, res) => {
 })
 
 router.get('/teams_events/:type/:id', (req, res) => {
+  console.log('Type: ', req.params.type, 'ID: ', req.params.id);
   if (req.params.type === 'getTeamsForEvent') {
     helpers.getTeamsForEvent(req.params.id, (err, teams) => {
       if (err) res.status(400).send({err});

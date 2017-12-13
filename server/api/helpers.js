@@ -13,6 +13,7 @@ helpers.tokenForUser = (user) => {
 };
 
 helpers.loginUser = function(req, res, next) {
+
   // user already auth'd, just need to give token
   let { _id, username, profilePicURL, event } = req.user;
   res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, event }}));
@@ -100,13 +101,8 @@ helpers.joinEvent = async (userID, eventID, callback) => {
   var err, event = await Event.findOneAndUpdate({_id: eventID}, { $push: {participants: user}});
   console.log('user and event: ', user, event)
   if (err) callback(err);
-
-  // add eventID to user's events
-  await User.findOneAndUpdate({_id: userID}, { $push: {event: event}});
-  console.log('user and event: ', user, event)
-  if (err) callback(err);
-  
-  callback(null, `SERVER: User successfully added to event ${event.name}!`)
+  var err, event = await Event.findOneAndUpdate({event: event}, { $push: {users: userID}});
+  callback(null, `SERVER: User ${username} successfully added to event ${event.name}!`)
 }
 
 helpers.getUser = (username, userID) => {
@@ -192,9 +188,7 @@ helpers.searchDatabase = (query, callback) => {
             if (gamesError) callback(gamesError);
             else {
               let games = {games: gamesResults};
-              console.log(games, users, events);
               results = Object.assign({}, events, users, games);
-              console.log('BIG RESULTS: ', results);
               callback(null, results);
             }
           });

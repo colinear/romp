@@ -211,7 +211,7 @@ export class Carousel extends Component {
         <Link to={`/event/${this.props.slides[this.state.activeIndex].id}`}>
         <div
             className="carousel parallax"
-            style={{ backgroundImage: `url("${this.props.slides[this.state.activeIndex].background}")` }}
+            style={{ backgroundImage: `url("${carouselSlidesData[this.state.activeIndex].background}")` }}
             onClick={() => {browserHistory.push(`/event/${this.event[this.state.activeIndex]._id}`)}}
           >
             
@@ -260,6 +260,7 @@ class EventCarousel extends React.Component {
       // usernames: []
     };
   }
+
   componentDidMount(events) {
     this.props.getEvents(eventData => {
 
@@ -292,6 +293,7 @@ class EventCarousel extends React.Component {
 
       // Iterate and get data for the first five events.
       for (var n = 0; n < 5; n++) {
+        console.log(eventData);
         getData(eventData[n].creator, n);
       }
 

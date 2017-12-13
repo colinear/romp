@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 
 import BottomNavBar from './BottomNavBar';
-import AuthModal from './AuthModal';
+import _AuthModal from './_AuthModal';
 import TopNavBar from './TopNavBar';
 import Footer from './Footer';
 // import RandomTeamGenerator from './RandomTeamGenerator';
@@ -17,7 +17,7 @@ export default class App extends Component {
       <div>
         <TopNavBar />
         <BottomNavBar />
-        <AuthModal />
+        <_AuthModal />
 
         {this.props.children}
 
