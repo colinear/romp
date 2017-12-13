@@ -105,7 +105,8 @@ helpers.joinEvent = async (userID, eventID, callback) => {
   await User.findOneAndUpdate({_id: userID}, { $push: {event: event}});
   console.log('user and event: ', user, event)
   if (err) callback(err);
-  callback(null, `SERVER: User ${username} successfully added to event ${event.name}!`)
+  
+  callback(null, `SERVER: User successfully added to event ${event.name}!`)
 }
 
 helpers.getUser = (username, userID) => {

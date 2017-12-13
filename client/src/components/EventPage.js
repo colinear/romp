@@ -26,11 +26,15 @@ class EventPage extends React.Component {
     let userID = this.props.user._id;
     let eventID = this.props.event._id;
 
-    this.props.joinEvent({ userID, eventID })
+    this.props.joinEvent({ userID, eventID }, () => {
+      this.props.getEvent(eventID, () => {
+        this.displayParticipants()
+      })
+    })
 
     // TODO: disallow repeat user entries into db
     // TODO: add creator to participants automatically
-    // TODO: maybe add user to team and team to events??
+    // TODO[STRETCH]: add user to team and team to event??
   }
 
   displayParticipants = () => {
@@ -50,7 +54,7 @@ class EventPage extends React.Component {
   componentDidMount() {
     // Make call to the server for the particular event here using an action.
     this.props.getEvent(this.props.routeParams.eventid, () => {
-      console.log(this.props.event);
+      // console.log(this.props.event);
       this.getUsers();
       this.getCreatorUsername();
       this.getTeams();
@@ -92,7 +96,7 @@ class EventPage extends React.Component {
   getTeams = async () => {
     let teams = (await axios.get(`${ROOT_URL}/teams_events/getTeamsForEvent/${this.props.event._id}`)).data;
     this.getUsersPerTeam(teams);
-    console.log('Teams: ', teams);
+    // console.log('Teams: ', teams);
   };
 
   // TODO: Change all instance of players into members, except watch out for this function!!!
@@ -159,8 +163,8 @@ class EventPage extends React.Component {
   render() {
     if (this.props && this.props.event) {
 
-      console.log('Event: ', this.props.event);
-      console.log('logged in user (this.state): ', this.props.user)
+      // console.log('Event: ', this.props.event);
+      // console.log('logged in user (this.state): ', this.props.user)
 
       // Pull properties off event.
       let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event;
