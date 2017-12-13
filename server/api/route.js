@@ -83,9 +83,8 @@ router.post('/events', (req, res) => {
   });
 });
 
-// username or userID?
 router.post('/joinEvent', (req, res) => {
-  helpers.joinEvent(req.body.username, req.body.eventID, (err, message) => {
+  helpers.joinEvent(req.body.userID, req.body.eventID, (err, message) => {
     if (err) res.status(400).send({ err });
     res.end(message);
   });

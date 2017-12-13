@@ -7,6 +7,7 @@ import getGamesReducer from './reducer_getGames';
 import searchReducer from './reducer_search';
 import setUserReducer from './reducer_setUser';
 import getEventsReducer from './reducer_getEvents';
+import joinEventReducer from './reducer_joinEvent';
 
 
 const rootReducer = combineReducers({
