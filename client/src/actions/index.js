@@ -54,10 +54,9 @@ export function signupUser(userData) {
   }
 }
 
-// TODO: change browserHistory to push to event page
-export function createEvent({ event, game, location, description }) {
+export function createEvent({ event, game, location, description, creator }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description })
+    axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description, creator })
       .then(response => {
         dispatch({ type: AUTH_USER });
         browserHistory.push(`/event/${response.data}`);
@@ -168,4 +167,3 @@ export function joinEvent({ userID, eventID }) {
       .catch(err => console.log('error joining event: ', err));
   }
 }
-

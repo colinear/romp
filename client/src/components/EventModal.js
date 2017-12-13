@@ -14,8 +14,8 @@ class EventModal extends Component {
   }
 
   handleEvent = () => {
-    const { event, game, location, description } = this.state.payload;
-    this.props.createEvent({ event, game, location, description });
+    const { event, game, location, description, creator } = this.state.payload;
+    this.props.createEvent({ event, game, location, description, creator });
     this.setState({modalOpen: false});
   };
 
