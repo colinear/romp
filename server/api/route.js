@@ -90,14 +90,6 @@ router.post('/joinEvent', (req, res) => {
   });
 });
 
-// // username or userID?
-// router.post('/joinEvent', (req, res) => {
-//   helpers.joinEvent(req.body.username, req.body.eventID, (err, message) => {
-//     if (err) res.status(400).send({ err });
-//     res.end(message);
-//   });
-// });
-
 router.get('/event/:eventid', (req, res) => {
   let eventID = req.params.eventid;
   helpers.searchEvents(null, null, eventID, (err, event) => {

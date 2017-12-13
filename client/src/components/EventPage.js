@@ -28,12 +28,24 @@ class EventPage extends React.Component {
 
     this.props.joinEvent({ userID, eventID })
 
+    // TODO: disallow repeat user entries into db
     // TODO: add creator to participants automatically
-
-    // connect up join event button with back end services to 
-    // add event to user, and user to event
-    // ?? maybe add user to team and team to events
+    // TODO: maybe add user to team and team to events??
   }
+
+  displayParticipants = () => {
+    let participants = this.props.event.participants;
+    return participants.map((user, index) => {
+      let profilePic = user.profilePicURL;
+      return (
+        <span style={{ margin: '2px' }}>
+          <Link to={`${ROOT_URL}/user/${user._id}`}>
+            <img width="100" height="100" src={profilePic} />
+          </Link>
+        </span>
+      );
+    });
+  };
 
   componentDidMount() {
     // Make call to the server for the particular event here using an action.
@@ -50,27 +62,27 @@ class EventPage extends React.Component {
     this.setState({ users });
   };
 
-  getSpectators = users => {
-    let spectators = this.props.event.spectators;
-    return users
-      .filter(user => {
-        for (var n = 0; n < spectators.length; n++) {
-          if (spectators[n] === user._id) {
-            return true;
-          }
-        }
-      })
-      .map((user, index) => {
-        let profilePic = user.profilePicURL;
-        return (
-          <span style={{ margin: '2px' }}>
-            <Link to={`${ROOT_URL}/user/${user._id}`}>
-              <img width="100" height="100" src={profilePic} />
-            </Link>
-          </span>
-        );
-      });
-  };
+  // getSpectators = users => {
+  //   let spectators = this.props.event.spectators;
+  //   return users
+  //     .filter(user => {
+  //       for (var n = 0; n < spectators.length; n++) {
+  //         if (spectators[n] === user._id) {
+  //           return true;
+  //         }
+  //       }
+  //     })
+  //     .map((user, index) => {
+  //       let profilePic = user.profilePicURL;
+  //       return (
+  //         <span style={{ margin: '2px' }}>
+  //           <Link to={`${ROOT_URL}/user/${user._id}`}>
+  //             <img width="100" height="100" src={profilePic} />
+  //           </Link>
+  //         </span>
+  //       );
+  //     });
+  // };
 
   getCreatorUsername = async () => {
     let creator = await axios.get(`${ROOT_URL}/users/${this.props.event.creator}`);
@@ -149,10 +161,6 @@ class EventPage extends React.Component {
 
       console.log('Event: ', this.props.event);
       console.log('logged in user (this.state): ', this.props.user)
-      // console.log('all users: ', this.state.users)
-
-      // console.log('users in EventPage: ', this.state.users)
-      // console.log('players in EventPage: ', this.state.players)
 
       // Pull properties off event.
       let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event;
@@ -187,7 +195,7 @@ class EventPage extends React.Component {
           <Grid.Row>
             <Grid.Column width={16}>
               <h2>Players</h2>
-              {this.getSpectators(users)}
+              {this.displayParticipants()}
             </Grid.Column>
           </Grid.Row>
           {/* <Grid.Row>
