@@ -26,14 +26,15 @@ class EventPage extends React.Component {
     let userID = this.props.user._id;
     let eventID = this.props.event._id;
 
-    this.props.joinEvent({ userID, eventID })
+    this.props.joinEvent({ userID, eventID }, () => {
+      this.props.getEvent(eventID, () => {
+        this.displayParticipants()
+      })
+    })
 
     // TODO: disallow repeat user entries into db
     // TODO: add creator to participants automatically
     // TODO[STRETCH]: add user to team and team to event??
-
-    // TODO: Rerender event participants once user joins event
-
   }
 
   displayParticipants = () => {

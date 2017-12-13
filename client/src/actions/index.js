@@ -107,7 +107,6 @@ export function getEvent(eventID, callback) {
     .then((event) => {
       dispatch ({type: GET_EVENT, event})
       callback();
-
     })
     .catch(err => console.log('Error while retrieving event.'));
   }
@@ -158,12 +157,14 @@ export function getEvents(callback) {
 }
 
 // TODO: Rerender participants once user joins event
-export function joinEvent({ userID, eventID }) {
+export function joinEvent({ userID, eventID }, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/joinEvent`, { userID, eventID })
       .then(response => {
+        console.log('response in index: ', response)
         dispatch({ type: JOIN_EVENT });
         browserHistory.push(`/event/${eventID}`);
+        callback();
       })
       .catch(err => console.log('error joining event: ', err));
   }
