@@ -20,6 +20,7 @@ const ROOT_URL = 'http://localhost:3001'; // Server URL
 
 export function loginUser(userData) {
   return function(dispatch) {
+    console.log(userData);
     // Submit username/password to the server
     axios.post(`${ROOT_URL}/login`, userData)
       .then(response => {
@@ -41,14 +42,16 @@ export function loginUser(userData) {
   }
 }
 
-export function signupUser(userData) {
+export function signupUser(userData, callback) {
+  console.log(userData, callback);
   return function(dispatch) {
     axios.post(`${ROOT_URL}/signup`, userData)
       .then(response => {
-        dispatch({ type: AUTH_USER });
-        dispatch({ type: OPEN_AUTH, value: false });
+        console.log('Signup successful!');
+        callback();
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/homepage');
+
       })
       .catch(response => dispatch(authError(response.data.error)));
   }

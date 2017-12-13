@@ -133,7 +133,6 @@ router.get('/games', (req, res) => {
     order: 'rating:desc',
 }, desiredFields)
     .then(games => {
-      console.log('games: ', games)
       res.json(games)
     })
     .catch(err => {

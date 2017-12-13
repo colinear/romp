@@ -166,10 +166,13 @@ class _AuthModal extends React.Component {
         // Sign up and return original object.
         if (this.state.form === 'login') {
           const {username, loginPassword } = this.state;
-          this.props.loginUser({username, loginPassword})
+          this.props.loginUser({username, password: loginPassword})
         } else if (this.state.form === 'signup') {
-          const {username, signupPassword1} = this.state;
-          this.props.signupUser(username, signupPassword1);
+          const {username, signupPassword1, email} = this.state;
+          console.log(this.state);
+          this.props.signupUser({username, password: signupPassword1, email}, () => {
+            this.props.loginUser({username, password: signupPassword1});
+          });
         }
         return prevState;
       }
@@ -182,7 +185,7 @@ class _AuthModal extends React.Component {
       var { name, value } = e.target;
     }
     
-    if (data && data.checked) {
+    if (data && data.checked && data.name) {
       var { checked } = data;
     }
 
@@ -201,11 +204,12 @@ class _AuthModal extends React.Component {
         signupPassword2 = value;
       } else if (name === 'email') {
         email = value;
-      } else if (data.name === 'terms') {
+      } else if (data && data.name === 'terms') {
         terms = data.checked;
       } else {
         console.log('Error while calling this.onChange in _AuthModal.');
       }
+      console.log(username, loginPassword, signupPassword1, signupPassword2, email, terms)
       return { username, loginPassword, signupPassword1, signupPassword2, email, terms };
     });
   };
@@ -223,7 +227,7 @@ class _AuthModal extends React.Component {
     let showShortPasswordError = this.state.shortPasswordError ? (
       <div>Username must be greater than 2 characters.</div>
     ) : null;
-    let showShortUsernameError = this.state.shortUsernamedError ? (
+    let showShortUsernameError = this.state.shortUsernameError ? (
       <div>Password must be at least 8 characters.</div>
     ) : null;
     let showNeedsUnalphanumericPasswordError = this.state.needsUnalphanumericPasswordError ? (
@@ -233,24 +237,24 @@ class _AuthModal extends React.Component {
     return (
       <div className="SignupForm">
         <Form>
-          <Form.Field errror={this.state.noEmailError || this.state.invalidEmailError} required>
+          <Form.Field error={showNoEmailError || showInvalidEmailError || showShortUsernameError} required>
             <label>Email</label>
             <input name="email" placeholder="Email" onChange={this.onChange} />
             {showNoEmailError}
             {showInvalidEmailError}
             {showShortUsernameError}
           </Form.Field>
-          <Form.Field error={this.state.noUsernameError || this.state.alphanumericError}>
+          <Form.Field error={showNoUsernameError || showShortUsernameError}>
             <label>Username</label>
             <input name="username" placeholder="Username" onChange={this.onChange} />
             {showNoUsernameError}
             {showShortUsernameError}
           </Form.Field>
-          <Form.Field error={this.state.unmatchingPasswordError || this.state.noPasswordError} required>
+          <Form.Field error={showNoPasswordError || showUnmatchingPasswordError || showConfirmPasswordError || showNeedsUnalphanumericPasswordError} required>
             <label>Password</label>
             <input name="signupPassword1" placeholder="Password" type="password" onChange={this.onChange} />
           </Form.Field>
-          <Form.Field error={this.state.unmatchingPasswordError || this.state.noPasswordError} required>
+          <Form.Field error={showNoPasswordError || showUnmatchingPasswordError || showConfirmPasswordError || showNeedsUnalphanumericPasswordError} required>
             <input name="signupPassword2" placeholder="Confirm Password" type="password" onChange={this.onChange} />
             {showNoPasswordError}
             {showUnmatchingPasswordError}
@@ -275,12 +279,12 @@ class _AuthModal extends React.Component {
     return (
       <div className="LoginForm">
         <Form>
-          <Form.Field required>
+          <Form.Field error={showNoUsernameError} required>
             <label>Username</label>
             <input name="username" placeholder="Username" onChange={this.onChange} />
             {showNoUsernameError}
           </Form.Field>
-          <Form.Field required>
+          <Form.Field error={showNoPasswordError} required>
             <label>Password</label>
             <input name="loginPassword" placeholder="Password" type="password" onChange={this.onChange} />
             {showNoPasswordError}

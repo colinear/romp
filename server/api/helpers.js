@@ -13,6 +13,7 @@ helpers.tokenForUser = (user) => {
 };
 
 helpers.loginUser = function(req, res, next) {
+
   // user already auth'd, just need to give token
   let { _id, username, profilePicURL, event } = req.user;
   res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, event }}));
@@ -187,9 +188,7 @@ helpers.searchDatabase = (query, callback) => {
             if (gamesError) callback(gamesError);
             else {
               let games = {games: gamesResults};
-              console.log(games, users, events);
               results = Object.assign({}, events, users, games);
-              console.log('BIG RESULTS: ', results);
               callback(null, results);
             }
           });
