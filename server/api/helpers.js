@@ -15,8 +15,8 @@ helpers.tokenForUser = (user) => {
 helpers.loginUser = function(req, res, next) {
 
   // user already auth'd, just need to give token
-  let { _id, username, profilePicURL, event } = req.user;
-  res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, event }}));
+  let { _id, username, profilePicURL, email } = req.user;
+  res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, email }}));
 };
 
 helpers.createUser = function(req, res, next) {
@@ -101,8 +101,13 @@ helpers.joinEvent = async (userID, eventID, callback) => {
   var err, event = await Event.findOneAndUpdate({_id: eventID}, { $push: {participants: user}});
   console.log('user and event: ', user, event)
   if (err) callback(err);
-  var err, event = await Event.findOneAndUpdate({event: event}, { $push: {users: userID}});
-  callback(null, `SERVER: User ${username} successfully added to event ${event.name}!`)
+
+  // add eventID to user's events
+  await User.findOneAndUpdate({_id: userID}, { $push: {event: event}});
+  console.log('user and event: ', user, event)
+  if (err) callback(err);
+  
+  callback(null, `SERVER: User successfully added to event!`)
 }
 
 helpers.getUser = (username, userID) => {

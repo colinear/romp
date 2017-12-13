@@ -68,8 +68,8 @@ router.get('/team/players/:teamid', (req, res) => {
 });
 
 router.post('/createEvent', (req, res) => {
+  console.log('req.body in routes: ', req.body)
   helpers.createEvent(req.body, (err, eventID) => {
-    console.log('message in router:', eventID)
     if (err) res.status(400).send({ err });
     else res.send(eventID);
   });
