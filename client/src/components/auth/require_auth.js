@@ -21,6 +21,7 @@ export default function(ComposedComponent) {
     }
 
     render() {
+      console.log('this.ROMPS: ', this.props);
       return <ComposedComponent {...this.props} />
     }
   }

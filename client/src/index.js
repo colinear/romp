@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
-
 import App from './components/App';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
@@ -16,7 +15,7 @@ import HomePage from './components/HomePage';
 import Welcome from './components/Welcome';
 import Events from './components/Events';
 import reducers from './reducers';
-import EventPage from'./components/EventPage';
+import EventPage from './components/EventPage';
 import { AUTH_USER } from './actions/types';
 import UserPage from './components/UserPage';
 import GamePage from './components/GamePage';
