@@ -57,9 +57,9 @@ export function signupUser(userData, callback) {
   }
 }
 
-export function createEvent({ event, game, location, description, creator }) {
+export function createEvent({ event, game, location, description, creator, participants }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description, creator })
+    axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description, creator, participants })
       .then(response => {
         dispatch({ type: AUTH_USER });
         browserHistory.push(`/event/${response.data}`);
@@ -163,7 +163,6 @@ export function joinEvent({ userID, eventID }, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/joinEvent`, { userID, eventID })
       .then(response => {
-        console.log('response in index: ', response)
         dispatch({ type: JOIN_EVENT });
         browserHistory.push(`/event/${eventID}`);
         callback();

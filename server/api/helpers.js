@@ -15,8 +15,8 @@ helpers.tokenForUser = (user) => {
 helpers.loginUser = function(req, res, next) {
 
   // user already auth'd, just need to give token
-  let { _id, username, profilePicURL, event } = req.user;
-  res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, event }}));
+  let { _id, username, profilePicURL, email } = req.user;
+  res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, email }}));
 };
 
 helpers.createUser = function(req, res, next) {

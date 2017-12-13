@@ -13,7 +13,8 @@ class CreateEvent extends Component {
       game: '',
       location: '',
       description: '',
-      creator: props.user._id,
+      creator: props.user,
+      participants: [props.user],
     };
   }
 
@@ -21,8 +22,8 @@ class CreateEvent extends Component {
     let name = e.target.name;
     let value = e.target.value;
     this.setState((prevState, props) => {
-      console.log('creator madness', this.state);
-      let { event, game, location, description, creator } = prevState;
+      // console.log('creator madness', this.state);
+      let { event, game, location, description, creator, participants } = prevState;
 
       if (name === 'event') {
         event = value;
@@ -34,8 +35,8 @@ class CreateEvent extends Component {
         description = value;
       }
 
-      this.props.setPayload({ event, game, location, description, creator });
-      return { event, game, location, description, creator };
+      this.props.setPayload({ event, game, location, description, creator, participants });
+      return { event, game, location, description, creator, participants };
     });
   };
 
