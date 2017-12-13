@@ -47,14 +47,13 @@ helpers.createUser = function(req, res, next) {
 }
 
 helpers.createEvent = (eventData, callback) => {
-  //create new event
   var newEvent = new Event (eventData);
 
   console.log('SERVER: NEW EVENT:', newEvent)
   //save event to db
   newEvent.save((err) => {
     console.log(err);
-    callback(err, 'SERVER: Event added.')
+    callback(err, newEvent._id)
   });
 };
 
@@ -110,31 +109,20 @@ helpers.joinEvent = async (userID, eventID, callback) => {
 }
 
 helpers.getUser = (username, userID) => {
-  
   if (username !== null) {
     return User.findOne({ username: username }).exec((err, user) => {
-      if (err) {
-        throw err;
-      }
-      if (!user) {
-        console.log('USER DOES NOT EXIST');
-      }
+      if (err) { throw err }
+      if (!user) { console.log('USER DOES NOT EXIST') }
       return user;
     });
-  } else if (userID !== null) {   
-     
-    return User.findById(userID).exec((err, user) => {
-      if (err) {
-        throw err;
-      } 
-      if (!user) {
-        console.log('USER DOES NOT EXIST BY THAT ID');
-      }
-      return user;
-    });
-  } else {
-  }
 
+  } else if (userID !== null) {
+    return User.findById(userID).exec((err, user) => {
+      if (err) { throw err } 
+      if (!user) { console.log('USER DOES NOT EXIST BY THAT ID') }
+      return user;
+    });
+  } 
 };
 
 helpers.setTeam = (team, callback) => {
