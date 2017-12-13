@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { save, load } from "redux-localstorage-simple";
 import reduxThunk from 'redux-thunk';
 import App from './components/App';
 import Signin from './components/auth/signin';
@@ -22,8 +23,8 @@ import GamePage from './components/GamePage';
 import SearchPage from './components/SearchPage';
 import EventCarousel from './components/EventCarousel';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers, undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, save())(createStore);
+const store = createStoreWithMiddleware(reducers, load(), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const token = localStorage.getItem('token');
 // If we have a token, consider the user to be signed in
