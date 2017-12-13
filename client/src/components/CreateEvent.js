@@ -6,12 +6,14 @@ import * as actions from '../actions';
 
 class CreateEvent extends Component {
   constructor(props) {
+    console.log('create event', props);
     super(props);
     this.state = {
       event: '',
       game: '',
       location: '',
-      description: ''
+      description: '',
+      creator: props.user._id,
     };
   }
 
@@ -20,7 +22,8 @@ class CreateEvent extends Component {
     let name = e.target.name;
     let value = e.target.value;
     this.setState((prevState, props) => {
-      let { event, game, location, description } = prevState;
+      console.log('creator madness', this.state);
+      let { event, game, location, description, creator } = prevState;
 
       if (name === 'event') {
         event = value;
@@ -32,8 +35,8 @@ class CreateEvent extends Component {
         description = value;
       }
 
-      this.props.setPayload({ event, game, location, description });
-      return { event, game, location, description };
+      this.props.setPayload({ event, game, location, description, creator });
+      return { event, game, location, description, creator };
     });
   };
 

@@ -23,8 +23,8 @@ import GamePage from './components/GamePage';
 import SearchPage from './components/SearchPage';
 import EventCarousel from './components/EventCarousel';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk, save())(createStore);
-const store = createStoreWithMiddleware(reducers, load(), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, save(["user"]))(createStore);
+const store = createStoreWithMiddleware(reducers, load(["user"]), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const token = localStorage.getItem('token');
 // If we have a token, consider the user to be signed in
