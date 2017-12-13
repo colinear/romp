@@ -157,6 +157,7 @@ export function getEvents(callback) {
   }
 }
 
+// TODO: Rerender participants once user joins event
 export function joinEvent({ userID, eventID }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/joinEvent`, { userID, eventID })
