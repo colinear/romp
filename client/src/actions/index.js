@@ -54,12 +54,13 @@ export function signupUser(userData) {
   }
 }
 
+// TODO: change browserHistory to push to event page
 export function createEvent({ event, game, location, description }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description })
       .then(response => {
         dispatch({ type: AUTH_USER });
-        browserHistory.push('/homepage');
+        browserHistory.push(`/event/${response.data}`);
       })
       .catch(response => dispatch(authError(response.data.error)));
   }
@@ -162,9 +163,9 @@ export function joinEvent({ userID, eventID }) {
     axios.post(`${ROOT_URL}/joinEvent`, { userID, eventID })
       .then(response => {
         dispatch({ type: JOIN_EVENT });
-        browserHistory.push(`${ROOT_URL}/event/${eventID}`);
+        browserHistory.push(`/event/${eventID}`);
       })
-      .catch(err => console.log('error in index at line166: ', err));
+      .catch(err => console.log('error joining event: ', err));
   }
 }
 
