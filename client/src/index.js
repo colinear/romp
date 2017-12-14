@@ -40,7 +40,7 @@ ReactDOM.render(
         <IndexRoute component={HomePage} />
         <Route path="homepage" component={RequireAuth(HomePage)} />
         <Route path="photos" component={PhotoGrid} />
-        <Route exact path="event/:eventid" component={EventPage} />
+        <Route path="event/:eventid" component={EventPage} />
         <Route exact path="user/:username" component={UserPage} />
         <Route path="search" component={SearchPage} />
         <Route exact path="games/:gameid" component={GamePage} />

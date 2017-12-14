@@ -62,7 +62,8 @@ export function createEvent({ event, game, location, description, creator, parti
     axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description, creator, participants })
       .then(response => {
         dispatch({ type: AUTH_USER });
-        browserHistory.push(`/event/${response.data}`);
+        let eventID = response.data;
+        browserHistory.push(`/event/${eventID}`);
       })
       .catch(response => dispatch(authError(response.data.error)));
   }
@@ -158,7 +159,6 @@ export function getEvents(callback) {
   }
 }
 
-// TODO: Rerender participants once user joins event
 export function joinEvent({ userID, eventID }, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/joinEvent`, { userID, eventID })
