@@ -82,9 +82,14 @@ class TopNavBar extends React.Component {
 
         {/* Show logout button if not signed in. */}
         {!showLogin ? (
-          <Menu.Item name="logout" active={activeItem === 'logout'} active={activeItem === 'logout'} onClick={this.handleItemClick}>
+          <Menu.Item name="logout" active={activeItem === 'logout'} active={activeItem === 'logout'}
+            onClick={(e, { name }) => {
+              this.handleItemClick(e, { name });
+              this.props.signoutUser();
+            }}
+          >
             {/* adding log out button, need to toggle and show only when user logged in */}
-            <span onClick={this.props.signoutUser}>Logout</span>
+            Logout
           </Menu.Item>
         ) : null}
 
