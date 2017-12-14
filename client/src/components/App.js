@@ -9,6 +9,7 @@ import Footer from './Footer';
 import EventModal from './EventModal';
 import GamePage from './GamePage'
 
+
 import 'semantic-ui-css/semantic.min.css';
 
 export default class App extends Component {

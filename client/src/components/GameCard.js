@@ -2,8 +2,9 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import StarRatingComponent from 'react-star-rating-component';
 import { Segment } from 'semantic-ui-react';
-
 import '../styles/GameCard.css';
+
+import MouseHoverParallaxImage from './MouseHoverParallaxImage';
 
 const GameCard = props => {
   let rating;
@@ -45,8 +46,8 @@ const GameCard = props => {
         browserHistory.push(`/games/${props.game.id}`);
       }}
     >
-      <div className="GameCard-image" style={{backgroundImage: `url("${cover}")`}}>
-      </div>
+      {/* <div className="GameCard-image" style={{ backgroundImage: `url("${cover}")` }} /> */}
+      <MouseHoverParallaxImage background={cover} />
       <div className="content">
         <div className="header">{props.game.name}</div>
         <div className="meta">
