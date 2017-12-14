@@ -93,18 +93,21 @@ helpers.joinEvent = async (userID, eventID, callback) => {
   }
 
   // get user object with only returnInfo
-  var returnInfo = '_id username email profilePicURL';
+  var returnInfo = '_id username email profilePicURL event';
   var err, user = await User.findOne({_id: userID}, returnInfo, {upsert: true});
   if (err) callback(err);
 
+  // check if user has already joined
+  if (user.event.indexOf(eventID) > -1) {
+    callback('SERVER: user already joined')
+  }
+
   // add user to event
   var err, event = await Event.findOneAndUpdate({_id: eventID}, { $push: {participants: user}});
-  console.log('user and event: ', user, event)
   if (err) callback(err);
 
   // add eventID to user's events
   await User.findOneAndUpdate({_id: userID}, { $push: {event: event}});
-  console.log('user and event: ', user, event)
   if (err) callback(err);
   
   callback(null, `SERVER: User successfully added to event!`)
