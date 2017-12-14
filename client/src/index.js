@@ -17,6 +17,7 @@ import Welcome from './components/Welcome';
 import Events from './components/Events';
 import reducers from './reducers';
 import EventPage from './components/EventPage';
+import EventGrid from './components/EventGrid';
 import { AUTH_USER } from './actions/types';
 import UserPage from './components/UserPage';
 import GamePage from './components/GamePage';
@@ -39,6 +40,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
         <Route path="homepage" component={RequireAuth(HomePage)} />
+        <Route path="events" component={EventGrid} />
         <Route path="photos" component={PhotoGrid} />
         <Route path="event/:eventid" component={EventPage} />
         <Route exact path="user/:username" component={UserPage} />
