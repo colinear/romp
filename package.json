@@ -33,11 +33,11 @@
     "passport-twitch": "^1.0.3",
     "prop-types": "^15.6.0",
     "pure-react-carousel": "^1.9.11",
-    "react": "^16.2.0",
     "react-carousel": "^4.3.0",
     "react-dom": "^16.2.0",
     "react-flexbox-grid": "^2.0.0",
     "react-parallax": "^1.5.0",
+    "react-parallax-mousemove": "^1.1.0",
     "react-redux": "^5.0.6",
     "react-responsive-carousel": "^3.1.29",
     "react-router": "^3.2.0",
@@ -70,7 +70,7 @@
     "node": "6.10.0"
   },
   "peerDependencies": {
-    "react": "^16.2.0"
+    "react": "^15.6.2"
   },
   "keywords": [
     "node",
