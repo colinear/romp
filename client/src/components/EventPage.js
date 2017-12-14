@@ -33,7 +33,6 @@ class EventPage extends React.Component {
     })
 
     // TODO: disallow repeat user entries into db
-    // TODO: add creator to participants automatically
     // TODO[STRETCH]: add user to team and team to event??
   }
 
