@@ -5,11 +5,12 @@ import { Segment } from 'semantic-ui-react';
 
 const EventCard = props => {
   let cover = props.event.pictureURL;
+  console.log('event card', props);
   return (
     <div
       className="card"
       onClick={() => {
-        browserHistory.push(`/events/${props.event.id}`);
+        browserHistory.push(`/event/${props.event._id}`);
       }}
     >
       <div className="GameCard-image" style={{ backgroundImage: `url("${cover}")` }} />

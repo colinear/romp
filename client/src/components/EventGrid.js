@@ -9,13 +9,14 @@ const EventGrid = props => {
   return (
     <div className="ui link cards" style={{justifyContent: 'center', marginTop: "1%"}}>
       {props.events.map((event, index) => {
+        console.log('event', event, index);
         return (
           <EventCard
-            key={event.id}
+            key={event._id}
             index={index}
             event={event}
             onClick={() => {
-              browserHistory.push(`/events/${event.id}`);
+              browserHistory.push(`/events/${event._id}`);
             }}
           />
         );
