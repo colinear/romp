@@ -64,6 +64,7 @@ export function createEvent({ event, game, location, description, creator, parti
         dispatch({ type: AUTH_USER });
         let eventID = response.data;
         browserHistory.push(`/event/${eventID}`);
+        browserHistory.go(`/event/${eventID}`);
       })
       .catch(response => dispatch(authError(response.data.error)));
   }
