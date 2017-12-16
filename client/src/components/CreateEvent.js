@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
-// import moment from 'moment';
+import moment from 'moment';
 
 
 class CreateEvent extends Component {
@@ -41,7 +41,7 @@ class CreateEvent extends Component {
         eventAt = value;
       }
 
-      this.props.setPayload({ event, game, location, description, creator, participants, createdAt: new Date(), eventAt: new Date(eventAt) });
+      this.props.setPayload({ event, game, location, description, creator, participants, createdAt: new Date(), eventAt: moment(eventAt, 'MM-DD-YYYY').format('MMMM Do YYYY') });
       return { event, game, location, description, creator, participants, createdAt, eventAt };
     });
   };
