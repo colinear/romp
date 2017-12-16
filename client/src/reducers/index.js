@@ -8,7 +8,7 @@ import searchReducer from './reducer_search';
 import setUserReducer from './reducer_setUser';
 import getEventsReducer from './reducer_getEvents';
 import joinEventReducer from './reducer_joinEvent';
-
+import addFriendReducer from './reducer_addFriend';
 
 const rootReducer = combineReducers({
   form,
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   games: getGamesReducer,
   results: searchReducer,
   user: setUserReducer,
-  events: getEventsReducer
+  events: getEventsReducer,
 });
 
 export default rootReducer;

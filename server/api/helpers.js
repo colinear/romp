@@ -24,12 +24,12 @@ helpers.createUser = function(req, res, next) {
   const password = req.body.password;
 
   if (!username || !password) {
-    
+
     return res.status(422).send({ error: 'You must provide username and password' })
   }
 
   User.findOne({ username: username }, function(err, existingUser) {
-    
+
     if (err) { return next(err) }
     if (existingUser) {
       return res.status(422).send({ error: 'username is in use' });
@@ -37,10 +37,10 @@ helpers.createUser = function(req, res, next) {
 
     const user = new User(req.body);
     user.save(function(err) {
-      
+
       if (err) { return next(err) }
       // console.log(req.body)
-    
+
       // send back identifying token
       res.json({ token: helpers.tokenForUser(user) });
     });
@@ -84,7 +84,7 @@ helpers.searchEvents = async (name, game, id, callback) => {
     callback(err, events);
   } else if (!name && !game) {
 
-  } 
+  }
 };
 
 helpers.joinEvent = async (userID, eventID, callback) => {
@@ -109,7 +109,7 @@ helpers.joinEvent = async (userID, eventID, callback) => {
   // add eventID to user's events
   await User.findOneAndUpdate({_id: userID}, { $push: {event: event}});
   if (err) callback(err);
-  
+
   callback(null, `SERVER: User successfully added to event!`)
 }
 
@@ -123,11 +123,11 @@ helpers.getUser = (username, userID) => {
 
   } else if (userID !== null) {
     return User.findById(userID).exec((err, user) => {
-      if (err) { throw err } 
+      if (err) { throw err }
       if (!user) { console.log('USER DOES NOT EXIST BY THAT ID') }
       return user;
     });
-  } 
+  }
 };
 
 helpers.setTeam = (team, callback) => {
@@ -187,7 +187,7 @@ helpers.searchDatabase = (query, callback) => {
   User.find().or([{ 'firstName': { $regex: query }}, { 'lastName': { $regex: query }}, { 'username': {$regex: query}}]).exec(function(usersError, usersResults) {
     if (usersError) callback(usersError);
     else {
-      let users = {users: usersResults};      
+      let users = {users: usersResults};
       Event.find().or([{ 'event': { $regex: query }}, { 'description': { $regex: query }}, { 'game.name': {$regex: query}}]).exec(function(eventsError, eventsResults) {
         if (eventsError) callback(eventsError);
         else {
@@ -205,5 +205,37 @@ helpers.searchDatabase = (query, callback) => {
     }
   });
 }
+
+helpers.addFriend = async (userID, curUserID, callback) => {
+  if (!userID) {
+    callback('SERVER: username not supplied');
+  }
+  // get user object with only returnInfo
+  var returnInfo = '_id username email profilePicURL';
+  var err, user = await User.findOne({_id: userID}, returnInfo, {upsert: true});
+  if (err) callback(err);
+  // add user to friends
+  await User.findOneAndUpdate({_id: curUserID}, { $push: {friends: user}});
+  console.log('now herererer', user);
+  if (err) callback(err);
+  callback(null, `SERVER: Friend Added!`)
+}
+
+helpers.searchUsers = async (username, id, callback) => {
+  console.log('Searching through users...');
+  if (username === undefined && id === undefined) {
+    console.log('test!!');
+    var err, users = await User.find({});
+    callback(err, users);
+  } else if (id) {
+    var err, user = await User.findById(id);
+    callback(err, user);
+  } if (name) {
+    var err, users = await User.find({name: {"$regex": name, "$options": "i"}});
+    callback(err, users);
+  } else if (!name && !game) {
+
+  }
+};
 
 module.exports = helpers;

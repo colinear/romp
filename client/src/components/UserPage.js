@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getEvent } from '../actions/index.js';
-import { Grid, Image, Segment } from 'semantic-ui-react';
+import { addFriend } from '../actions/index.js';
+import { Grid, Image, Segment, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
 import axios from 'axios';
@@ -13,8 +13,17 @@ class UserPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      friends: [],
     };
+  }
+
+  addThisFriend = () => {
+    let userID = this.state.user._id;
+    let curUserID = this.props.user._id;
+    this.props.addFriend({ userID, curUserID }, () => {
+      console.log(this.state.user.username, 'added to your friends list!');
+    })
   }
 
   componentDidMount() {
@@ -35,6 +44,9 @@ class UserPage extends React.Component {
             <Grid.Row>
               <Grid.Column width={3}><div><h2>{user.username}</h2></div><div><img width="200" height="200" src={user.profilePicURL} /></div></Grid.Column>
               <Grid.Column width={13}>{`${user.firstName} ${user.lastName}`}</Grid.Column>
+              <Grid.Column width={1}>
+                <Button onClick={this.addThisFriend}>Add Friend</Button>
+              </Grid.Column>
             </Grid.Row>
           </Grid>
         </Segment>
@@ -45,8 +57,8 @@ class UserPage extends React.Component {
   }
 }
 
-function mapStateToProps({ event }) {
-  return { event };
+function mapStateToProps(state) {
+  return state;
 }
 
-export default connect(mapStateToProps, { getEvent })(UserPage);
+export default connect(mapStateToProps, { addFriend })(UserPage);

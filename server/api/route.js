@@ -203,4 +203,11 @@ router.post('/gameSearch', (req, res) => {
     })
 })
 
+router.post('/addFriend', (req, res) => {
+  helpers.addFriend(req.body.userID, req.body.curUserID, (err, message) => {
+    if (err) res.status(400).send({ err });
+    else {res.end(message)}
+  });
+});
+
 module.exports = router;

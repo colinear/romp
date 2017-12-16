@@ -8,7 +8,7 @@ var userSchema = new Schema({
   email: {type: String, required: true, minlength: 7},
   firstName: {type: String, minlength: 2},
   lastName: {type: String, minlength: 2},
-  friends: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+  friends: [],
   event: [{ type: Schema.Types.ObjectId, ref: 'events' }],
   team: [{ type: Schema.Types.ObjectId, ref: 'teams' }],
   favorites: [{ type: Schema.Types.ObjectId, ref: 'games' }],
@@ -19,7 +19,7 @@ userSchema.pre('save', function(next) {
   const user = this;
   bcrypt.genSalt(10, function(err, salt) {
     if (err) { return next(err) }
-    
+
     bcrypt.hash(user.password, salt, null, function(err, hash) {
       if (err) { return next(err) }
       user.password = hash;
