@@ -39,11 +39,8 @@ export default class MouseHoverParallaxImage extends React.Component {
 
   handleMouseHover = (e) => {
       var bounds = e.target.getBoundingClientRect();
-      console.log(e);
-      console.log('Hovered!');
       let x = e.clientX - bounds.left;
       let y  = e.clientY - bounds.top;
-      console.log(x, y);
       this.setState({hover: true, position: {x, y}});
   }
 
@@ -53,7 +50,6 @@ export default class MouseHoverParallaxImage extends React.Component {
 
   render() {
     let componentStyle;
-    console.log(this.state);
     if (this.state.hover) {
       componentStyle = this.style.background(this.props.background, this.state.position.x, this.state.position.y);
     } else {

@@ -57,9 +57,9 @@ export function signupUser(userData, callback) {
   }
 }
 
-export function createEvent({ event, game, location, description, creator, participants }) {
+export function createEvent({ event, game, location, description, creator, participants, createdAt, eventAt }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description, creator, participants })
+    axios.post(`${ROOT_URL}/createEvent`, { event, game, location, description, creator, participants, createdAt, eventAt })
       .then(response => {
         dispatch({ type: AUTH_USER });
         let eventID = response.data;

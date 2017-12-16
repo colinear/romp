@@ -166,7 +166,7 @@ class EventPage extends React.Component {
       // console.log('logged in user (this.state): ', this.props.user)
 
       // Pull properties off event.
-      let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game } = this.props.event;
+      let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game, eventAt } = this.props.event;
       let { users, creator } = this.state;
       return (
         <Segment>
@@ -192,6 +192,7 @@ class EventPage extends React.Component {
                 ) : null}
                 <p>{description}</p>
                 <p>{notes}</p>
+                <p>Date: {eventAt}</p>
               </Grid.Column>
             </Grid.Row>
           </Grid>
