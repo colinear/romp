@@ -39,6 +39,7 @@
     "react-datepicker": "^0.63.0",
     "react-dom": "^16.2.0",
     "react-flexbox-grid": "^2.0.0",
+    "react-images-upload": "^1.1.1",
     "react-parallax": "^1.5.0",
     "react-parallax-mousemove": "^1.1.0",
     "react-redux": "^5.0.6",

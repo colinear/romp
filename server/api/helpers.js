@@ -19,6 +19,14 @@ helpers.loginUser = function(req, res, next) {
   res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, email }}));
 };
 
+helpers.isAdmin = function(req, res, next) {
+  let { _id } = req.user;
+  // Grab ID from user.
+
+  
+  // return boolean determining whether user that is logged in is auth'd to do special stuff
+}
+
 helpers.createUser = function(req, res, next) {
   const username = req.body.username;
   const password = req.body.password;

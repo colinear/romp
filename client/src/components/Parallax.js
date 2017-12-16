@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class MouseHoverParallaxImage extends React.Component {
+class Mouse extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,3 +58,5 @@ export default class MouseHoverParallaxImage extends React.Component {
     return <div style={componentStyle} onMouseMove={this.handleMouseHover} onMouseOut={this.handleMouseExit}></div>
   }
 }
+
+export default { Mouse }

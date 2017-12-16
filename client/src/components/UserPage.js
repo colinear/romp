@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addFriend } from '../actions/index.js';
 import FriendCard from './FriendCard';
-import { Grid, Image, Segment, Button, Card } from 'semantic-ui-react';
-import { Link } from 'react-router';
+import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
+import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
+import { Link, browserHistory } from 'react-router';
+
+import ProfileSettingsModal from './ProfileSettingsModal';
+import '../styles/UserPage.css';
 
 import axios from 'axios';
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -16,6 +19,7 @@ class UserPage extends React.Component {
     this.state = {
       user: null,
       friends: [],
+      isAdmin: false
     };
   }
 
@@ -64,7 +68,11 @@ class UserPage extends React.Component {
     if (this.state.user) {
       let { user } = this.state;
       let curUserID = this.props.user._id;
+      let profileId = this.props.routeParams.username;
+      let userId = this.props.user._id;
+      console.log(user);
       return (
+        <div>
         <Segment>
           <Grid>
             <Grid.Row>
@@ -82,6 +90,26 @@ class UserPage extends React.Component {
             </Grid.Row>
           </Grid>
         </Segment>
+        <div className="UserPage-container">
+          <div className="UserPage-user-blurb">
+            <div className="UserPage-profile-picture">
+              <img src={user.profilePicURL} />
+              <Icon name='circle notched' />
+            </div>
+            <div className="UserPage-user-info">
+              <div className="UserPage-user-name">
+                <h2>Username (full name)</h2>
+              </div>
+              <div className="UserPage-user-description">
+              {(user.description !== '') ? <span><h5>“</h5><p>User description goes here.</p><h5>”</h5></span> : <p>No description available.</p>}
+              </div>
+              <div className="UserPage-edit-description">
+                <Icon name='edit' /><p>Edit description</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
       );
     } else {
       return <Segment>Loading...</Segment>;
@@ -93,4 +121,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps, { addFriend })(UserPage);
+export default connect(mapStateToProps, { getEvent, toggleProfileSettingsModal })(UserPage);

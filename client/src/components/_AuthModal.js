@@ -214,6 +214,7 @@ class _AuthModal extends React.Component {
     });
   };
 
+  // Signup form goes here.
   signupForm = () => {
     // Create errors for signup.
     let showNoEmailError = this.state.noEmailError ? <div>No Email Error</div> : null;
@@ -271,8 +272,9 @@ class _AuthModal extends React.Component {
     );
   };
 
-  // Create errors for login.
+  // Login form goes here.
   loginForm = () => {
+    // Create errors for login.
     let showNoUsernameError = this.state.noUsernameError ? <div>No username</div> : null;
     let showNoPasswordError = this.state.noPasswordError ? <div>No password</div> : null;
     let showInvalidLoginError = this.state.invalidEmailError ? <div> Invalid Login</div> : null;
