@@ -32,7 +32,6 @@ class EventPage extends React.Component {
       })
     })
 
-    // TODO: disallow repeat user entries into db
     // TODO[STRETCH]: add user to team and team to event??
   }
 
@@ -51,9 +50,7 @@ class EventPage extends React.Component {
   };
 
   componentDidMount() {
-    // Make call to the server for the particular event here using an action.
     this.props.getEvent(this.props.routeParams.eventid, () => {
-      // console.log(this.props.event);
       this.getUsers();
       this.getCreatorUsername();
       this.getTeams();
@@ -65,28 +62,6 @@ class EventPage extends React.Component {
     this.setState({ users });
   };
 
-  // getSpectators = users => {
-  //   let spectators = this.props.event.spectators;
-  //   return users
-  //     .filter(user => {
-  //       for (var n = 0; n < spectators.length; n++) {
-  //         if (spectators[n] === user._id) {
-  //           return true;
-  //         }
-  //       }
-  //     })
-  //     .map((user, index) => {
-  //       let profilePic = user.profilePicURL;
-  //       return (
-  //         <span style={{ margin: '2px' }}>
-  //           <Link to={`${ROOT_URL}/user/${user._id}`}>
-  //             <img width="100" height="100" src={profilePic} />
-  //           </Link>
-  //         </span>
-  //       );
-  //     });
-  // };
-
   getCreatorUsername = async () => {
     let creator = await axios.get(`${ROOT_URL}/users/${this.props.event.creator}`);
     this.setState({ creator });
@@ -95,7 +70,6 @@ class EventPage extends React.Component {
   getTeams = async () => {
     let teams = (await axios.get(`${ROOT_URL}/teams_events/getTeamsForEvent/${this.props.event._id}`)).data;
     this.getUsersPerTeam(teams);
-    // console.log('Teams: ', teams);
   };
 
   // TODO: Change all instance of players into members, except watch out for this function!!!
@@ -161,9 +135,6 @@ class EventPage extends React.Component {
 
   render() {
     if (this.props && this.props.event) {
-
-      // console.log('Event: ', this.props.event);
-      // console.log('logged in user (this.state): ', this.props.user)
 
       // Pull properties off event.
       let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game, eventAt } = this.props.event;

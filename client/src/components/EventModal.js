@@ -38,7 +38,6 @@ class EventModal extends Component {
         <Modal.Content image>
           <Modal.Description>
             <Header>Create New Event</Header>
-            {/* <p>text here maybe</p> */}
             <CreateEvent src='/assets/images/wireframe/paragraph.png' setPayload={this.setPayload} />
           </Modal.Description>
         </Modal.Content>
