@@ -5,7 +5,7 @@ import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
 import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
 
-import ProfileSettingsModal from './ProfileSettingsModal';
+// import ProfileSettingsModal from './ProfileSettingsModal';
 import '../styles/UserPage.css';
 
 import axios from 'axios';

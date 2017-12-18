@@ -28,6 +28,10 @@
   grid-column-end: 4;
 }
 
+.UserPage-user-info {
+  
+}
+
 .UserPage-user-description {
   font-size: 1.5em;
 }
