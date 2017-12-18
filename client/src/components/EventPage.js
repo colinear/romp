@@ -192,7 +192,7 @@ class EventPage extends React.Component {
                 ) : null}
                 <p>{description}</p>
                 <p>{notes}</p>
-                <p>Date: {eventAt}</p>
+                <p>Time: {JSON.stringify(eventAt)}</p>
               </Grid.Column>
             </Grid.Row>
           </Grid>
