@@ -30,7 +30,6 @@ class CreateEvent extends Component {
   }
 
   onChange = e => {
-    console.log('event: ', e.target)
     let name = e.target.name;
     let value = e.target.value;
     this.setState((prevState, props) => {
@@ -52,9 +51,11 @@ class CreateEvent extends Component {
   };
 
   render() {
-    return (
-      <Form>
-        <p>Time</p>
+    let hasDate = !!this.state.eventAt;
+    if (hasDate) {
+      return (
+        <Form>
+          <p>Time</p>
           <DatePicker
             name='eventAt'
             selected={this.state.eventAt}
@@ -65,16 +66,38 @@ class CreateEvent extends Component {
             dateFormat="LLL"
             placeholderText='Select a date'
           />
-        <Form.Group widths='equal'>
-          <Form.Field required id='form-input-control-event-name' name="event" control={Input} label='Event name' placeholder='Event name' onChange={this.onChange} />
-          <Form.Field required id='form-input-control-game' name="game" control={Input} label='Game' placeholder='Game' onChange={this.onChange} />
-          <Form.Field required id='form-input-control-location' name="location" control={Input} label='Location' placeholder='Location' onChange={this.onChange} />
-        </Form.Group>
-        <Form.Field id='form-textarea-control-description' name="description" control={TextArea} label='Description' placeholder='Description' onChange={this.onChange} />
+          <Form.Group widths='equal'>
+            <Form.Field required id='form-input-control-event-name' name="event" control={Input} label='Event name' placeholder='Event name' onChange={this.onChange} />
+            <Form.Field required id='form-input-control-game' name="game" control={Input} label='Game' placeholder='Game' onChange={this.onChange} />
+            <Form.Field required id='form-input-control-location' name="location" control={Input} label='Location' placeholder='Location' onChange={this.onChange} />
+          </Form.Group>
+          <Form.Field id='form-textarea-control-description' name="description" control={TextArea} label='Description' placeholder='Description' onChange={this.onChange} />
+        </Form>
+      )
+    } else {
 
-        {/* <Form.Field id='form-button-control-public' color="blue" control={Button} content='Confirm' /> */}
-      </Form>
-    )
+      return (
+        <Form>
+          <p>Please select a time</p>
+          <DatePicker
+            name='eventAt'
+            selected={this.state.eventAt}
+            onChange={this.handleChange}
+            showTimeSelect
+            timeFormat='HH:mm'
+            timeIntervals={30}
+            dateFormat="LLL"
+            placeholderText='Select a date'
+          />
+          <Form.Group widths='equal'>
+            <Form.Field required id='form-input-control-event-name' disabled='disabled' name="event" control={Input} label='Event name' placeholder='Event name' onChange={this.onChange} />
+            <Form.Field required id='form-input-control-game' disabled='disabled' name="game" control={Input} label='Game' placeholder='Game' onChange={this.onChange} />
+            <Form.Field required id='form-input-control-location' disabled='disabled' name="location" control={Input} label='Location' placeholder='Location' onChange={this.onChange} />
+          </Form.Group>
+          <Form.Field id='form-textarea-control-description' disabled='disabled' name="description" control={TextArea} label='Description' placeholder='Description' onChange={this.onChange} />
+        </Form>
+      )
+    }
   }
 }
 
