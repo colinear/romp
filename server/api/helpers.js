@@ -229,6 +229,30 @@ helpers.addFriend = async (userID, curUserID, callback) => {
   callback(null, `SERVER: Friend Added!`)
 }
 
+helpers.removeFriend = async (userID, curUserID, callback) => {
+  if (!userID) {
+    callback('SERVER: username not supplied');
+  }
+  // get user object with only returnInfo
+  var returnInfo = '_id username email profilePicURL friends';
+  var friendsList = 'username friends'
+  var err, user = await User.findOne({_id: userID}, returnInfo, {upsert: true});
+  var err, curUser = await User.findOne({_id: curUserID}, friendsList);
+  if (err) callback(err);
+  // add user to friends
+  // var match = curUser.friends.find((friend) => friend.username === user.username)
+  // var isSelf =  curUser.username === user.username
+  // console.log('usernames', curUser, user.username);
+  // if (match || isSelf) {
+  // } else {
+  console.log('HALP', user);
+  await User.findOneAndUpdate({_id: curUserID}, { $pull: {friends: user}});
+  // }
+  // console.log('now herererer', user);
+  if (err) callback(err);
+  callback(null, `SERVER: Friend Added!`)
+}
+
 helpers.searchUsers = async (username, id, callback) => {
   console.log('Searching through users...');
   if (username === undefined && id === undefined) {

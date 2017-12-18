@@ -210,4 +210,11 @@ router.post('/addFriend', (req, res) => {
   });
 });
 
+router.post('/removeFriend', (req, res) => {
+  helpers.removeFriend(req.body.userID, req.body.curUserID, (err, message) => {
+    if (err) res.status(400).send({ err });
+    else {res.end(message)}
+  });
+});
+
 module.exports = router;

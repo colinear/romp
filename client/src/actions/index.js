@@ -16,6 +16,7 @@ import {
   JOIN_EVENT,
   ADD_FRIEND,
   GET_USER,
+  REMOVE_FRIEND,
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -179,6 +180,17 @@ export function addFriend({ userID, curUserID }, callback) {
     axios.post(`${ROOT_URL}/addFriend`, { userID, curUserID })
       .then(response => {
         dispatch({ type: ADD_FRIEND });
+        callback();
+      })
+      .catch(err => console.log('error adding user: ', err));
+  }
+}
+
+export function removeFriend({ userID, curUserID }, callback) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/removeFriend`, { userID, curUserID })
+      .then(response => {
+        dispatch({ type: REMOVE_FRIEND });
         callback();
       })
       .catch(err => console.log('error adding user: ', err));

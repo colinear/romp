@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 import { openAuth, signoutUser } from '../actions/index.js';
 
@@ -74,7 +74,13 @@ class TopNavBar extends React.Component {
 
         {/* Show user's button at top if logged in. */}
         {!showLogin ? (
-          <Menu.Item as={Link} active={activeItem === 'user'} to={`/user/${user._id}`}>
+          <Menu.Item active={activeItem === 'user'}
+            onClick={() => {
+              console.log('PROPS', this.props);
+              browserHistory.push(`/user/${this.props.user.username}`)
+              browserHistory.go(`/user/${this.props.user.username}`)
+            }}
+          >
             <img src={user.profilePicURL} style={{borderRadius: '30px', width: '30px', height: '30px', margin: '3px'}}/>
             <span>  {user.username}</span>
           </Menu.Item>
