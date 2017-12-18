@@ -63,6 +63,7 @@ class UserPage extends React.Component {
   render() {
     if (this.state.user) {
       let { user } = this.state;
+      let curUserID = this.props.user._id;
       return (
         <Segment>
           <Grid>
@@ -76,7 +77,7 @@ class UserPage extends React.Component {
             <Grid.Row>
               <Grid.Column width={16}>
                 <h2>Friends</h2>
-                {this.displayFriends()}
+                {curUserID === user._id ? this.displayFriends() : null}
               </Grid.Column>
             </Grid.Row>
           </Grid>

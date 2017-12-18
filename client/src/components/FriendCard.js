@@ -7,6 +7,15 @@ import { removeFriend } from '../actions/index.js';
 
 const ROOT_URL = 'http://localhost:3001';
 
+// const removeFriend = () => {
+//   let userID = this.state.user._id;
+//   let curUserID = this.props.user._id;
+//   this.props.addFriend({ userID, curUserID }, () => {
+//     console.log(this.state.user.username, 'added to your friends list!');
+//     // this.displayFriends();
+//   })
+// }
+
 const FriendCard = props => {
   console.log('FriendCard', props);
   let cover = props.friend.profilePicURL;
@@ -26,7 +35,7 @@ const FriendCard = props => {
           </List.Content>
         {/* </Link> */}
       </List.Item>
-      <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em"}} onClick={() => props.removeFriend()}/>
+      <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={() => props.removeFriend(props.user._id)}/>
     </List>
   );
 };

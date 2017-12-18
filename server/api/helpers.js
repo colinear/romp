@@ -229,7 +229,7 @@ helpers.addFriend = async (userID, curUserID, callback) => {
   callback(null, `SERVER: Friend Added!`)
 }
 
-helpers.removeFriend = async (userID, curUserID, callback) => {
+helpers.removeFriend = async (userID, callback) => {
   if (!userID) {
     callback('SERVER: username not supplied');
   }
