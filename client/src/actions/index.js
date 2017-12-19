@@ -17,6 +17,7 @@ import {
   ADD_FRIEND,
   GET_USER,
   REMOVE_FRIEND,
+  TOGGLE_PROFILE_SETTINGS_MODAL
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -196,3 +197,8 @@ export function removeFriend({ userID, curUserID }, callback) {
       .catch(err => console.log('error adding user: ', err));
   }
 }
+
+export function toggleProfileSettingsModal(value) {
+  return { type: TOGGLE_PROFILE_SETTINGS_MODAL, value }
+
+};

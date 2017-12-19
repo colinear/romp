@@ -1,7 +1,7 @@
-const Event = require('../../db/schema/Event.js');
-const Game = require('../../db/schema/Game.js');
-const User = require('../../db/schema/User');
-const Team = require('../../db/schema/Team');
+const Event = require('../db/schema/Event.js');
+const Game = require('../db/schema/Game.js');
+const User = require('../db/schema/User');
+const Team = require('../db/schema/Team');
 const jwt = require('jwt-simple');
 const config = require('../config');
 
@@ -18,6 +18,14 @@ helpers.loginUser = function(req, res, next) {
   let { _id, username, profilePicURL, email } = req.user;
   res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, email }}));
 };
+
+helpers.isAdmin = function(req, res, next) {
+  let { _id } = req.user;
+  // Grab ID from user.
+
+  
+  // return boolean determining whether user that is logged in is auth'd to do special stuff
+}
 
 helpers.createUser = function(req, res, next) {
   const username = req.body.username;

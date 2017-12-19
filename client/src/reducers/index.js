@@ -9,6 +9,8 @@ import setUserReducer from './reducer_setUser';
 import getEventsReducer from './reducer_getEvents';
 import joinEventReducer from './reducer_joinEvent';
 import addFriendReducer from './reducer_addFriend';
+import profileSettingsModalReducer from './reducer_profileSettingsModal';
+
 
 const rootReducer = combineReducers({
   form,
@@ -19,6 +21,7 @@ const rootReducer = combineReducers({
   results: searchReducer,
   user: setUserReducer,
   events: getEventsReducer,
+  profileSettingsOpened: profileSettingsModalReducer
 });
 
 export default rootReducer;

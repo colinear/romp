@@ -4,7 +4,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import { Segment } from 'semantic-ui-react';
 import '../styles/GameCard.css';
 
-import MouseHoverParallaxImage from './MouseHoverParallaxImage';
+import Parallax from './Parallax';
 
 const GameCard = props => {
   let rating;
@@ -47,7 +47,7 @@ const GameCard = props => {
       }}
     >
       {/* <div className="GameCard-image" style={{ backgroundImage: `url("${cover}")` }} /> */}
-      <MouseHoverParallaxImage background={cover} />
+      <Parallax.Mouse background={cover} />
       <div className="content">
         <div className="header">{props.game.name}</div>
         <div className="meta">

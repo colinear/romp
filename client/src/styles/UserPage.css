@@ -1,0 +1,46 @@
+.UserPage-container {
+  justify-content: center;
+  margin: 2em auto;
+  min-width: 40%;
+  width: 80%;
+}
+
+.UserPage-user-blurb {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20%;
+  grid-template-rows: 100%;
+  height: auto;
+}
+
+.UserPage-profile-picture {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.UserPage-profile-picture img {
+  width: 100%;
+  height: 100%;
+}
+
+.UserPage-user-info {
+  padding: 0 1em;
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.UserPage-user-info {
+  
+}
+
+.UserPage-user-description {
+  font-size: 1.5em;
+}
+
+.UserPage-user-description h5 {
+  display: inline-block;
+  font-size: 2em;
+}
+
+.UserPage-user-description p {
+  display: inline-block;
+}
