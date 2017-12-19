@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "author": "colinear",
   "scripts": {
-    "start": "npm run prebuild && node server/index.js",
+    "start": "node server/index.js",
     "heroku-prebuild": "cd client && npm install && npm run build && cd ../server && npm install",
     "prebuild": "cd client && npm install && npm run build && cd ../server && npm install",
     "client": "cd client && npm start",
