@@ -17,7 +17,8 @@ import {
   ADD_FRIEND,
   GET_USER,
   REMOVE_FRIEND,
-  TOGGLE_PROFILE_SETTINGS_MODAL
+  GET_FRIENDS,
+  TOGGLE_PROFILE_SETTINGS_MODAL,
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
@@ -184,6 +185,18 @@ export function addFriend({ userID, curUserID }, callback) {
         callback();
       })
       .catch(err => console.log('error adding user: ', err));
+  }
+}
+
+export function getFriends(curUser, callback) {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/users/${curUser.username}`)
+    .then((friends) => {
+      console.log('USER', friends);
+      dispatch ({type: GET_FRIENDS, friends})
+      callback();
+    })
+    .catch(err => console.log('Error while retrieving event.'));
   }
 }
 

@@ -15,8 +15,8 @@ helpers.tokenForUser = (user) => {
 helpers.loginUser = function(req, res, next) {
 
   // user already auth'd, just need to give token
-  let { _id, username, profilePicURL, email } = req.user;
-  res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, email }}));
+  let { _id, username, profilePicURL, email, friends } = req.user;
+  res.send(JSON.stringify({ token: helpers.tokenForUser(req.user), user: { _id, username, profilePicURL, email, friends }}));
 };
 
 helpers.isAdmin = function(req, res, next) {
