@@ -186,9 +186,9 @@ export function addFriend({ userID, curUserID }, callback) {
   }
 }
 
-export function removeFriend({ userID }, callback) {
+export function removeFriend({ userID, curUserID }, callback) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/removeFriend`, { userID })
+    axios.post(`${ROOT_URL}/removeFriend`, { userID, curUserID })
       .then(response => {
         dispatch({ type: REMOVE_FRIEND });
         callback();
