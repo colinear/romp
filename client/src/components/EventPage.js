@@ -25,7 +25,7 @@ class EventPage extends React.Component {
   joinThisEvent = () => {
     let userID = this.props.user._id;
     let eventID = this.props.event._id;
-
+    // console.log('this.props.event: ', this.props.event)
     this.props.joinEvent({ userID, eventID }, () => {
       this.props.getEvent(eventID, () => {
         this.displayParticipants()
@@ -135,7 +135,7 @@ class EventPage extends React.Component {
 
   render() {
     if (this.props && this.props.event) {
-      console.log('props: ', this.props)
+      console.log('props: ', this.props.event)
       // Pull properties off event.
       let { event, description, location, liveStream, spectators, notes, teams, pictureURL, game, eventAt } = this.props.event;
       let { users, creator } = this.state;
