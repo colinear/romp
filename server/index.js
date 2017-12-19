@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var MONGODB_URI = require('../db/mongo.js');
+var MONGODB_URI = require('./db/mongo.js');
 var session = require('express-session');
 var routes = require('./api/route.js');
 var app = express();
@@ -11,7 +11,7 @@ mongoose.connect(MONGODB_URI, { useMongoClient: true });
 
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../public/dist')));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

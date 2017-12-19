@@ -1,15 +1,59 @@
 {
-  "name": "romp",
+  "name": "github-fetcher-fullstack-v2",
   "version": "1.0.0",
-  "description": "An app for gamers to meet up and play.",
-  "main": "server/index.js",
-  "author": "colinear",
-  "dependencies": {
-    "react-scripts": "^1.0.17",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack -d --watch",
+    "build-css": "node-sass-chokidar ./src/styles/ -o ./src/styles/",
+    "watch-css": "npm run build-css && node-sass-chokidar ./src/styles/ -o ./src/styles/ --watch --recursive"
   },
+  "author": "Patrick Daly",
+  "license": "ISC",
   "devDependencies": {
-    "react-scripts": "1.0.17"
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel-preset-react-es2015": "^1.3.0",
+    "body-parser": "^1.17.2",
+    "dateformat": "^3.0.2",
+    "faker": "^4.1.0",
+    "node-sass-chokidar": "0.0.3",
+    "path": "^0.12.7",
+    "prop-types": "^15.6.0",
+    "pure-react-carousel": "^1.9.11",
+    "react": "^15.4.2",
+    "react-carousel": "^4.3.0",
+    "react-dom": "^15.4.2",
+    "react-flexbox-grid": "^2.0.0",
+    "react-images-upload": "^1.1.1",
+    "react-parallax": "^1.5.0",
+    "react-parallax-mousemove": "^1.1.0",
+    "react-redux": "^5.0.6",
+    "react-responsive-carousel": "^3.1.29",
+    "react-router": "^3.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^1.0.17",
+    "react-star-rating-component": "^1.3.0",
+    "redux": "^3.7.2",
+    "redux-form": "^7.2.0",
+    "redux-localstorage-simple": "^1.3.1",
+    "redux-persist": "^5.4.0",
+    "redux-promise": "^0.5.3",
+    "redux-saga": "^0.16.0",
+    "redux-thunk": "^2.0.1",
+    "sass": "^1.0.0-beta.4",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.0",
+    "socket.io": "^2.0.4",
+    "twitch-embed": "^1.1.4"
+  },
+  "peerDependencies": {
+    "react": "^15.6.2"
   }
 }

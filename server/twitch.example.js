@@ -1,1 +1,0 @@
-module.exports = 'CLIENT ID GOES HERE';
