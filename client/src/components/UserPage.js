@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import FriendCard from './FriendCard';
+import FriendList from './FriendList';
 import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
-import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
+import { getEvent, toggleProfileSettingsModal, addFriend, getFriends } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
 
 // import ProfileSettingsModal from './ProfileSettingsModal';
@@ -26,32 +26,27 @@ class UserPage extends React.Component {
   addThisFriend = () => {
     let userID = this.state.user._id;
     let curUserID = this.props.user._id;
+    let curUser = this.props.user;
     this.props.addFriend({ userID, curUserID }, () => {
-      console.log(this.state.user.username, 'added to your friends list!');
-      // this.displayFriends();
+      this.props.getFriends(curUser, () => {
+        console.log(this.state.user.username, 'added to your friends list!');
+      })
     })
   }
 
   displayFriends = () => {
-    let friends = this.state.user.friends;
+    let friends = this.props.friends.data.friends;
     return friends.map((user, index) => {
       // let friend = user;
       // let profilePic = user.profilePicURL;
       return (
 
-        <FriendCard
+        <FriendList
           key={user.id}
           index={index}
           friend={user}
         />
       )
-      //   <span style={{ margin: '2px' }}>
-      //     <Link to={`${ROOT_URL}/user/${user._id}`}>
-      //       <img width="100" height="100" src={profilePic} />
-      //     </Link>
-      //     <p>{friend.username}</p>
-      //   </span>
-      // );
     });
   };
 
@@ -121,4 +116,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps, { getEvent, toggleProfileSettingsModal, addFriend })(UserPage);
+export default connect(mapStateToProps, { getEvent, toggleProfileSettingsModal, addFriend, getFriends })(UserPage);
