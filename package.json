@@ -13,6 +13,9 @@
   "engines": {
     "node": "8.9.1"
   },
+  "dependencies": {
+    "express": "^4.13.3"
+  },
   "keywords": [
     "node",
     "heroku",
