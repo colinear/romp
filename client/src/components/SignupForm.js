@@ -5,11 +5,6 @@ import * as actions from '../actions';
 import { userInfo } from 'os';
 
 class SignupForm extends React.Component {
-
-
-
-
-
   render() {
     let usernameError = this.state.usernameError ? <Label basic color="red" pointing="above">Username must contain only letters and numbers.</Label> : null;
     let passwordError = this.state.passwordError ? (<Label basic color="red" pointing="above">Passwords do not match.</Label>) : null;
