@@ -9,6 +9,7 @@ node_modules
 client/coverage
 
 # production
+client/build
 
 # misc
 .DS_Store
