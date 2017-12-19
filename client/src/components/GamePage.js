@@ -26,7 +26,7 @@ class GamePage extends Component {
             </Grid.Column>
             <Grid.Column textAlign="center" style={{paddingRight: "15%"}}>
               <h1>{this.state.game.name}</h1>
-              <h2>Developer: n/a</h2>
+              <h3>Developer: n/a</h3>
               <h3>Release Date: {dateFormat(date, "mmmm yyyy")}</h3>
               <p>Genre: video game</p>
               <p>Platforms: various</p>
