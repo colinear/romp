@@ -26,12 +26,12 @@ class GamePage extends Component {
             </Grid.Column>
             <Grid.Column textAlign="center" style={{paddingRight: "15%"}}>
               <h1>{this.state.game.name}</h1>
-              <h2>Developer: n/a</h2>
+              <h3>Developer: n/a</h3>
               <h3>Release Date: {dateFormat(date, "mmmm yyyy")}</h3>
               <p>Genre: video game</p>
               <p>Platforms: various</p>
               <p>{this.state.game.summary}</p>
-              <h4>Rating: {this.state.game.aggregated_rating ? this.state.game.aggregated_rating : 'N/A'}</h4>
+              <h4>Rating: {this.state.game.aggregated_rating ? Math.round(this.state.game.aggregated_rating) : 'N/A'}</h4>
             </Grid.Column>
             <Grid.Column>
             </Grid.Column>

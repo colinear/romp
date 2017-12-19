@@ -135,7 +135,6 @@ class EventPage extends React.Component {
 
   render() {
     if (this.props && this.props.event) {
-      console.log('props: ', this.props.event)
       // Pull properties off event.
       let { event, description, location, liveStream, spectators, notes, teams, pictureURL, game, eventAt } = this.props.event;
       let { users, creator } = this.state;
