@@ -18,6 +18,7 @@ class CreateEvent extends Component {
       description: '',
       creator: props.user,
       participants: [props.user],
+      pictureURL: '', 
       createdAt: '',
       eventAt: '',
     };
@@ -33,7 +34,7 @@ class CreateEvent extends Component {
     let name = e.target.name;
     let value = e.target.value;
     this.setState((prevState, props) => {
-      let { event, game, location, description, creator, participants, createdAt, eventAt} = prevState;
+      let { event, game, location, description, creator, participants, pictureURL, createdAt, eventAt} = prevState;
 
       if (name === 'event') {
         event = value;
@@ -43,10 +44,12 @@ class CreateEvent extends Component {
         location = value;
       } else if (name === 'description') {
         description = value;
+      } else if (name === 'pictureURL') {
+        pictureURL = value;
       }
 
-      this.props.setPayload({ event, game, location, description, creator, participants, createdAt: new Date(), eventAt: moment(this.state.eventAt._d).format('MMMM Do YYYY, h:mm a') });
-      return { event, game, location, description, creator, participants, createdAt, eventAt };
+      this.props.setPayload({ event, game, location, description, creator, participants, pictureURL, createdAt: new Date(), eventAt: moment(this.state.eventAt._d).format('MMMM Do YYYY, h:mm a') });
+      return { event, game, location, description, creator, participants, pictureURL, createdAt, eventAt };
     });
   };
 
@@ -72,6 +75,7 @@ class CreateEvent extends Component {
             <Form.Field required id='form-input-control-location' name="location" control={Input} label='Location' placeholder='Location' onChange={this.onChange} />
           </Form.Group>
           <Form.Field id='form-textarea-control-description' name="description" control={TextArea} label='Description' placeholder='Description' onChange={this.onChange} />
+          <Form.Field id='form-input-control-pictureURL' name="pictureURL" control={Input} label='Picture URL' placeholder='URL' onChange={this.onChange} />
         </Form>
       )
     } else {
@@ -95,6 +99,7 @@ class CreateEvent extends Component {
             <Form.Field required id='form-input-control-location' disabled='disabled' name="location" control={Input} label='Location' placeholder='Location' onChange={this.onChange} />
           </Form.Group>
           <Form.Field id='form-textarea-control-description' disabled='disabled' name="description" control={TextArea} label='Description' placeholder='Description' onChange={this.onChange} />
+          <Form.Field id='form-input-control-pictureURL' disabled='disabled' name="pictureURL" control={Input} label='Picture URL' placeholder='URL' onChange={this.onChange} />
         </Form>
       )
     }
