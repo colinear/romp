@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addFriend, getFriends } from '../actions/index.js';
 import FriendList from './FriendList';
 import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
-import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
+import { getEvent, toggleProfileSettingsModal, addFriend, getFriends } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
 
 // import ProfileSettingsModal from './ProfileSettingsModal';
