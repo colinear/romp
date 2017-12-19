@@ -9,6 +9,7 @@ import setUserReducer from './reducer_setUser';
 import getEventsReducer from './reducer_getEvents';
 import joinEventReducer from './reducer_joinEvent';
 import addFriendReducer from './reducer_addFriend';
+import getFriendsReducer from './reducer_getFriends';
 import profileSettingsModalReducer from './reducer_profileSettingsModal';
 
 
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   results: searchReducer,
   user: setUserReducer,
   events: getEventsReducer,
-  profileSettingsOpened: profileSettingsModalReducer
+  friends: getFriendsReducer,
+  profileSettingsOpened: profileSettingsModalReducer,
 });
 
 export default rootReducer;
