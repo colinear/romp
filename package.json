@@ -21,5 +21,9 @@
     "Cameron Malloy",
     "Cecilia Goss",
     "Clay Smart"
-  ]
+  ],
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "style-loader": "^0.19.1"
+  }
 }
