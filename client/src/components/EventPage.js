@@ -135,9 +135,9 @@ class EventPage extends React.Component {
 
   render() {
     if (this.props && this.props.event) {
-
+      console.log('props: ', this.props)
       // Pull properties off event.
-      let { name, description, location, liveStream, spectators, notes, teams, pictureURL, game, eventAt } = this.props.event;
+      let { event, description, location, liveStream, spectators, notes, teams, pictureURL, game, eventAt } = this.props.event;
       let { users, creator } = this.state;
       return (
         <Segment>
@@ -153,15 +153,13 @@ class EventPage extends React.Component {
                 <Image src={pictureURL} />
               </Grid.Column>
               <Grid.Column width={11}>
-                <h1>{name}</h1>
-                <p>{location}</p>
+                <h1>{event}</h1>
+                <p>@ {location}</p>
                 {creator ? (
-                  <div>
-                    <img height="100" width="100" src={creator.profilePicURL} />
-                    <h5 style={{ marginTop: 2 }}>{creator.username}</h5>
-                  </div>
+                  <p>Hosted by: <Link to={`/user/${this.props.event.participants[0].username}`}>{this.props.event.participants[0].username}</Link></p>
                 ) : null}
-                <p>{description}</p>
+                <p>Game: {game}</p>
+                <p>Description: {description}</p>
                 <p>{notes}</p>
                 <p>Time: {JSON.stringify(eventAt)}</p>
               </Grid.Column>

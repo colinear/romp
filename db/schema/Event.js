@@ -8,7 +8,7 @@ var eventSchema = new Schema({
   location: {type: String, required: true, lowercase: true},
   creator: {type: Schema.Types.ObjectId, ref: 'users'},
   winner: {type: Schema.Types.ObjectId, ref: 'teams'},
-  event: {type: String, required: true, lowercase: true},
+  event: {type: String, required: true},
   description: String,
   notes: String,
   createdAt: String,
