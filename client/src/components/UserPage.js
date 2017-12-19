@@ -4,6 +4,7 @@ import FriendCard from './FriendCard';
 import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
 import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
+import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
 
 // import ProfileSettingsModal from './ProfileSettingsModal';
 import '../styles/UserPage.css';

@@ -14,16 +14,10 @@ import {
   GET_EVENTS,
   UNSET_USER,
   JOIN_EVENT,
-<<<<<<< 592a9b5135eedc74f1078990c93cac4ac3ace9f3
   ADD_FRIEND,
   GET_USER,
-<<<<<<< 1c4587e19b3608200f119b3c6727e45a64137da2
   REMOVE_FRIEND,
-=======
-=======
   TOGGLE_PROFILE_SETTINGS_MODAL
->>>>>>> Add UserBlurb for UserPage.
->>>>>>> Add UserBlurb for UserPage.
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001'; // Server URL
