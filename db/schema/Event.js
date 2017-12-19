@@ -5,7 +5,7 @@ var eventSchema = new Schema({
   game: {type: String, ref: 'games'},
   teams: [{type: Schema.Types.ObjectId, ref: 'teams'}],
   image: String,
-  location: {type: String, required: true, lowercase: true},
+  location: {type: String, required: true},
   creator: {type: Schema.Types.ObjectId, ref: 'users'},
   winner: {type: Schema.Types.ObjectId, ref: 'teams'},
   event: {type: String, required: true},
