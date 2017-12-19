@@ -123,8 +123,7 @@ class _AuthModal extends React.Component {
         if (signupPassword1 === '' && signupPassword2 === '') noPasswordError = true;
         if (signupPassword1 !== signupPassword2) unmatchingPasswordError = true;
         if (signupPassword1 === signupPassword2 && signupPassword1.length < 8) shortPasswordError = true;
-        if (signupPassword1 === signupPassword2 && this.isAlphanumeric(signupPassword1))
-          needsUnalphanumericPasswordError = true;
+        if (signupPassword1 === signupPassword2 && this.isAlphanumeric(signupPassword1)) needsUnalphanumericPasswordError = true;
         if (terms === false) termsError = true;
 
         if (email === '') noEmailError = true;

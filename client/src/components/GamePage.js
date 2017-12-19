@@ -31,7 +31,7 @@ class GamePage extends Component {
               <p>Genre: video game</p>
               <p>Platforms: various</p>
               <p>{this.state.game.summary}</p>
-              <h4>Rating: {this.state.game.aggregated_rating ? this.state.game.aggregated_rating : 'N/A'}</h4>
+              <h4>Rating: {this.state.game.aggregated_rating ? Math.round(this.state.game.aggregated_rating) : 'N/A'}</h4>
             </Grid.Column>
             <Grid.Column>
             </Grid.Column>
