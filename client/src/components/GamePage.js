@@ -20,29 +20,20 @@ class GamePage extends Component {
     return (
       <Segment>
         <Grid centered="true">
-          <Grid.Row columns={3}>
+          <Grid.Row columns={2}>
             <Grid.Column style={{paddingLeft: "12%"}}>
-              <img src={cover} style={{width: "100%", height: "100%"}} />
+              <img src={cover} style={{width: "85%", height: "90%"}} />
             </Grid.Column>
             <Grid.Column textAlign="center" style={{paddingRight: "15%"}}>
               <h1>{this.state.game.name}</h1>
-              <h2>{dateFormat(date, "dddd, mmmm dS, yyyy")}</h2>
-              <h3>Developer</h3>
+              <h2>Developer: n/a</h2>
+              <h3>Release Date: {dateFormat(date, "mmmm yyyy")}</h3>
+              <p>Genre: video game</p>
+              <p>Platforms: various</p>
+              <p>{this.state.game.summary}</p>
+              <h4>Rating: {this.state.game.aggregated_rating ? this.state.game.aggregated_rating : 'N/A'}</h4>
             </Grid.Column>
             <Grid.Column>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-        <Grid centered="true" style={{marginLeft: "4%"}}>
-          <Grid.Row columns={3}>
-            <Grid.Column />
-            <Grid.Column textAlign="left">
-              <p>Genre: genre</p>
-              <p>Platforms: platforms</p>
-              <p>{this.state.game.summary}</p>
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-            <p>{this.state.game.aggregated_rating ? this.state.game.aggregated_rating : 'N/A'}</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
