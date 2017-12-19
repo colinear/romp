@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FriendList from './FriendList';
+import { addFriend, getFriends } from '../actions/index.js';
 import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
 import { getEvent, toggleProfileSettingsModal, addFriend, getFriends } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
