@@ -4,7 +4,6 @@ import FriendCard from './FriendCard';
 import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
 import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
-import { getEvent, toggleProfileSettingsModal, addFriend } from '../actions/index.js';
 
 // import ProfileSettingsModal from './ProfileSettingsModal';
 import '../styles/UserPage.css';
@@ -66,6 +65,7 @@ class UserPage extends React.Component {
   };
 
   render() {
+    console.log('Current user selected: ', this.state.user)
     if (this.state.user) {
       let { user } = this.state;
       let curUserID = this.props.user._id;
@@ -95,7 +95,6 @@ class UserPage extends React.Component {
           <div className="UserPage-user-blurb">
             <div className="UserPage-profile-picture">
               <img src={user.profilePicURL} />
-              <Icon name='circle notched' />
             </div>
             <div className="UserPage-user-info">
               <div className="UserPage-user-name">
@@ -105,11 +104,11 @@ class UserPage extends React.Component {
               {(user.description !== '') ? <span><h5>“</h5><p>User description goes here.</p><h5>”</h5></span> : <p>No description available.</p>}
               </div>
               <div className="UserPage-edit-description">
-                <Icon name='edit' /><p>Edit description</p>
+                <Icon name='edit' /><p style={{display: 'inline-block'}}>Edit description</p>
               </div>
             </div>
           </div>
-        </div>
+          </div>
         </div>
       );
     } else {
@@ -122,4 +121,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps, { getEvent, toggleProfileSettingsModal })(UserPage);
+export default connect(mapStateToProps, { getEvent, toggleProfileSettingsModal, addFriend })(UserPage);
