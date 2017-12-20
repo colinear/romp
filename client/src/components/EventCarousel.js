@@ -9,7 +9,7 @@ import { getEvents } from '../actions/index';
 
 import '../styles/Carousel.css';
 
-const ROOT_URL = process.env.HOST || `http://localhost:3001`;
+const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
 
 //Data for carousel
 const carouselSlidesData = [

@@ -5,7 +5,7 @@ import { Segment, List, Image, Menu, Dropdown, Button } from 'semantic-ui-react'
 import { removeFriend } from '../actions/index.js';
 // import '../styles/GameCard.css';
 
-const ROOT_URL = process.env.HOST || `http://localhost:3001`;
+const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
 
 
 class FriendCard extends Component {
