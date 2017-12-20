@@ -23,7 +23,7 @@ helpers.isAdmin = function(req, res, next) {
   let { _id } = req.user;
   // Grab ID from user.
 
-  
+
   // return boolean determining whether user that is logged in is auth'd to do special stuff
 }
 
@@ -221,7 +221,7 @@ helpers.addFriend = async (userID, curUserID, callback) => {
     callback('SERVER: username not supplied');
   }
   // get user object with only returnInfo
-  var returnInfo = '_id username email profilePicURL friends';
+  var returnInfo = '_id username email profilePicURL';
   var friendsList = 'username friends'
   var err, user = await User.findOne({_id: userID}, returnInfo, {upsert: true});
   var err, curUser = await User.findOne({_id: curUserID}, friendsList);
@@ -243,14 +243,14 @@ helpers.removeFriend = async (userID, curUserID, callback) => {
   if (!userID) {
     callback('SERVER: username not supplied');
   }
-  var returnInfo = '_id username email profilePicURL friends';
-  var friendsList = 'username friends'
+  var returnInfo = '_id username email profilePicURL';
+  var friendsList = 'friends'
   var err, user = await User.findOne({_id: userID}, returnInfo, {upsert: true});
   var err, curUser = await User.findOne({_id: curUserID}, friendsList);
   if (err) callback(err);
   await User.findOneAndUpdate({_id: curUser}, { $pull: {friends: user}});
   if (err) callback(err);
-  callback(null, `SERVER: Friend Added!`)
+  callback(null, `SERVER: Friend removed!`)
 }
 
 helpers.searchUsers = async (username, id, callback) => {

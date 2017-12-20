@@ -15,21 +15,17 @@ class FriendList extends Component {
   }
 
   removeThisFriend = () => {
-    console.log('WHAT THE FUCK');
     let userID = this.props.friend._id;
     let curUserID = this.props.user._id;
     let curUser = this.props.user
-    this.props.removeFriend({ userID, curUserID, curUser }, () => {
+    this.props.removeFriend({ userID, curUserID }, () => {
       this.props.getFriends(curUser, () => {
         this.forceUpdate();
-        console.log('user', curUser);
       })
-      // this.setState({friends: this.state.intFriends.slice(userID)})
     })
   }
 
   render() {
-    console.log('AHHHH', this.props, this.state);
     let cover = this.props.friend.profilePicURL;
     return (
       <List>
