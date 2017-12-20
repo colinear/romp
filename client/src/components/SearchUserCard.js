@@ -3,17 +3,19 @@ import { Card, Icon, Image, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
 const SearchUserCard = ({ user }) => {
-  console.log('user in card: ', user);
   return (
     <Card as={Link} to={`/user/${user.username}`} fluid color="red" header="Option 1">
-      <Grid>
+      <Grid style={styles.card}>
         <Grid.Row>
-          <Grid.Column>
+          <Grid.Column width={3}>
             <Image src={user.profilePicURL} size="medium" />
           </Grid.Column>
-
           <Grid.Column>
-            aaaaaaaaaaaaaaaa
+            <h2>{user.username}</h2>
+            <Card.Description>
+              <Icon name="user" />
+              {user.friends.length} Friends
+            </Card.Description>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -21,26 +23,10 @@ const SearchUserCard = ({ user }) => {
   );
 };
 
-// const SearchUserCard = ({ user }) => {
-//   console.log('user in card: ', user);
-//   return (
-//     <Link to={`/user/${user.username}`}>
-//       <Card fluid style={{minWidth: '100%'}}>
-//         <Image src={user.profilePicURL} />
-//         <Card.Content>
-//           <Card.Header>{user.username}</Card.Header>
-//           <Card.Meta>User since May, 2017.</Card.Meta>
-//           <Card.Description>1337 Gamer living in San Francisco, CA. Willing to hang out with anybody.</Card.Description>
-//         </Card.Content>
-//         <Card.Content extra>
-//           <a>
-//             <Icon name="user" />
-//             10 Friends
-//           </a>
-//         </Card.Content>
-//       </Card>
-//     </Link>
-//   );
-// };
+const styles = {
+  card: {
+    'margin-left': '30px'
+  }
+};
 
 export default SearchUserCard;

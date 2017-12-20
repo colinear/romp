@@ -31,8 +31,6 @@ const GameCard = props => {
     description = description.slice(0, 240) + '...';
   }
 
-  // console.log('GAME: ', props.game);
-
   let starRating = Math.round(rating / 14);
 
   let cover = props.game.cover.url.substring(0, 35) + props.game.cover.url.substring(43);
@@ -58,8 +56,8 @@ const GameCard = props => {
       <div className="extra content">
         <span className="right floated">
           <StarRatingComponent
-            name="star-rating" /* name of the radio input, it is required */
-            value={starRating} /* number of selected icon (`0` - none, `1` - first) */
+            name="star-rating" 
+            value={starRating}
             starCount={7} /* number of icons in rating, default `5` */
           />
         </span>
