@@ -2,11 +2,11 @@ const router = require('express').Router();
 const helpers = require('./helpers.js');
 const passportService = require('../services/passport');
 const passport = require('passport');
-const config = process.ENV;
+const config = process.env;
 const axios = require('axios');
 
 const igdb = require('igdb-api-node').default;
-const client = process.ENV.IGDB_KEY;
+const client = process.env.IGDB_KEY;
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });

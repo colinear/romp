@@ -3,7 +3,7 @@ const Game = require('../db/schema/Game.js');
 const User = require('../db/schema/User');
 const Team = require('../db/schema/Team');
 const jwt = require('jwt-simple');
-const config = process.ENV;
+const config = process.env;
 
 let helpers = {};
 
