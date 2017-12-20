@@ -4,14 +4,17 @@ import { connect } from 'react-redux';
 import { Segment, List, Image, Menu, Dropdown, Button } from 'semantic-ui-react';
 import { removeFriend, getFriends } from '../actions/index.js';
 // import '../styles/GameCard.css';
-
+// import axios from 'axios';
 const ROOT_URL = 'http://localhost:3001';
 
 
 class FriendList extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    console.log('props', props);
+    this.state = {
+      user: null,
+    }
   }
 
   removeThisFriend = () => {
@@ -25,8 +28,21 @@ class FriendList extends Component {
     })
   }
 
+  // componentWillMount() {
+  //   this.getUser();
+  //   // getFriends();
+  // }
+  //
+  // getUser = async () => {
+  //   let user = (await axios.get(`${ROOT_URL}/users/${this.props.routeParams.username}`)).data;
+  //   this.setState({ user });
+  // };
+
   render() {
     let cover = this.props.friend.profilePicURL;
+    let loggedUser = this.props.user;
+    // let user = this.state;
+    console.log('USERS', this.props);
     return (
       <List>
         <List.Item
@@ -42,7 +58,7 @@ class FriendList extends Component {
             </List.Content>
           {/* </Link> */}
         </List.Item>
-        <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/>
+        {loggedUser._id ? <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/> : null}
       </List>
     );
   }
