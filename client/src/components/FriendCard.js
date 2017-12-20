@@ -6,7 +6,7 @@ import { removeFriend } from '../actions/index.js';
 // import '../styles/GameCard.css';
 
 // const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
-const ROOT_URL = 'http://colinear.herokuapp.com:3001';
+const ROOT_URL = 'http://colinear.herokuapp.com';
 
 
 class FriendCard extends Component {
