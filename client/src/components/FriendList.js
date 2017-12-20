@@ -14,6 +14,7 @@ class FriendList extends Component {
     console.log('props', props);
     this.state = {
       user: null,
+      friend: props.friend,
     }
   }
 
@@ -28,20 +29,10 @@ class FriendList extends Component {
     })
   }
 
-  // componentWillMount() {
-  //   this.getUser();
-  //   // getFriends();
-  // }
-  //
-  // getUser = async () => {
-  //   let user = (await axios.get(`${ROOT_URL}/users/${this.props.routeParams.username}`)).data;
-  //   this.setState({ user });
-  // };
-
   render() {
     let cover = this.props.friend.profilePicURL;
     let loggedUser = this.props.user;
-    // let user = this.state;
+    let user = this.state.friend;
     console.log('USERS', this.props);
     return (
       <List>
@@ -58,7 +49,7 @@ class FriendList extends Component {
             </List.Content>
           {/* </Link> */}
         </List.Item>
-        {loggedUser._id ? <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/> : null}
+        {loggedUser._id === user._id ? <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/> : null}
       </List>
     );
   }
