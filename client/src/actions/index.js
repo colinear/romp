@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { IGDB_KEY } from '../config'
 import { browserHistory } from 'react-router';
 import {
   AUTH_USER,
@@ -22,7 +21,8 @@ import {
   TOGGLE_PROFILE_SETTINGS_MODAL,
 } from './types';
 
-const ROOT_URL = 'http://localhost:3001'; // Server URL
+const ROOT_URL = process.env.HOST || `http://localhost:3001`;
+console.log('ROOT_URL ', ROOT_URL);
 
 export function loginUser(userData) {
   return function(dispatch) {
