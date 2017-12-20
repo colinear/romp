@@ -102,7 +102,7 @@ helpers.joinEvent = async (userID, eventID, callback) => {
 
   // get user object with only returnInfo
   var returnInfo = '_id username email profilePicURL event';
-  var err, user = await User.findOne({_id: userID}, returnInfo, {upsert: true});
+  var err, user = await User.findOne({_id: userID}, returnInfo);
   if (err) callback(err);
 
   // check the user has not already joined

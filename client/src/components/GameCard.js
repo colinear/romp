@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import StarRatingComponent from 'react-star-rating-component';
 import { Segment } from 'semantic-ui-react';
 import '../styles/GameCard.css';
@@ -31,9 +31,7 @@ const GameCard = props => {
     description = description.slice(0, 240) + '...';
   }
 
-  // console.log('GAME: ', props.game);
-
-  let starRating = Math.floor(rating / 20);
+  let starRating = Math.round(rating / 14);
 
   let cover = props.game.cover.url.substring(0, 35) + props.game.cover.url.substring(43);
   let url = props.game.cover.url;
@@ -58,9 +56,9 @@ const GameCard = props => {
       <div className="extra content">
         <span className="right floated">
           <StarRatingComponent
-            name="star-rating" /* name of the radio input, it is required */
-            value={starRating} /* number of selected icon (`0` - none, `1` - first) */
-            starCount={5} /* number of icons in rating, default `5` */
+            name="star-rating" 
+            value={starRating}
+            starCount={7} /* number of icons in rating, default `5` */
           />
         </span>
         <span>
