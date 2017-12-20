@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 import { Segment, List, Image, Menu, Dropdown, Button } from 'semantic-ui-react';
 import { removeFriend, getFriends } from '../actions/index.js';
 // import '../styles/GameCard.css';
-
 const ROOT_URL = 'http://localhost:3001';
 
 
 class FriendList extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      user: null,
+      curUserPage: props.curUserPage
+    }
   }
 
   removeThisFriend = () => {
@@ -27,6 +29,8 @@ class FriendList extends Component {
 
   render() {
     let cover = this.props.friend.profilePicURL;
+    let loggedUser = this.props.user;
+    let curUserPage = this.state.curUserPage;
     return (
       <List>
         <List.Item
@@ -42,7 +46,7 @@ class FriendList extends Component {
             </List.Content>
           {/* </Link> */}
         </List.Item>
-        <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/>
+        {loggedUser._id === curUserPage._id ? <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/> : null}
       </List>
     );
   }
