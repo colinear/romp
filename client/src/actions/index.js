@@ -18,6 +18,7 @@ import {
   GET_USER,
   REMOVE_FRIEND,
   GET_FRIENDS,
+  UNSET_FRIENDS,
   TOGGLE_PROFILE_SETTINGS_MODAL,
 } from './types';
 
@@ -33,7 +34,8 @@ export function loginUser(userData) {
         // - Update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });
         dispatch({ type: OPEN_AUTH, value: false });
-        dispatch({ type: SET_USER, user: response.data.user});
+        dispatch({ type: SET_USER, user: response.data.user });
+        dispatch({ type: GET_FRIENDS, friends: response.data.user.friends })
         // - Save the JWT token
         localStorage.setItem('token', response.data.token);
         // - redirect to the route '/feature'
@@ -87,6 +89,7 @@ export function signoutUser() {
   return function(dispatch) {
     dispatch({ type: UNAUTH_USER });
     dispatch({ type: UNSET_USER });
+    dispatch({ type: UNSET_FRIENDS })
   }
 }
 
@@ -180,7 +183,7 @@ export function joinEvent({ userID, eventID }, callback) {
 export function addFriend({ userID, curUserID }, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/addFriend`, { userID, curUserID })
-      .then(response => {
+      .then(res => {
         dispatch({ type: ADD_FRIEND });
         callback();
       })
@@ -191,9 +194,8 @@ export function addFriend({ userID, curUserID }, callback) {
 export function getFriends(curUser, callback) {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/users/${curUser.username}`)
-    .then((friends) => {
-      console.log('USER', friends);
-      dispatch ({type: GET_FRIENDS, friends})
+    .then((res) => {
+      dispatch ({type: GET_FRIENDS, friends: res.data.friends})
       callback();
     })
     .catch(err => console.log('Error while retrieving event.'));
@@ -203,7 +205,7 @@ export function getFriends(curUser, callback) {
 export function removeFriend({ userID, curUserID }, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/removeFriend`, { userID, curUserID })
-      .then(response => {
+      .then(res => {
         dispatch({ type: REMOVE_FRIEND });
         callback();
       })

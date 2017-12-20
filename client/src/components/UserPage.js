@@ -36,7 +36,7 @@ class UserPage extends React.Component {
   }
 
   displayFriends = () => {
-    let friends = this.props.friends.data.friends;
+    let friends = this.props.friends ? this.props.friends : this.props.user.friends;
     return friends.map((user, index) => {
       // let friend = user;
       // let profilePic = user.profilePicURL;
@@ -51,8 +51,9 @@ class UserPage extends React.Component {
     });
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.getUser();
+    getFriends();
   }
 
   getUser = async () => {
@@ -82,7 +83,7 @@ class UserPage extends React.Component {
             <Grid.Row>
               <Grid.Column width={16}>
                 <h2>Friends</h2>
-                {curUserID === user._id ? this.displayFriends() : null}
+                {curUserID === user._id ? this.displayFriends() : <div>No Friends</div>}
               </Grid.Column>
             </Grid.Row>
           </Grid>
