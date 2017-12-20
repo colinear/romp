@@ -9,7 +9,8 @@ import { Link, browserHistory } from 'react-router';
 import '../styles/UserPage.css';
 
 import axios from 'axios';
-const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
+// const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
+const ROOT_URL = 'http://colinear.herokuapp.com:3001';
 console.log('process.env.HOST: ', process.env.HOST);
 
 const fillerImage = 'http://www.fillmurray.com/300/200';

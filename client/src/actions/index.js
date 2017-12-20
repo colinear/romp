@@ -21,7 +21,8 @@ import {
   TOGGLE_PROFILE_SETTINGS_MODAL,
 } from './types';
 
-const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
+//const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
+const ROOT_URL = 'http://colinear.herokuapp.com:3001';
 console.log('ROOT_URL ', ROOT_URL);
 
 export function loginUser(userData) {
