@@ -15,6 +15,7 @@ class GamePage extends Component {
   }
 
   render() {
+    console.log('state in gamepage: ', this.state)
     let date = new Date(this.state.game.first_release_date).toString()
     let cover = this.state.game.cover.url.replace(/t_thumb/, 't_1080p');
     return (

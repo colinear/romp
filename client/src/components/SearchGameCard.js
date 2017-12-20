@@ -3,6 +3,7 @@ import { Card } from 'semantic-ui-react';
 
 
 const SearchGameCard = (props) => {
+  console.log('props in SearchGameCard', props)
   let cover = props.game.cover.url.substring(0, 35) + props.game.cover.url.substring(43);
   let url = props.game.cover.url;
   cover = url.replace(/t_thumb/, 't_1080p');
@@ -32,7 +33,7 @@ const SearchGameCard = (props) => {
         </span> */}
         <span>
           <i className="user icon" />
-          {0 /* add payers who favorited */} Players
+          {0 /* add players who favorited */} Players
         </span>
       </div>
     </div>
