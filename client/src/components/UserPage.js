@@ -19,7 +19,10 @@ class UserPage extends React.Component {
     super(props);
     this.state = {
       user: null,
-      isAdmin: false
+      friends: [],
+      isAdmin: false,
+      description: null,
+      editingDescription: false
     };
   }
 
@@ -75,6 +78,10 @@ class UserPage extends React.Component {
     this.setState({ user });
   };
 
+  setDescription = () => {
+
+  }
+
   render() {
     console.log('Current user selected: ', this.state.user)
     if (this.state.user) {
@@ -84,7 +91,7 @@ class UserPage extends React.Component {
       let userID = this.state.user._id;
       return (
         <div>
-        <Segment>
+        {/* <Segment>
           <Grid>
             <Grid.Row>
               <Grid.Column width={3}><div><h2>{user.username}</h2></div><div><img width="200" height="200" src={user.profilePicURL} /></div></Grid.Column>
@@ -100,7 +107,7 @@ class UserPage extends React.Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </Segment>
+        </Segment> */}
         <div className="UserPage-container">
           <div className="UserPage-user-blurb">
             <div className="UserPage-profile-picture">
@@ -111,9 +118,9 @@ class UserPage extends React.Component {
                 <h2>Username (full name)</h2>
               </div>
               <div className="UserPage-user-description">
-              {(user.description !== '') ? <span><h5>“</h5><p>User description goes here.</p><h5>”</h5></span> : <p>No description available.</p>}
+              {(user.description !== '') ? <span><h5>“</h5><textarea value={user.description} /><h5>”</h5></span> : <p>No description available.</p>}
               </div>
-              <div className="UserPage-edit-description">
+              <div className="UserPage-edit-description" onClick={this.setDescription}>
                 <Icon name='edit' /><p style={{display: 'inline-block'}}>Edit description</p>
               </div>
             </div>
@@ -132,3 +139,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { getEvent, toggleProfileSettingsModal, addFriend, getFriends })(UserPage);
+
+const styles = {
+  descriptionInput: {
+    border: "none"
+  }
+}

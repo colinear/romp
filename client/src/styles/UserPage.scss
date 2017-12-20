@@ -2,40 +2,50 @@
   justify-content: center;
   margin: 2em auto;
   min-width: 40%;
-  width: 80%; }
+  width: 80%;
+}
 
 .UserPage-user-blurb {
   border: 2px red solid;
   display: grid;
-  padding: 0.5em;
+    padding: 0.5em; 
   grid-template-columns: 20% 20% 20% 20%;
   grid-template-rows: 100%;
-  height: auto; }
+  height: auto;
+}
 
 .UserPage-profile-picture {
-  padding: 0.5em;
+  padding: 0.5em;  
   border: 2px blue solid;
   grid-column-start: 1;
-  grid-column-end: 2; }
+  grid-column-end: 2;
+}
 
 .UserPage-profile-picture img {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+}
 
 .UserPage-user-info {
   border: 2px yellow solid;
   padding: 0.5em;
   grid-column-start: 2;
-  grid-column-end: 4; }
+  grid-column-end: 4;
+}
 
 .UserPage-user-description {
-  font-size: 1.5em; }
-  .UserPage-user-description h5 {
+  font-size: 1.5em;
+  h5 {
     display: inline-block;
-    font-size: 1.75em; }
-  .UserPage-user-description p {
-    display: inline-block; }
-  .UserPage-user-description input {
-    border: none; }
-    .UserPage-user-description input:focus {
-      border: 2px red solid; }
+    font-size: 1.75em;
+  }
+  p {
+    display: inline-block;
+  }
+  input {
+    border: none;
+    &:focus {
+      border: 2px red solid;
+    }
+  }
+}
