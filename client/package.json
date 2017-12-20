@@ -12,7 +12,7 @@
     "build-css": "node-sass-chokidar ./src/styles/ -o ./src/styles/",
     "watch-css": "npm run build-css && node-sass-chokidar ./src/styles/ -o ./src/styles/ --watch --recursive"
   },
-  "author": "Patrick Daly",
+  "author": "Cecilia Goss",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
