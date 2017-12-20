@@ -4,17 +4,15 @@ import { connect } from 'react-redux';
 import { Segment, List, Image, Menu, Dropdown, Button } from 'semantic-ui-react';
 import { removeFriend, getFriends } from '../actions/index.js';
 // import '../styles/GameCard.css';
-// import axios from 'axios';
 const ROOT_URL = 'http://localhost:3001';
 
 
 class FriendList extends Component {
   constructor(props) {
     super(props);
-    console.log('props', props);
     this.state = {
       user: null,
-      friend: props.friend,
+      curUserPage: props.curUserPage
     }
   }
 
@@ -32,8 +30,7 @@ class FriendList extends Component {
   render() {
     let cover = this.props.friend.profilePicURL;
     let loggedUser = this.props.user;
-    let user = this.state.friend;
-    console.log('USERS', this.props);
+    let curUserPage = this.state.curUserPage;
     return (
       <List>
         <List.Item
@@ -49,7 +46,7 @@ class FriendList extends Component {
             </List.Content>
           {/* </Link> */}
         </List.Item>
-        {loggedUser._id === user._id ? <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/> : null}
+        {loggedUser._id === curUserPage._id ? <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/> : null}
       </List>
     );
   }

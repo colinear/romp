@@ -44,8 +44,8 @@ class UserPage extends React.Component {
         <FriendList
           key={user.id}
           index={index}
-          user={user}
-          friend={this.state.user}
+          friend={user}
+          curUserPage={this.state.user}
         />
       )
     });
@@ -59,6 +59,7 @@ class UserPage extends React.Component {
           key={user.id}
           index={index}
           friend={user}
+          curUserPage={this.state.user}
         />
       )
     });
