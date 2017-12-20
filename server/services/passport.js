@@ -1,6 +1,6 @@
 const passport = require('passport');
 const User = require('../db/schema/User');
-const config = require('../config');
+const config = process.ENV;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');

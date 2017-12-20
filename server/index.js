@@ -6,6 +6,7 @@ var MONGODB_URI = require('./db/mongo.js');
 var session = require('express-session');
 var routes = require('./api/route.js');
 var app = express();
+require('dotenv').config()
 
 mongoose.connect(MONGODB_URI, { useMongoClient: true });
 
