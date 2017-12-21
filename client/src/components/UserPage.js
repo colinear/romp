@@ -80,8 +80,10 @@ class UserPage extends React.Component {
     this.setState({ user });
   };
 
-  setDescription = () => {
-
+  setDescription = (e) => {
+    let user = Object.assign({}, this.state.user);
+    user.description = e.target.value;
+    this.setState({user});
   }
 
   render() {
@@ -120,9 +122,15 @@ class UserPage extends React.Component {
                 <h2>Username (full name)</h2>
               </div>
               <div className="UserPage-user-description">
-              {(user.description !== '') ? <span><h5>“</h5><textarea value={user.description} /><h5>”</h5></span> : <p>No description available.</p>}
+              {(() => {
+                if (this.state.editingDescription) {
+                  return <textarea value={user.description} onChange={this.setDescription} onBlur={this.setState({editingDescription: false})}/>
+                } else {
+                  return (user.description !== '') ? <span><h5>“</h5><p>{user.description}</p><h5>”</h5></span> : <p>No description available.</p>
+                }
+              })()}
               </div>
-              <div className="UserPage-edit-description" onClick={this.setDescription}>
+              <div className="UserPage-edit-description" onClick={() => {this.setState({editingDescription: true})}} >
                 <Icon name='edit' /><p style={{display: 'inline-block'}}>Edit description</p>
               </div>
             </div>
