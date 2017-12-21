@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { Segment, List, Image, Menu, Dropdown, Button } from 'semantic-ui-react';
+import { Segment, List, Image, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
 import { removeFriend, getFriends } from '../actions/index.js';
 // import '../styles/GameCard.css';
 const ROOT_URL = 'http://localhost:3001';
@@ -34,19 +34,18 @@ class FriendList extends Component {
     return (
       <List>
         <List.Item
-          onClick={() => {
-            browserHistory.push(`/user/${this.props.friend.username}`)
-            browserHistory.go(`/user/${this.props.friend.username}`)
-          }}
+          // onClick={() => {
+          //   browserHistory.push(`/user/${this.props.friend.username}`)
+          //   browserHistory.go(`/user/${this.props.friend.username}`)
+          // }}
         >
           {/* <Link to={`/users/${props.friend._id}`}> */}
             <Image avatar src={cover} />
             <List.Content>
-              <List.Header as='a' style={{width: "100%"}}>{this.props.friend.username}</List.Header>
+              <List.Header as='a'>{this.props.friend.username}{loggedUser._id === curUserPage._id ? <Icon name="delete" color="grey" style={{marginLeft:"1em"}} onClick={this.removeThisFriend}/> : null}</List.Header>
             </List.Content>
           {/* </Link> */}
         </List.Item>
-        {loggedUser._id === curUserPage._id ? <Button icon="delete" circular="true" size="mini" style={{marginLeft:"1em", float: "rigth"}} onClick={this.removeThisFriend}/> : null}
       </List>
     );
   }
