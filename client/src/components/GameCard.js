@@ -7,7 +7,6 @@ import '../styles/GameCard.css';
 import Parallax from './Parallax';
 
 const GameCard = props => {
-  console.log('game in GameCard', props.game)
   let rating;
   if (props.game.total_rating) {
     rating = props.game.total_rating;
