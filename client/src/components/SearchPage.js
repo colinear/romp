@@ -5,7 +5,7 @@ import { Card, Grid, Segment } from 'semantic-ui-react';
 
 import SearchEventCard from './SearchEventCard';
 import SearchUserCard from './SearchUserCard';
-import SearchGameCard from './SearchGameCard';
+import GameCard from './GameCard';
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -31,12 +31,13 @@ class SearchPage extends React.Component {
   renderSearchGameCards = () => {
     const games = this.props.results;
     let cards = games.body.map((game, index) => {
-      return <SearchGameCard game={game} />;
+      return <GameCard game={game} />;
     });
     return cards;
   };
 
   render() {
+    // console.log('games in searchpage: ', this.props.results.body);
     let temp = this.props.results;
     if (temp.events || temp.users) {
       return (

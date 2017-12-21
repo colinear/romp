@@ -12,6 +12,8 @@ class GamePage extends Component {
         return game.id === Number(props.params.gameid)
       }))
     }
+    console.log('PROPS in gamePage: ', props)
+    console.log('STATE in gamePage: ', this.state)
   }
 
   render() {
@@ -42,8 +44,8 @@ class GamePage extends Component {
   }
 }
 
-function mapStateToProps({ games }) {
-  return { games };
+function mapStateToProps({ games, game }) {
+  return { games, game };
 }
 
 export default connect(mapStateToProps)(GamePage);
