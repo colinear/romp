@@ -20,6 +20,7 @@ const EventCard = props => {
           <a>{}</a>
         </div>
         <div className="description">{props.event.description}</div>
+        <div style={{fontSize: "11px"}}>{props.event.eventAt}</div>
       </div>
     </div>
   );
