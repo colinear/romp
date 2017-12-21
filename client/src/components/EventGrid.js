@@ -9,7 +9,6 @@ const EventGrid = props => {
   let time = moment().format('MMMM Do YYYY, h:mm a');
   let now = JSON.stringify(time);
   let upcoming = JSON.stringify(moment().add(3, 'days').format('MMMM Do YYYY, h:mm a'));
-  console.log('TEST', JSON.stringify(props.events[12].eventAt) < upcoming, props.events[16], now, upcoming);
   return (
     <div>
       <h2 style={{textAlign: "center", marginTop: "1%"}}>Upcoming Events</h2>
