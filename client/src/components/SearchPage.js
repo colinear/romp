@@ -37,6 +37,7 @@ class SearchPage extends React.Component {
   };
 
   render() {
+    // console.log('games in searchpage: ', this.props.results.body);
     let temp = this.props.results;
     if (temp.events || temp.users) {
       return (
