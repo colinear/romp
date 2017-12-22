@@ -127,7 +127,7 @@ router.get('/games', (req, res) => {
       'release_dates.date-gt': '2017-01-01',
       'release_dates.date-lt': '2017-12-31',
     },
-    limit: 25,
+    limit: 28,
     offset: 0,
     order: 'rating:desc',
 }, desiredFields)
