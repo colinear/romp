@@ -19,7 +19,7 @@ const localLogin = new LocalStrategy({}, (username, password, done) => {
   })
 })
 
-console.log('Process env stuff: ', process.env.TWITCH_CLIENT_ID);
+console.log('Process env stuff: ', process.env.secret);
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),

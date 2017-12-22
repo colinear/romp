@@ -13,6 +13,8 @@ mongoose.connect(MONGODB_URI, { useMongoClient: true });
 
 app.use(bodyParser.json());
 
+app.use(bodyParser({limit: '50mb'}));
+
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
