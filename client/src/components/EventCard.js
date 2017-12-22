@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import StarRatingComponent from 'react-star-rating-component';
 import { Segment } from 'semantic-ui-react';
+import moment from 'moment';
 
 const EventCard = props => {
   let cover = props.event.pictureURL;
@@ -19,8 +20,8 @@ const EventCard = props => {
         <div className="meta">
           <a>{}</a>
         </div>
-        <div className="description">{props.event.description}</div>
-        <div style={{fontSize: "11px"}}>{props.event.eventAt}</div>
+        <div className="description" style={{fontWeight: "bold"}}>{props.event.description}</div>
+        <div style={{fontStyle: "italic"}}>{moment(props.event.eventAt, 'MMMM Do YYYY, h:mm a').fromNow()}</div>
       </div>
     </div>
   );
