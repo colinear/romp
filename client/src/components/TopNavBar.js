@@ -68,7 +68,7 @@ class TopNavBar extends React.Component {
         {!showLogin ? (
           <Menu.Item as={Link} position="right">
             <EventModal />
-            Add an Event
+            Create Event
           </Menu.Item>
         ) : null}
 
