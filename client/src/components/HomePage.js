@@ -15,63 +15,9 @@ class HomePage extends React.Component {
 
     // TODO: use getEvents function to populate events
     this.state = {
-      events: [
-        {
-          "_id": { "$oid": "5a22e842734d1d5aaf0e29da" },
-          "game": "5a22e51b734d1d5aaf0e2975",
-          "teams": [
-            "5a22e6b3734d1d5aaf0e29ad",
-            "5a22e6f8734d1d5aaf0e29af"
-          ],
-          "location": "Austin",
-          "creator": "5a22e5c8e083650dd34c144e",
-          "winner": "5a22e6b3734d1d5aaf0e29ad",
-          "name": "Austin Magic Game",
-          "description": "We are fun",
-          "notes": "Get ready to get beat",
-          "spectators": [
-            "5a22e5eee083650dd34c1450"
-          ],
-          "pictureURL": "https://i.imgur.com/O0BvsKO.jpg"
-        },
-        {
-          "_id": { "$oid": "5a22e842734d1d5aaf0e29sr" },
-          "game": "5a22e51b734d1d5aaf0e2975",
-          "teams": [
-            "5a22e6b3734d1d5aaf0e29ad",
-            "5a22e6f8734d1d5aaf0e29af"
-          ],
-          "location": "Austin",
-          "creator": "5a22e5c8e083650dd34c144e",
-          "winner": "5a22e6b3734d1d5aaf0e29ad",
-          "name": "Austin Poker Game",
-          "description": "Kinda shitty",
-          "notes": "Probably dont show up",
-          "spectators": [
-            "5a22e5eee083650dd34c1450"
-          ],
-          "pictureURL": "https://i.imgur.com/O0BvsKO.jpg"
-        },
-        {
-          "_id": { "$oid": "5a22e842734d1d5aaf0e29pq" },
-          "game": "5a22e51b734d1d5aaf0e2975",
-          "teams": [
-            "5a22e6b3734d1d5aaf0e29ad",
-            "5a22e6f8734d1d5aaf0e29af"
-          ],
-          "location": "Austin",
-          "creator": "5a22e5c8e083650dd34c144e",
-          "winner": "5a22e6b3734d1d5aaf0e29ad",
-          "name": "Austin Pokemon Game",
-          "description": "Kinda cool",
-          "notes": "Come Join!",
-          "spectators": [
-            "5a22e5eee083650dd34c1450"
-          ],
-          "pictureURL": "https://i.imgur.com/O0BvsKO.jpg"
-        },
-      ],
-      games: [], };
+      events: [],
+      games: []
+    };
   }
 
   // Make action call to the server api for games

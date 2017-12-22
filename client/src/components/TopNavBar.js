@@ -76,13 +76,12 @@ class TopNavBar extends React.Component {
         {!showLogin ? (
           <Menu.Item active={activeItem === 'user'}
             onClick={() => {
-              console.log('PROPS', this.props);
               browserHistory.push(`/user/${this.props.user.username}`)
               browserHistory.go(`/user/${this.props.user.username}`)
             }}
           >
             <img src={user.profilePicURL} style={{borderRadius: '30px', width: '30px', height: '30px', margin: '3px'}}/>
-            <span>  {user.username}</span>
+            <span>{user.username}</span>
           </Menu.Item>
         ) : null}
 
