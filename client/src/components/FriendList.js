@@ -17,6 +17,7 @@ class FriendList extends Component {
   }
 
   removeThisFriend = () => {
+    console.log('CLICKED');
     let userID = this.props.friend._id;
     let curUserID = this.props.user._id;
     let curUser = this.props.user
@@ -40,9 +41,21 @@ class FriendList extends Component {
           // }}
         >
           {/* <Link to={`/users/${props.friend._id}`}> */}
-            <Image avatar src={cover} />
+            <Image avatar src={cover}
+              onClick={() => {
+                browserHistory.push(`/user/${this.props.friend.username}`)
+                browserHistory.go(`/user/${this.props.friend.username}`)
+              }}
+            />
             <List.Content>
-              <List.Header as='a'>{this.props.friend.username}{loggedUser._id === curUserPage._id ? <Icon name="delete" color="grey" style={{marginLeft:"1em"}} onClick={this.removeThisFriend}/> : null}</List.Header>
+              <List.Header as='a' style={{display: "inline-block"}}
+                onClick={() => {
+                  browserHistory.push(`/user/${this.props.friend.username}`)
+                  browserHistory.go(`/user/${this.props.friend.username}`)
+                }}
+              >
+                {this.props.friend.username}</List.Header>
+              {loggedUser._id === curUserPage._id ? <Icon name="delete" color="grey" style={{marginLeft:"1em"}} onClick={this.removeThisFriend} /> : null}
             </List.Content>
           {/* </Link> */}
         </List.Item>
