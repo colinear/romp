@@ -12,7 +12,7 @@
     "build-css": "node-sass-chokidar ./src/styles/ -o ./src/styles/",
     "watch-css": "npm run build-css && node-sass-chokidar ./src/styles/ -o ./src/styles/ --watch --recursive"
   },
-  "author": "Patrick Daly",
+  "author": "Cecilia Goss",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -37,6 +37,7 @@
     "react-carousel": "^4.3.0",
     "react-datepicker": "^0.64.0",
     "react-dom": "^15.4.2",
+    "react-dropzone": "^4.2.3",
     "react-flexbox-grid": "^2.0.0",
     "react-images-upload": "^1.1.1",
     "react-parallax": "^1.5.0",

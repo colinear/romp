@@ -28,3 +28,4 @@ client/src/twitch.js
 
 server/config.js
 client/config.js
+.env

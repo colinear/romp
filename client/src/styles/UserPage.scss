@@ -1,0 +1,67 @@
+.UserPage-container {
+  justify-content: center;
+  margin: 2em auto;
+  min-width: 40%;
+  width: 80%;
+}
+
+.UserPage-user-blurb {
+  display: grid;
+  padding: 0.5em;
+  grid-template-columns: 150px 20% 20% 20%;
+  grid-template-rows: 100%;
+  height: auto;
+}
+
+.UserPage-profile-picture {
+  position: relative;
+  padding: 0.5em;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  height: 150px;
+  width: 150px;
+  text-align: center;
+  div {
+    width: 100%;
+    height: 100%;
+    .profile-picture {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 50;
+    }
+  }
+  .edit-profile-picture {
+    top: 65%;
+    left: 70%;
+    position: absolute;
+    max-width: 30%;
+    max-height: 30%;
+    z-index: 100;
+  }
+}
+
+.UserPage-user-info {
+  padding: 2em;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  width: auto;
+}
+
+.UserPage-user-description {
+  font-size: 1.5em;
+  h5 {
+    display: inline-block;
+    font-size: 1.25em;
+  }
+  p {
+    display: inline-block;
+  }
+  input {
+    border: none;
+    &:focus {
+      border: 2px red solid;
+    }
+  }
+}

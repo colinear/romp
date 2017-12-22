@@ -9,6 +9,7 @@ export default class ProfilePictureUploader extends React.Component {
   }
 
   onDrop(picture) {
+    console.log(arguments);
     this.setState({
       pictures: this.state.pictures.concat(picture)
     });

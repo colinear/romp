@@ -15,7 +15,7 @@ const SearchUserCard = ({ user }) => {
           <Grid.Column>
             <h2>{user.username}</h2>
             <Card.Description>
-              <div><Icon name="user" />{user.friends.length} Friends</div>
+              <div className="SearchUserCard-friends"><Icon name="user" />{user.friends.length} Friends</div>
             </Card.Description>
           </Grid.Column>
         </Grid.Row>

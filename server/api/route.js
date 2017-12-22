@@ -2,11 +2,11 @@ const router = require('express').Router();
 const helpers = require('./helpers.js');
 const passportService = require('../services/passport');
 const passport = require('passport');
-const config = require('../config');
+const config = process.env;
 const axios = require('axios');
 
 const igdb = require('igdb-api-node').default;
-const client = igdb(config.IGDB_KEY);
+const client = process.env.IGDB_KEY;
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
@@ -214,6 +214,14 @@ router.post('/removeFriend', (req, res) => {
   helpers.removeFriend(req.body.userID, req.body.curUserID, (err, message) => {
     if (err) res.status(400).send({ err });
     else {res.end(message)}
+  });
+});
+
+router.post('/updateUser', (req, res) => {
+  console.log('User coming in: ', req.body.user);
+  helpers.editUser(req.body.user, (err, message) => {
+    if (err) res.status(400).send({ err });
+    else {res.end(message)};
   });
 });
 

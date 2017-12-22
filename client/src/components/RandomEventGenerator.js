@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import faker from 'faker';
 
-const ROOT_URL = 'http://localhost:3001'; // Server URL
+// const ROOT_URL = process.env.HOST //'http://localhost:3001'; // Server URL
+const ROOT_URL = 'http://colinear.herokuapp.com';
 
 let integer = (length, half) => {
   let middle = Math.floor(length / 2);
