@@ -17,7 +17,8 @@
   grid-column-start: 1;
   grid-column-end: 2;
   height: 150px;
-  width: 150px; }
+  width: 150px;
+  text-align: center; }
   .UserPage-profile-picture div {
     width: 100%;
     height: 100%; }
@@ -25,17 +26,18 @@
       border-radius: 50%;
       width: 100%;
       height: 100%;
-      position: relative; }
+      position: relative;
+      z-index: 50; }
   .UserPage-profile-picture .edit-profile-picture {
-    top: 70%;
+    top: 65%;
     left: 70%;
     position: absolute;
     max-width: 30%;
     max-height: 30%;
-    z-index: 10000; }
+    z-index: 100; }
 
 .UserPage-user-info {
-  padding: 0.5em;
+  padding: 2em;
   grid-column-start: 2;
   grid-column-end: 4;
   width: auto; }
@@ -44,7 +46,7 @@
   font-size: 1.5em; }
   .UserPage-user-description h5 {
     display: inline-block;
-    font-size: 1.75em; }
+    font-size: 1.25em; }
   .UserPage-user-description p {
     display: inline-block; }
   .UserPage-user-description input {

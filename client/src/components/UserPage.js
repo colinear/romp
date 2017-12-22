@@ -5,6 +5,7 @@ import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
 import { getEvent, toggleProfileSettingsModal, addFriend, getFriends } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
 import ProfileSettingsModal from './ProfileSettingsModal';
+import FriendCard from './FriendCard';
 
 // import ProfileSettingsModal from './ProfileSettingsModal';
 import '../styles/UserPage.css';
@@ -36,24 +37,16 @@ class UserPage extends React.Component {
     this.props.addFriend({ userID, curUserID }, () => {
       this.props.getFriends(curUser, () => {
         console.log(this.state.user.username, 'added to your friends list!');
-      })
-    })
-  }
+      });
+    });
+  };
 
   displayFriends = () => {
     let friends = this.props.friends ? this.props.friends : this.props.user.friends;
     return friends.map((user, index) => {
       // let friend = user;
       // let profilePic = user.profilePicURL;
-      return (
-
-        <FriendList
-          key={user.id}
-          index={index}
-          friend={user}
-          curUserPage={this.state.user}
-        />
-      )
+      return <FriendList key={user.id} index={index} friend={user} curUserPage={this.state.user} />;
       return <FriendCard key={user.id} index={index} friend={user} />;
       //   <span style={{ margin: '2px' }}>
       //     <Link to={`${ROOT_URL}/user/${user._id}`}>
@@ -68,16 +61,9 @@ class UserPage extends React.Component {
   displayTheirFriends = () => {
     let friends = this.state.user.friends;
     return friends.map((user, index) => {
-      return (
-        <FriendList
-          key={user.id}
-          index={index}
-          friend={user}
-          curUserPage={this.state.user}
-        />
-      )
+      return <FriendList key={user.id} index={index} friend={user} curUserPage={this.state.user} />;
     });
-  }
+  };
 
   componentWillMount() {
     this.getUser();
@@ -106,39 +92,64 @@ class UserPage extends React.Component {
     console.log('Current user selected: ', this.state.user);
     if (this.state.user) {
       let { user } = this.state;
-      let curUserID = this.props.user._id;
+      let curUserID = this.props.user.username;
       let profileId = this.props.routeParams.username;
-      let userID = this.state.user._id;
+      let userID = this.state.user.username;
+      console.log(curUserID === profileId)
       return (
         <div>
           {/* <Segment>
-          <Grid>
-            <Grid.Row>
-              <Grid.Column width={3}><div><h2>{user.username}</h2></div><div><img width="200" height="200" src={user.profilePicURL} /></div></Grid.Column>
-              <Grid.Column width={13}>{`${user.firstName} ${user.lastName}`}</Grid.Column>
-              <Grid.Column width={1}>
-                {this.props.friends.find(user => user._id === userID) ? <Button disabled="true" color="green">Friends</Button> : <Button onClick={this.addThisFriend}>Add Friend</Button>}
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column width={16}>
-                <h2>Friends</h2>
-                {curUserID === user._id ? this.displayFriends() : this.displayTheirFriends()}
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment> */}
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <div>
+                    <h2>{user.username}</h2>
+                  </div>
+                  <div>
+                    <img width="200" height="200" src={user.profilePicURL} />
+                  </div>
+                </Grid.Column>
+                <Grid.Column width={13}>{`${user.firstName} ${user.lastName}`}</Grid.Column>
+                <Grid.Column width={1}>
+                  {this.props.friends.find(user => user._id === userID) ? (
+                    <Button disabled="true" color="green">
+                      Friends
+                    </Button>
+                  ) : (
+                    <Button onClick={this.addThisFriend}>Add Friend</Button>
+                  )}
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column width={16}>
+                  <h2>Friends</h2>
+                  {curUserID === user._id ? this.displayFriends() : this.displayTheirFriends()}
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Segment> */}
           <div className="UserPage-container">
-            <ProfileSettingsModal user={this.state.user}/>
+            <ProfileSettingsModal user={this.state.user} />
             <div className="UserPage-user-blurb">
               <div className="UserPage-profile-picture">
-                <img
-                  className="edit-profile-picture"
-                  src="https://www.shareicon.net/data/256x256/2015/12/01/680607_add_512x512.png"
-                  onClick={() => {this.props.toggleProfileSettingsModal(true)}}
-                />
                 <div>
                   <img className="profile-picture" src={user.profilePicURL} />
+                  {(curUserID === profileId) ? <img
+                    className="edit-profile-picture"
+                    src="https://png.icons8.com/ultraviolet/540//plus.png"
+                    onClick={() => {
+                      this.props.toggleProfileSettingsModal(true);
+                    }}
+                  />: null }
+                  <div>
+                  {this.props.friends.find(user => user._id === userID) ? (
+                    <Button disabled="true" color="green">
+                      Friends
+                    </Button>
+                  ) : (
+                    <Button onClick={this.addThisFriend}>Add Friend</Button>
+                  )}
+                  </div>
                 </div>
               </div>
               <div className="UserPage-user-info">
@@ -169,16 +180,9 @@ class UserPage extends React.Component {
                     }
                   })()}
                 </div>
-                <div
-                  className="UserPage-edit-description"
-                  onClick={() => {
-                    this.setState({ editingDescription: true });
-                  }}
-                >
-                  <Icon name="edit" />
-                  <p style={{ display: 'inline-block' }}>Edit description</p>
-                </div>
+                  {(curUserID === profileId) ? <div className="UserPage-edit-description" onClick={() => { this.setState({ editingDescription: true }) }}><Icon name="edit" /><p style={{ display: 'inline-block' }}>Edit description</p></div> : null }
               </div>
+              <div>{curUserID === user._id ? this.displayFriends() : this.displayTheirFriends()}</div>
             </div>
           </div>
         </div>
