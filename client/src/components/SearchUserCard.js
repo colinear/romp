@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, Icon, Image, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
+import '../styles/SearchUserCard.css';
+
 const SearchUserCard = ({ user }) => {
   return (
     <Card as={Link} to={`/user/${user.username}`} fluid color="red" header="Option 1">
@@ -13,8 +15,7 @@ const SearchUserCard = ({ user }) => {
           <Grid.Column>
             <h2>{user.username}</h2>
             <Card.Description>
-              <Icon name="user" />
-              {user.friends.length} Friends
+              <div><Icon name="user" />{user.friends.length} Friends</div>
             </Card.Description>
           </Grid.Column>
         </Grid.Row>

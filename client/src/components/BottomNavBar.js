@@ -22,7 +22,11 @@ class BottomNavBar extends React.Component {
     if (event.key === 'Enter') {
       this.props.search(this.state.query);
       browserHistory.push('/search');
+      this.setState({
+        query: ''
+      })
     }
+    console.log('hello', this.state.query);
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -34,7 +38,7 @@ class BottomNavBar extends React.Component {
             <Menu.Menu position="right">
               <div className="ui right aligned category search item">
                 <div className="ui transparent icon input">
-                  <input className="prompt" type="text" style={{width: '100vw'}} placeholder="Search by users, events, and games..." onChange={this.onChange} onKeyPress={this.handleEnter}/>
+                  <input className="prompt" type="text" style={{width: '100vw'}} placeholder="Search by users, events, and games..." onChange={this.onChange} value={this.state.query} onKeyPress={this.handleEnter}/>
                   <i className="search link icon" />
                 </div>
                 <div className="results" />
