@@ -38,7 +38,7 @@ class TopNavBar extends React.Component {
 
     return (
       <Menu attached="top" inverted>
-        <Menu.Item as={Link} to="/homepage">
+        <Menu.Item name="homepage" active={activeItem === 'hompage'} onClick={this.handleItemClick} as={Link} to="/homepage">
           <img style={{color: 'white'}}
             src={icon}
             alt="ROMP"
