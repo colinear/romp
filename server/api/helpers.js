@@ -269,4 +269,15 @@ helpers.searchUsers = async (username, id, callback) => {
   }
 };
 
+helpers.editUser = async (user, callback) => {
+  console.log('User: ', user);
+  let err, selectedUser = await User.findOneAndUpdate({_id: user._id}, Object.assign({}, user), {new: true});
+  console.log('Selected user: ', selectedUser);
+  if (err) callback(err);
+  else {
+    callback(null, `SERVER: User updated!`);
+  }
+ 
+}
+
 module.exports = helpers;

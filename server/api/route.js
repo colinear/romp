@@ -217,4 +217,12 @@ router.post('/removeFriend', (req, res) => {
   });
 });
 
+router.post('/updateUser', (req, res) => {
+  console.log('User coming in: ', req.body.user);
+  helpers.editUser(req.body.user, (err, message) => {
+    if (err) res.status(400).send({ err });
+    else {res.end(message)};
+  });
+});
+
 module.exports = router;

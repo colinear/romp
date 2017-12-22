@@ -6,31 +6,45 @@
 }
 
 .UserPage-user-blurb {
-  border: 2px red solid;
   display: grid;
-    padding: 0.5em; 
-  grid-template-columns: 20% 20% 20% 20%;
+  padding: 0.5em;
+  grid-template-columns: 150px 20% 20% 20%;
   grid-template-rows: 100%;
   height: auto;
 }
 
 .UserPage-profile-picture {
-  padding: 0.5em;  
-  border: 2px blue solid;
+  position: relative;
+  padding: 0.5em;
   grid-column-start: 1;
   grid-column-end: 2;
-}
-
-.UserPage-profile-picture img {
-  width: 100%;
-  height: 100%;
+  height: 150px;
+  width: 150px;
+  div {
+    width: 100%;
+    height: 100%;
+    .profile-picture {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+  }
+  .edit-profile-picture {
+    top: 70%;
+    left: 70%;
+    position: absolute;
+    max-width: 30%;
+    max-height: 30%;
+    z-index: 10000;
+  }
 }
 
 .UserPage-user-info {
-  border: 2px yellow solid;
   padding: 0.5em;
   grid-column-start: 2;
   grid-column-end: 4;
+  width: auto;
 }
 
 .UserPage-user-description {

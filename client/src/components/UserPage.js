@@ -4,13 +4,14 @@ import FriendList from './FriendList';
 import { Grid, Image, Segment, Button, Card, Icon } from 'semantic-ui-react';
 import { getEvent, toggleProfileSettingsModal, addFriend, getFriends } from '../actions/index.js';
 import { Link, browserHistory } from 'react-router';
+import ProfileSettingsModal from './ProfileSettingsModal';
 
 // import ProfileSettingsModal from './ProfileSettingsModal';
 import '../styles/UserPage.css';
 
 import axios from 'axios';
-// const ROOT_URL = process.env.HOST //|| `http://localhost:3001`;
-const ROOT_URL = 'http://colinear.herokuapp.com';
+const ROOT_URL = `http://localhost:3001`;
+// const ROOT_URL = 'http://colinear.herokuapp.com';
 console.log('process.env.HOST: ', process.env.HOST);
 
 const fillerImage = 'http://www.fillmurray.com/300/200';
@@ -53,6 +54,14 @@ class UserPage extends React.Component {
           curUserPage={this.state.user}
         />
       )
+      return <FriendCard key={user.id} index={index} friend={user} />;
+      //   <span style={{ margin: '2px' }}>
+      //     <Link to={`${ROOT_URL}/user/${user._id}`}>
+      //       <img width="100" height="100" src={profilePic} />
+      //     </Link>
+      //     <p>{friend.username}</p>
+      //   </span>
+      // );
     });
   };
 
@@ -80,14 +89,21 @@ class UserPage extends React.Component {
     this.setState({ user });
   };
 
-  setDescription = (e) => {
+  setDescription = e => {
     let user = Object.assign({}, this.state.user);
     user.description = e.target.value;
-    this.setState({user});
-  }
+    this.setState({ user });
+  };
+
+  sendDescription = () => {
+    this.setState({ editingDescription: false });
+    // post to server the new description
+    console.log(this.state.user.description);
+    axios.post(`${ROOT_URL}/updateUser`, { user: this.state.user });
+  };
 
   render() {
-    console.log('Current user selected: ', this.state.user)
+    console.log('Current user selected: ', this.state.user);
     if (this.state.user) {
       let { user } = this.state;
       let curUserID = this.props.user._id;
@@ -95,7 +111,7 @@ class UserPage extends React.Component {
       let userID = this.state.user._id;
       return (
         <div>
-        {/* <Segment>
+          {/* <Segment>
           <Grid>
             <Grid.Row>
               <Grid.Column width={3}><div><h2>{user.username}</h2></div><div><img width="200" height="200" src={user.profilePicURL} /></div></Grid.Column>
@@ -112,29 +128,58 @@ class UserPage extends React.Component {
             </Grid.Row>
           </Grid>
         </Segment> */}
-        <div className="UserPage-container">
-          <div className="UserPage-user-blurb">
-            <div className="UserPage-profile-picture">
-              <img src={user.profilePicURL} />
+          <div className="UserPage-container">
+            <ProfileSettingsModal user={this.state.user}/>
+            <div className="UserPage-user-blurb">
+              <div className="UserPage-profile-picture">
+                <img
+                  className="edit-profile-picture"
+                  src="https://www.shareicon.net/data/256x256/2015/12/01/680607_add_512x512.png"
+                  onClick={() => {this.props.toggleProfileSettingsModal(true)}}
+                />
+                <div>
+                  <img className="profile-picture" src={user.profilePicURL} />
+                </div>
+              </div>
+              <div className="UserPage-user-info">
+                <div className="UserPage-user-name">
+                  <h2>{user.username}</h2>
+                </div>
+                <div className="UserPage-user-description">
+                  {(() => {
+                    if (this.state.editingDescription) {
+                      return (
+                        <textarea
+                          autoFocus
+                          value={user.description}
+                          onChange={this.setDescription}
+                          onBlur={this.sendDescription}
+                        />
+                      );
+                    } else {
+                      return user.description !== '' ? (
+                        <span>
+                          <h5>“</h5>
+                          <p>{user.description}</p>
+                          <h5>”</h5>
+                        </span>
+                      ) : (
+                        <p>No description available.</p>
+                      );
+                    }
+                  })()}
+                </div>
+                <div
+                  className="UserPage-edit-description"
+                  onClick={() => {
+                    this.setState({ editingDescription: true });
+                  }}
+                >
+                  <Icon name="edit" />
+                  <p style={{ display: 'inline-block' }}>Edit description</p>
+                </div>
+              </div>
             </div>
-            <div className="UserPage-user-info">
-              <div className="UserPage-user-name">
-                <h2>Username (full name)</h2>
-              </div>
-              <div className="UserPage-user-description">
-              {(() => {
-                if (this.state.editingDescription) {
-                  return <textarea value={user.description} onChange={this.setDescription} onBlur={this.setState({editingDescription: false})}/>
-                } else {
-                  return (user.description !== '') ? <span><h5>“</h5><p>{user.description}</p><h5>”</h5></span> : <p>No description available.</p>
-                }
-              })()}
-              </div>
-              <div className="UserPage-edit-description" onClick={() => {this.setState({editingDescription: true})}} >
-                <Icon name='edit' /><p style={{display: 'inline-block'}}>Edit description</p>
-              </div>
-            </div>
-          </div>
           </div>
         </div>
       );
@@ -152,6 +197,6 @@ export default connect(mapStateToProps, { getEvent, toggleProfileSettingsModal, 
 
 const styles = {
   descriptionInput: {
-    border: "none"
+    border: 'none'
   }
-}
+};
