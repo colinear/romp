@@ -1,6 +1,8 @@
 # Romp
 ## A web app for gamers!
 
+![Screenshot](https://i.imgur.com/e1d4Azs.png)
+
 ### To start: 
 
 Run the following command to run Romp on your localhost:
